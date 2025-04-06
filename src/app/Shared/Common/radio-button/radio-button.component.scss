@@ -1,0 +1,21 @@
+
+::ng-deep {
+    .mat-mdc-radio-button:first-of-type .mdc-radio {
+        padding-left: 5px!important;
+    }
+    .mat-mdc-radio-button .mdc-radio {
+        padding-right: 5px!important;
+    }
+    .mat-mdc-radio-button .mdc-radio .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
+        border-color: #3B82F6!important;
+    }
+    .mdc-radio__inner-circle {
+        border-color: #3B82F6!important;
+    }
+    .mat-mdc-radio-button.mat-mdc-radio-checked .mat-ripple-element {
+        background-color: #BFDBFE!important;
+    }
+    .mdc-form-field {
+        margin-right: 10px;
+    }
+}

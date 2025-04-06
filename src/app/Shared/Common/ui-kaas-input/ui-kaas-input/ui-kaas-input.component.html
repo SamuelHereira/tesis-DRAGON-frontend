@@ -1,0 +1,31 @@
+<div class="ui-kaas-styles-general">
+  <div class="w-full">
+    <app-ui-kaas-heading [label]="label" *ngIf=" label != '' "></app-ui-kaas-heading>
+    <ng-container *ngIf="type != 'password';else inputPassword">
+      <div class="w-full ui-kaas-mt-20px relative">
+        <input  [readonly]="readOnly" 
+                [placeholder]="placeholder" 
+                [ngClass]="{'pr-5': icono != '' || readOnly,'ui-readonly-input' : readOnly, 'ui-kaas-input-text' : !readOnly}" 
+                class="w-full border-box" 
+                [(ngModel)]="value" 
+                [type]="type" 
+                (keypress)="blockEvent($event)" 
+                (input)="onInputChange()">
+        <i (click)="clickIcon()" *ngIf="icono != '' || readOnly" [ngClass]="{'bi bi-lock-fill': readOnly}" class="{{icono}} cursor-pointer absolute top-0 right-0 mr-2 text-lg" style="transform: translateY(50%);"></i>
+      </div>
+    </ng-container>
+    <ng-template #inputPassword>
+      <div class="w-full ui-kaas-mt-20px relative">
+        <input  [placeholder]="placeholder" 
+                class="w-full border-box pr-5 ui-kaas-input-text" 
+                [(ngModel)]="value" 
+                [type]="!mostrar_password ? type : 'text'" 
+                (keypress)="blockEvent($event)" 
+                (input)="onInputChange()">
+        <i (click)="mostrar_password = !mostrar_password" [ngClass]="{'bi-eye-fill': mostrar_password, 'bi-eye-slash-fill': !mostrar_password}" class="bi cursor-pointer absolute top-0 right-0 mr-2 text-lg" style="transform: translateY(50%);"></i>
+      </div>
+    </ng-template>
+    
+    <app-ui-kaas-hint [label]="hint" *ngIf=" hint != '' "></app-ui-kaas-hint>
+  </div>
+</div> 

@@ -1,0 +1,35 @@
+<div class="w-full flex flex-wrap justify-content-center align-content-center h-full">
+  <div class="w-9 grid m-0 mat-elevation-z4 border-round-xl p-4 h-max">
+    <div class="col-5">
+      <img src="assets/Img/Icons/iconos/no-data.svg" alt="">
+    </div>
+    <div class="col flex flex-wrap align-items-center" *ngIf="!errprEstudiante">
+      <div class="w-full h-max">
+        <p class="color-primary text-subtitulos-size">{{'user-hub-module.juegos-creado.error' | translate}}</p>
+        <p class="text-subtitulos-2-size text-justify line-height-3 mt-4">{{'user-hub-module.juegos-creado.no-datos' | translate}}</p>
+        <p class="text-subtitulos-2-size mt-4">{{'user-hub-module.juegos-creado.no-datos-2' | translate}}</p>
+       <div class="w-full flex justify-content-center mt-4">
+          <app-ui-kaas-button [label]="'general.boton-crear-juego' | translate" 
+                       [butonFull]="false" 
+                       buttonSize="small"
+                       (eventClick)="crearJuego()">
+          </app-ui-kaas-button>
+       </div>
+      </div>
+    </div>
+    <div class="col flex flex-wrap align-items-center" *ngIf="errprEstudiante">
+      <div class="w-full h-max">
+        <p class="color-primary text-subtitulos-size">{{'user-hub-module.juegos-jugados.error' | translate}}</p>
+        <p class="text-subtitulos-2-size text-justify line-height-3 mt-4">{{'user-hub-module.juegos-jugados.no-datos' | translate}}</p>
+        <p class="text-subtitulos-2-size mt-4">{{'user-hub-module.juegos-jugados.no-datos-2' | translate}}</p>
+       <div class="w-full flex justify-content-center mt-4">
+          <app-ui-kaas-button [label]="'general.boton-jugar-juego' | translate" 
+                       [butonFull]="false" 
+                       buttonSize="small"
+                       (eventClick)="crearJuego()">
+          </app-ui-kaas-button>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>

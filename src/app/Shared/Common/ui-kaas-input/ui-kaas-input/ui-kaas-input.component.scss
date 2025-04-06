@@ -1,0 +1,36 @@
+
+.my-component-input {
+  display: flex;
+}
+
+.ui-kaas-input-text:hover {
+  border-color: #3B82F6;
+}
+
+.ui-kaas-input-text:focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #BFDBFE;
+  border-color: #3B82F6;
+}
+
+.ui-readonly-input {
+  background-color: #f3f3f5;
+  font-size: 1rem;
+  color: #000000;
+  padding: 0.5rem;
+  border: 2px solid #ced4da;
+  transition: background-color .2s,color .2s,border-color .2s,box-shadow .2s;
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 6px;
+}
+
+.ui-readonly-input:focus {
+  outline: 0 none;
+  outline-offset: 0;
+}
+
+::placeholder {
+  color: rgb(173, 173, 173);
+}

@@ -1,0 +1,22 @@
+.estilo-cuadro-requisitos {
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.estilo-container-requisitos {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+
+.container-table {
+  height: max-content;
+  width: 100%;
+  max-width: 100%;
+  overflow: auto;
+}
+
+.mat-mdc-header-cell {
+  z-index: 0!important;
+}

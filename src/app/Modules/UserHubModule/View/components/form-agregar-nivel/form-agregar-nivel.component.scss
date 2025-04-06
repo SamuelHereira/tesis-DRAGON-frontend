@@ -1,0 +1,19 @@
+.container-table {
+    max-height: 200px;
+    height: max-content;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+}
+
+.mat-mdc-header-cell {
+    z-index: 0!important;
+}
+
+.container-table-v2 {
+    max-height: 70%;
+    height: max-content;
+    width: 100%;
+    max-width: 100%;
+    overflow: auto;
+}

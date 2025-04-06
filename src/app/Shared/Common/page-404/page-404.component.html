@@ -1,0 +1,31 @@
+<div class="w-screen h-screen flex justify-content-center flex-wrap relative border-box bg-white">
+    <div class="absolute top-0 right-0 w-full border-box py-1 px-2 bg-primary-100">
+        <div class="w-full flex justify-content-between flex-wrap">
+            <div class="w-max">
+                <div class="flex color-primary tex-titulo-Serius-Game cursor-pointer">
+                    <img src="assets/Img/Icons/icono_serius_game.png" width="80px">
+                    <div class="flex align-content-center flex-wrap ml-2" style="height: 50.72;">
+                        <p class="m-0 p-0">{{'title' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-max flex align-content-center flex-wrap">
+                <app-change_of_anguage></app-change_of_anguage>
+            </div>
+        </div>
+    </div>
+    <div style="height: calc(100% - 58px); margin-top: 50px;" class="w-full grid justify-content-center border-box">
+        <div class="h-full">
+            <img src="assets/Img/Icons/page_404_icon.png" alt="" class="h-full">
+        </div>
+        <div class="w-max max-w-30rem p-5 border-box h-full flex align-content-center flex-wrap">
+            <div class="h-max">
+                <p class="color-primary text-center text-titulos-size line-height-3" [innerHTML]="'404-page.page-not-found' | translate"></p>
+                <p class="color-black text-justify mt-4 text-subtitulos-size line-height-3">{{'404-page.sorry' | translate}}</p>
+                <div class="w-full flex justify-content-center flex-wrap mt-4">
+                    <app-ui-kaas-button [label]="'general.boton-regresar' | translate" buttonSize="small"></app-ui-kaas-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

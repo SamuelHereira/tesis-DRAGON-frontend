@@ -1,0 +1,9 @@
+<app-ui-kaas-heading [label]="label" *ngIf=" label != '' "></app-ui-kaas-heading>
+<div [class]="classIn">
+  <mat-radio-group [(ngModel)]="value" (change)="onValueChange($event.value)">
+    <mat-radio-button *ngFor="let season of options" [value]="season.value">
+      {{season.label | translate}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<app-ui-kaas-hint [label]="hint" *ngIf=" hint != '' "></app-ui-kaas-hint>

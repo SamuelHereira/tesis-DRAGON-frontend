@@ -1,0 +1,109 @@
+<div style="max-width: 99%;" class="w-full">
+  <div class="w-full ml-2 mb-4">
+    <form action="">
+      <p class="mt-4 text-center color-primary tex-titulo-Serius-Game">{{'user-hub-module.crear-juego.titulo' | translate}}</p>
+      <div class="w-full grid mt-4 gap-3">
+        <div class="w-12 md:w-max col-fixed">
+          <app-datepicker [label]="'user-hub-module.crear-juego.fecha-titulo'" 
+                          [hint]="'user-hub-module.crear-juego.fecha-hint'" 
+                          [(value)]="datosJuego.fechaFinalizacion"></app-datepicker>
+        </div>
+        <div class="w-12 md:w-max col-fixed">
+          <app-ui-kaas-input-select 
+                                 [label]="'user-hub-module.crear-juego.tipo-titulo'" 
+                                 [hint]="'user-hub-module.crear-juego.tipo-hint'" 
+                                 [(value)]="tipoJuego" 
+                                 [options]="options_Visibilidad" 
+                                 [readOnly]="datosJuego.niveles[0].requerimientos.length > 0"
+                                 (onChange)="elegitOtroTipo($event)"
+                                 [id_menu]="'visibilidad_juego'">
+          </app-ui-kaas-input-select>
+        </div>
+      </div>
+        <ng-container *ngFor="let data of datosJuego.niveles; let indice = index">
+            <app-form-agregar-nivel 
+                                      [indice]="indice" 
+                                      [nivel]="data" 
+                                      [requerimientosCargados]="requerimientosCargadosTipos"
+                                      [tipo]="tipoJuego"
+                                      (_guardarRequerimiento)="guardarRequerimiento($event,indice)"
+                                      (_eliminarRequerimiento)="eliminarRequerimiento(indice,$event)"
+                                      (_finalizarRequerimiento)="finalizarCreacion()"></app-form-agregar-nivel>
+        </ng-container>
+        <!-- <div class="w-full flex flex-wrap justify-content-center mt-4" *ngIf="validarCrearNivel">
+          <div class="w-max flex flex-wrap gap-3">
+            <app-ui-kaas-button [label]="'general.boton-finalizar-juego' | translate" 
+                                [butonFull]="false" 
+                                buttonSize="small"
+                                (eventClick)="finalizarCreacion()">
+            </app-ui-kaas-button>
+          </div>
+        </div> -->
+    </form>
+  </div> 
+</div>
+<app-modal  *ngIf="viewModalResponse" 
+                  [titulo]="'user-hub-module.crear-juego.titulo' | translate" 
+                  [content]="retornoMsg"
+                  [hideClose]="false"
+                  [peticionError]="!verificarCreacion"
+                  [width]="'50%'">
+    <div app-footer-mensaje>
+      <app-ui-kaas-button [label]="'general.boton-aceptar' | translate" 
+                                [butonFull]="false" 
+                                buttonSize="small"
+                                (eventClick)="verJuegoshome()">
+        </app-ui-kaas-button>
+    </div> 
+</app-modal>
+
+<app-modal [titulo]="'user-hub-module.crear-juego.modales.titulo-ayudanos' | translate" [width]="'45%'" *ngIf="verModalGuardarRequerimientos">
+  <div app-content class="w-full">
+    <div class="w-full grid">
+      <div class="col-5 py-0">
+        <img src="assets/Img/Icons/iconos/colaboracion.svg" alt="no se cargo imagen">
+      </div>
+      <div class="col py-0 flex flex-wrap align-content-center">
+        <p class="text-subtitulos-3-size text-justify">{{'user-hub-module.crear-juego.modales.subtitulo-ayudanos' | translate}}</p>
+      </div>
+    </div>
+  </div>
+  <div app-footer>
+    <div class="w-full flex flex-grap justify-content-center gap-3">
+      <app-ui-kaas-button [label]="'general.boton-no' | translate" 
+                          [butonFull]="true" 
+                          buttonSize="small"
+                          [background_color]="'bg-red-600'"
+                          (eventClick)="cerrarGuardarRequerimientos()">
+      </app-ui-kaas-button>
+      <app-ui-kaas-button [label]="'general.boton-si' | translate" 
+                          [butonFull]="true" 
+                          buttonSize="small"
+                          (eventClick)="guardarRequerimientos()">
+      </app-ui-kaas-button>
+    </div>
+  </div>
+</app-modal>
+
+<app-modal [titulo]="'user-hub-module.crear-juego.modales.titulo-agradecimiento' | translate" [width]="'45%'" *ngIf="modalAgradecimiento">
+  <div app-content class="w-full">
+    <div class="w-full grid">
+      <div class="col-5 py-0">
+        <img src="assets/Img/Icons/iconos/agredecimiento.svg" alt="no se cargo imagen">
+      </div>
+      <div class="col py-0 flex flex-wrap align-content-center">
+        <p class="text-subtitulos-3-size text-justify">{{'user-hub-module.crear-juego.modales.subtitulo-agradecimiento' | translate}}</p>
+      </div>
+    </div>
+  </div>
+  <div app-footer>
+    <div class="w-full flex flex-grap justify-content-center">
+      <app-ui-kaas-button [label]="'general.boton-aceptar' | translate" 
+                          [butonFull]="true" 
+                          buttonSize="small"
+                          (eventClick)="cerrarModalAgradecimiento()">
+      </app-ui-kaas-button>
+    </div>
+  </div>
+</app-modal>
+

@@ -1,0 +1,53 @@
+<div class="w-screen h-screen flex justify-content-center flex-wrap relative border-box bg-white">
+  <div class="absolute top-0 right-0 w-full border-box py-1 px-2 bg-primary-100">
+      <div class="w-full flex justify-content-between flex-wrap">
+          <div class="w-max hidden lg:block">
+              <div class="flex color-primary tex-titulo-Serius-Game cursor-pointer">
+                  <img src="assets/Img/Icons/icono_serius_game.png" width="80px">
+                  <div class="flex align-content-center flex-wrap ml-2" style="height: 50.72;">
+                      <p class="m-0 p-0">{{'title' | translate}}</p>
+                  </div>
+              </div>
+          </div>
+          <div class="w-max block lg:hidden flex align-content-center h-full flex-wrap">
+              <i class="bi bi-list text-xl ml-3 mt-2 cursor-pointer" (click)="viewMenu2 = !viewMenu2"></i>
+          </div>
+          <div class="w-max flex align-content-center flex-wrap text-subtitulos-3-size color-primary">
+            <p>{{'user-hub-module.home.bienvenida' | translate}} 
+              <span class="font-medium mr-2">{{usuarioRegistrado.usuario}}</span> 
+              <span class="font-medium hidden md:inline-block">{{'user-hub-module.home.ultima-conexion' | translate}} {{usuarioRegistrado.ultimoRegistro}}</span></p>
+          </div>
+          <div class="w-max flex align-content-center flex-wrap">
+              <app-change_of_anguage></app-change_of_anguage>
+          </div>
+      </div>
+  </div>
+  <div style="height: calc(100% - 60px); margin-top: 60px;" class="w-full grid gap-3 justify-content-center border-box relative">
+      <div class="absolute hidden lg:block" [ngClass]="{'style-button-activar-menu': viewMenu, 'style-button-desactivar-menu': !viewMenu}">
+        <i [ngClass]="{'bi-arrow-left-circle-fill': viewMenu, 'bi-arrow-right-circle-fill': !viewMenu}" class="bi color-primary-400 z-5 cursor-pointer text-lg" (click)="viewMenu = !viewMenu"></i>
+      </div>
+      <div [ngClass]="{'size-menu-activado': viewMenu, 'size-menu-desactivado': !viewMenu}" class="h-full bg-white shadow-7 hidden lg:block">
+        <ng-container *ngFor="let menu of menu_lista">
+          <div class="w-full px-3 pb-3 pt-4 text-subtitulos-size" 
+               [ngClass]="{'color-primary-400': menu.activo, 'menu-item cursor-pointer': !menu.activo}"
+               (click)="(!menu.activo) && cambioMenu(menu.id, menu.ruta)">
+            <i [class]="menu.icono"></i> <span *ngIf="viewMenu" class="ml-2">{{menu.titulo | translate}}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </div>
+      <div *ngIf="viewMenu2" class="h-full bg-white shadow-7 block lg:hidden absolute w-full" style="z-index: 999">
+        <ng-container *ngFor="let menu of menu_lista">
+          <div class="w-full px-3 pb-3 pt-4 text-subtitulos-size" 
+               [ngClass]="{'color-primary-400': menu.activo, 'menu-item cursor-pointer': !menu.activo}"
+               (click)="(!menu.activo) && cambioMenu(menu.id, menu.ruta)">
+            <i [class]="menu.icono"></i> <span *ngIf="viewMenu" class="ml-2">{{menu.titulo | translate}}</span>
+          </div>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </div>
+      <div class="col p-0 h-full overflow-auto mb-4 pl-3 lg:pl-0 pr-3">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>

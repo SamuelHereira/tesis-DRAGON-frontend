@@ -1,0 +1,20 @@
+<div class="w-screen h-screen flex justify-content-center flex-wrap relative border-box bg-white">
+    <div class="absolute top-0 right-0 w-full border-box py-1 px-2 bg-primary-100">
+        <div class="w-full flex justify-content-between flex-wrap">
+            <div class="w-max">
+                <div class="flex color-primary tex-titulo-Serius-Game cursor-pointer hull">
+                    <img class="hidden md:block" src="assets/Img/Icons/icono_serius_game.png" width="80px">
+                    <div class="flex align-content-center flex-wrap ml-2 mt-2 md:mt-0" style="height: 50.72;">
+                        <p class="m-0 p-0">{{'title' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-max flex align-content-center flex-wrap">
+                <app-change_of_anguage></app-change_of_anguage>
+            </div>
+        </div>
+    </div>
+    <div class="w-full" style="height: calc(100% - 60px); margin-top: 60px;">
+        <router-outlet></router-outlet>
+    </div>  
+</div>

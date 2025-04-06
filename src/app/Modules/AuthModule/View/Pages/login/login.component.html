@@ -1,0 +1,143 @@
+<div class="w-full h-full grid justify-content-center border-box m-0">
+    <div [ngClass]="{'sm:w-8 md:w-9 lg:w-7 xl:w-6': iniciarSesion, 'sm:w-9 md:w-10 xl:w-9': !iniciarSesion}" class="h-full flex align-content-center flex-wrap w-11">
+      <div class="w-full grid m-0 container-auth shadow-3">
+        <div [ngClass]="{'w-6': iniciarSesion, 'w-4': !iniciarSesion}" class="bg-primary-700 border-round-md border-noround-right border-box hidden md:block">
+          <div class="w-full h-full p-4 flex justify-content-center align-content-center flex-wrap border-box">
+            <p class="color-primary-50 tex-titulo-Serius-Game text-center">{{'title' | translate}}</p>
+            <p class="color-white text-subtitulos-2-size text-justify	line-height-3 mt-4">{{'aut-module.titulo' | translate}}</p>
+            <img src="assets/Img/Icons/iconos/cohete.png" width="140px" class="mt-4">
+          </div>
+        </div>
+        <div [ngClass]="{'w-12 md:w-6': iniciarSesion, 'w-12 md:w-8': !iniciarSesion}" class="bg-white border-round-md border-noround-left border-box">
+          <div class="w-full p-4 border-box">
+            <div class="w-full flex justify-content-end flex-wrap">
+              <div class="w-max flex">
+                <div  [ngClass]="{'color-primary-50 bg-primary': iniciarSesion, 'color-white bg-primary-100 selector-togle': !iniciarSesion}"
+                      class="border-box border-round-3xl border-noround-right p-2 pl-3 cursor-pointer"
+                      (click)="iniciarSesion = true">
+                  <p class="text-subtitulos-4-size">{{'aut-module.iniciar-sesion' | translate}}</p>
+                </div>
+                <div [ngClass]="{'color-primary-50 bg-primary': !iniciarSesion, 'color-white bg-primary-100 selector-togle': iniciarSesion}"
+                      (click)="iniciarSesion = false"
+                      class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer">
+                  <p class="text-subtitulos-4-size">{{'aut-module.crear-cuenta' | translate}}</p>
+                </div>
+              </div>
+              <div class="mt-5" *ngIf="iniciarSesion">
+                  <form class="w-full grid" [formGroup]="loginFormGroup">
+                    <div class="col-12 px-1">
+                      <mat-form-field class="w-full hide-hint" appearance="outline">
+                        <mat-label>{{'aut-module.input.usuario' | translate}}</mat-label>
+                        <input matInput placeholder="{{'aut-module.input.usuario-placeholder' | translate}}" formControlName="usuario">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 px-1 mt-1">
+                      <mat-form-field class="w-full hide-hint" appearance="outline">
+                        <mat-label>{{'aut-module.input.password' | translate}}</mat-label>
+                        <input [type]="ocultarPaaswordLogin ? 'password' : 'text'" matInput placeholder="{{'aut-module.input.password-placeholder' | translate}}" formControlName="password">
+                        <button type="button" mat-icon-button matSuffix (click)="ocultarPaaswordLogin = !ocultarPaaswordLogin" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="ocultarPaaswordLogin">
+                          <mat-icon>{{ ocultarPaaswordLogin ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-12 mt-1 flex justify-content-end">
+                      <p class="text-subtitulos-3-size w-max color-primary-300 font-medium cursor-pointer" (click)="dirigirRecuperarCuenta()">{{'aut-module.input.olvidaste-password' | translate}}</p>
+                    </div>
+                    <div class="w-full flex justify-content-center flex-wrap mt-2">
+                      <app-ui-kaas-button class="w-full" 
+                                          [label]="'general.boton-continuar' | translate" 
+                                          [disabled]="loginFormGroup.invalid"
+                                          [butonFull]="true" 
+                                          (eventClick)="login()"
+                                          buttonSize="small"></app-ui-kaas-button>
+                    </div>
+                  </form>
+              </div>
+              <div class="mt-5" *ngIf="!iniciarSesion">
+                <form class="w-full grid" [formGroup]="crearCuentaFormGroup">
+                  <div class="col-12 md:col-6 px-1">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>{{'aut-module.input.usuario' | translate}}</mat-label>
+                      <input matInput placeholder="{{'aut-module.input.usuario-placeholder' | translate}}" formControlName="usuario">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 md:col-6 px-1 mt-1 md:mt-0">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>{{'aut-module.input.correo' | translate}}</mat-label>
+                      <input matInput type="email" placeholder="{{'aut-module.input.correo-placeholder' | translate}}" formControlName="correo">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 md:col-6 px-1 mt-1">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>{{'aut-module.input.password' | translate}}</mat-label>
+                      <input [type]="ocultarPaaswordCrearCuenta ? 'password' : 'text'" matInput placeholder="{{'aut-module.input.password-placeholder' | translate}}" formControlName="password">
+                      <button type="button" mat-icon-button matSuffix (click)="ocultarPaaswordCrearCuenta = !ocultarPaaswordCrearCuenta" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="ocultarPaaswordCrearCuenta">
+                        <mat-icon>{{ ocultarPaaswordCrearCuenta ? 'visibility_off' : 'visibility' }}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 md:col-6 px-1 mt-1">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>{{'aut-module.input.password-conf' | translate}}</mat-label>
+                      <input [type]="ocultarPaaswordCrearCuenta ? 'password' : 'text'" matInput placeholder="{{'aut-module.input.password-conf-placeholder' | translate}}" formControlName="confirmarPassword">
+                      <button type="button" mat-icon-button matSuffix (click)="ocultarPaaswordCrearCuenta = !ocultarPaaswordCrearCuenta" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="ocultarPaaswordCrearCuenta">
+                        <mat-icon>{{ ocultarPaaswordCrearCuenta ? 'visibility_off' : 'visibility' }}</mat-icon>
+                      </button>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 px-1 mt-1">
+                    <!-- <p [ngClass]="{'text-teal-600': validador.caracteres, 'text-red-600': !validador.caracteres}" class="font-medium">* {{'aut-module.validador.caracteres' | translate}}</p>
+                    <p [ngClass]="{'text-teal-600': validador.general, 'text-red-600': !validador.general}" class="font-medium mt-1">* {{'aut-module.validador.general' | translate}}</p>
+                    <p [ngClass]="{'text-teal-600': validador.repetido, 'text-red-600': !validador.repetido}" class="font-medium mt-1">* {{'aut-module.validador.repetido' | translate}}</p> -->
+                    <p *ngIf="mensaje != ''" class="font-medium mt-1 text-red-600">* {{mensaje | translate}}</p>
+                  </div>
+                  <div class="w-full flex justify-content-center flex-wrap mt-2">
+                    <app-ui-kaas-button class="w-full" 
+                                        [label]="'general.boton-continuar' | translate" 
+                                        [disabled]="crearCuentaFormGroup.invalid"
+                                        [butonFull]="true" 
+                                        buttonSize="small"
+                                        (eventClick)="crearCuenta()"></app-ui-kaas-button>
+                  </div>
+                  <!-- <div class="col-12 pr-0">
+                    <mat-form-field class="w-full" [ngClass]="{'hide-hint': !nueva_brigada_FormGroup.get('numero_responsable')?.errors?.['minlength'] && !nueva_brigada_FormGroup.get('numero_responsable')?.errors?.['maxlength']}" appearance="outline">
+                      <mat-label>Número del responsable</mat-label>
+                      <span matPrefix class="ml-3">09</span>
+                      <input matInput placeholder="Ingrese el número del responsable'" formControlName="numero_responsable" (keypress)="blockEvent($event)" [maxlength]="8" [minlength]="8">
+                      
+                      <mat-error *ngIf="nueva_brigada_FormGroup.get('numero_responsable')?.errors?.['minlength']">
+                        El número debe tener al menos 8 caracteres
+                      </mat-error>
+                  
+                      
+                      <mat-error *ngIf="nueva_brigada_FormGroup.get('numero_responsable')?.errors?.['maxlength']">
+                        El número no puede tener más de 8 caracteres.
+                      </mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <!-- <div class="col-12 pr-0">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>Dirección de la brigada</mat-label>
+                      <input matInput placeholder="Ingrese la dirección de la brigada'" formControlName="direccion">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 pr-0">
+                    <mat-form-field class="w-full hide-hint" appearance="outline">
+                      <mat-label>Fecha Inicio y fin de la brigada</mat-label>
+                      <mat-date-range-input [formGroup]="nueva_brigada_FormGroup" [rangePicker]="picker">
+                        <input matStartDate formControlName="fechaInicio" placeholder="Fecha Inicio">
+                        <input matEndDate formControlName="fechFin" placeholder="Fecha Fin">
+                      </mat-date-range-input>
+                      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                  </div> -->
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

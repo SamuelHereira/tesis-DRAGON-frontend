@@ -1,0 +1,9 @@
+<div class="w-full calendare-style">
+  <app-ui-kaas-heading [label]="label" *ngIf=" label != '' "></app-ui-kaas-heading>
+  <mat-form-field class="w-full">
+    <input matInput [matDatepicker]="picker" [(ngModel)]="value" (dateChange)="change($event)" (input)="picker.close()" readonly>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <app-ui-kaas-hint [label]="hint" *ngIf=" hint != '' "></app-ui-kaas-hint>
+</div>

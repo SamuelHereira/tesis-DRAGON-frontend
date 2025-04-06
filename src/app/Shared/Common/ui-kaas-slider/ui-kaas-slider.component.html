@@ -1,0 +1,11 @@
+<app-ui-kaas-heading [label]="label" *ngIf=" label != '' "></app-ui-kaas-heading>
+<div [class]="classIn" class="z-5 w-full flex flex-wrap gap-3">
+  <div class="col p-0 border-box">
+    <mat-slider class="w-11 border-box" [max]="1000" [min]="100" [step]="100" (input)="onValueChange($event)">
+      <input matSliderThumb [(ngModel)]="value">
+    </mat-slider>
+  </div>
+  <div class="w-max flex flex-wrap align-content-center" style="height: 45px;">
+    <p>{{value}} Pts</p>
+  </div>
+</div>

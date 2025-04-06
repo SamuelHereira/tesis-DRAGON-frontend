@@ -1,0 +1,128 @@
+<div style="max-width: 99%;" class="w-full mx-1">
+  <p class="mt-4 text-center color-primary tex-titulo-Serius-Game">{{'user-hub-module.perfil.title' | translate}}</p>
+  <div class="w-full grid m-0 mt-4 mat-elevation-z4 border-round-xl p-4">
+    <div class="col-12 md:col-6 lg:col-4">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.usuario-titulo'" 
+              [(value)]="usuarioInformacion.usuario"
+              [readOnly]="true"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.nombres-titulo'" 
+              [(value)]="usuarioInformacion.nombres" 
+              [icono]="desabilitarNombre ? 'bi bi-pencil-square' : ''"
+              (iconClick)="habilitarNombre()" 
+              [readOnly]="desabilitarNombre"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.apellidos-titulo'" 
+              [(value)]="usuarioInformacion.apellidos" 
+              [icono]="desabilitarNombre ? 'bi bi-pencil-square' : ''"
+              (iconClick)="habilitarNombre()" 
+              [readOnly]="desabilitarNombre"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4 lg:mt-3">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.correo-titulo'" 
+              [(value)]="usuarioInformacion.correo" 
+              [readOnly]="true"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4 lg:mt-3">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.rol-titulo'" 
+              [(value)]="usuarioInformacion.rol" 
+              [readOnly]="true"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4 lg:mt-3">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.edad-titulo'" 
+              [(value)]="usuarioInformacion.edad" 
+              [readOnly]="true"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 md:col-6 lg:col-4 lg:mt-3">
+      <app-datepicker [label]="'user-hub-module.perfil.fechaN-titulo'" 
+                      [(value)]="usuarioInformacion.fechaNacimiento"
+                      (changeDate)="changeFecha()"></app-datepicker>
+    </div>
+    <div class="col-12 md:col-6 lg:col-6 lg:mt-3">
+      <app-ui-kaas-input 
+              [label]="'user-hub-module.perfil.contrasena-titulo'" 
+              [hint]="'user-hub-module.perfil.contrasena-hint'" 
+              [(value)]="usuarioInformacion.password"
+              [type]="'password'" 
+              [readOnly]="false"></app-ui-kaas-input>
+    </div>
+    <div class="col-12 mt-4 flex gap-4 justify-content-center flex-wrap" *ngIf="!validarObjetosIguales()">
+       <app-ui-kaas-button    [label]="'general.boton-cancelar' | translate" 
+                              [butonFull]="false" 
+                              buttonSize="small"
+                              (eventClick)="cancelarActualizacion()"
+                              [background_color]="'bg-red-600'">
+        </app-ui-kaas-button>
+        <app-ui-kaas-button [label]="'general.boton-aceptar' | translate" 
+                            [butonFull]="false" 
+                            (eventClick)="abrirModalConfirmacion()"
+                            buttonSize="small">
+        </app-ui-kaas-button>
+    </div>
+            <!-- <app-ui-kaas-input 
+            label="'user-hub-module.perfil.usuario-titulo'" 
+            [(value)]="usuarioInformacion.usuario" 
+            icono="bi bi-search"
+            (iconClick)="abrirModalRequerimientosCargados()"
+            [readOnly]="true"></app-ui-kaas-input> -->
+  </div>
+  <!-- <app-modal  [titulo]="'Retroalimentación del Juego'"  
+            *ngIf="mostrarRetoAlimentacion"
+            [hideClose]="false"
+            [peticionError]="true">
+  <div app-content>
+    <p>{{retroalimentacion}}</p>
+  </div> 
+  <div app-footer>
+    <app-ui-kaas-button class="w-full" 
+                        [label]="'general.boton-continuar' | translate" 
+                        [butonFull]="true" 
+                        buttonSize="small"
+                        (eventClick)="mostrarRetoAlimentacion = false">
+    </app-ui-kaas-button>
+  </div>
+  </app-modal> -->
+  <app-modal  [titulo]="'user-hub-module.perfil.modal.titulo' | translate"  
+              *ngIf="viewConfirmacionEditar"
+              [hideClose]="false"
+              [peticionError]="true"
+              [width]="'45%'">
+    <div app-content>
+      <p class="text-subtitulos-2-size">{{'user-hub-module.perfil.modal.subtitulo' | translate}}</p>
+      <div class="col-12 mt-3">
+        <app-ui-kaas-input 
+                [label]="'user-hub-module.perfil.contrasena-actual-titulo'" 
+                [hint]="'user-hub-module.perfil.contrasena-actual-hint'" 
+                [(value)]="password_antiguo"
+                [type]="'password'" 
+                [readOnly]="false"></app-ui-kaas-input>
+      </div>
+      <p *ngIf="verificarPassword()" class="text-red-500 font-semibold text-subtitulos-3-size col">{{'general-msg.error-pasword-repetido' | translate}}</p>
+    </div>
+    <div app-footer>
+     <div class="w-full flex gap-4 flex-wrap justify-content-center">
+       <app-ui-kaas-button    [label]="'general.boton-salir' | translate" 
+                               [butonFull]="false" 
+                               buttonSize="small"
+                               (eventClick)="cerrarModalConfirmacion()"
+                               [background_color]="'bg-red-600'">
+       </app-ui-kaas-button>
+       <app-ui-kaas-button  
+                           [label]="'general.boton-continuar' | translate" 
+                           [butonFull]="true" 
+                           [disabled]="verificarPassword() || this.password_antiguo == ''"
+                           buttonSize="small"
+                           (eventClick)="editarPerfil()">
+       </app-ui-kaas-button>
+     </div>
+    </div> 
+  </app-modal>
+</div>

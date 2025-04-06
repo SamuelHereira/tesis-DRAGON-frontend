@@ -1,0 +1,23 @@
+<div class="my-component-button w-full" [ngClass]="{'ui-kaas-opacity-50': disabled}">
+  <button [matTooltip]="tooltip" 
+          [type] = "type"
+          (click)="ejecutarAccion()" 
+          [class]="button_size_class" 
+          [ngClass]="getColorClass()" 
+          [style]="(custom_background_color && !buttonText) ? custom_background_color_class : ''">
+    <ng-container *ngIf="icon_visible && iconPosition == 'left'">
+      <ng-container *ngIf="!icon_img;else img_icon">
+        <i [ngClass]="{'ui-kaas-mr-2': label != ''}" [style]="(custom_text_color) ? custom_text_color_class : '' " [class]="icon"></i>
+      </ng-container>
+      <ng-template #img_icon>
+        <img [src]="icon_img_value" class="ui-kaas-style-img-icon" [ngClass]="{'ui-kaas-mr-2': label != ''}" alt="ruta invalido o no definida">
+      </ng-template>
+    </ng-container>
+    <span class="text-center w-full" [style]="(custom_text_color) ? custom_text_color_class : '' ">
+      {{label}}
+    </span>
+    <ng-container *ngIf="icon_visible && iconPosition == 'right'">
+      <i [ngClass]="{'ui-kaas-ml-2': label != ''}" [style]="(custom_text_color) ? custom_text_color_class : '' " [class]="icon+' text-lg'"></i>
+    </ng-container>
+  </button>
+</div>

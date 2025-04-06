@@ -1,0 +1,310 @@
+{
+  "title": "SERIOUS GAME",
+  "aut-module": {
+    "titulo": "Explore and discover your non-functional requirements through a unique gaming experience",
+    "iniciar-sesion": "Sign In",
+    "crear-cuenta": "Sign Up",
+    "input": {
+      "usuario": "User",
+      "usuario-placeholder": "Enter your username",
+      "password": "Password",
+      "password-placeholder": "Enter your password",
+      "password-conf": "Confirm your password",
+      "password-conf-placeholder": "Repeat your password",
+      "correo": "Email",
+      "correo-placeholder": "Enter your email address",
+      "olvidaste-password": "Forgot your password?",
+      "login-exitoso": "Successful login!",
+      "crear-exitoso": "The account has been created successfully. Now, just log in.",
+      "login-fallido": "Login failed. Try again",
+      "crear-fallido": "The account creation was not successful. Please try again later.",
+      "usuario-incorrecto": "Incorrect username. Please check and try again"
+    },
+    "migracion": {
+      "title": "Complete your registration",
+      "nombre": "First Name",
+      "nombre-hint": "Enter your full name",
+      "apellido": "Last Name",
+      "apellido-hint": "Enter your full last name",
+      "rol": "Role",
+      "fecha-nacimiento": "Date of Birth",
+      "estudiante": "Student",
+      "profesor": "Professor"
+    },
+    "recuperar-cuenta": {
+      "title": "Recover Your Password",
+      "correo": "Email",
+      "correo-placeholder": "Enter your email",
+      "password": "Password",
+      "password-placeholder": "Enter your password",
+      "passwordTemp": "Temporary Password",
+      "passwordTemp-placeholder": "Enter your temporary password sent to your email",
+      "password-conf": "Confirm Your Password",
+      "password-conf-placeholder": "Repeat your password",
+      "ok": "Temporary password sent successfully",
+      "error": "An error occurred while sending the email. Please try again later",
+      "ok2": "Password updated successfully. Now just log in",
+      "error2": "The temporary password is incorrect",
+      "error3": "An error occurred, please try again later",
+      "error4": "The entered email is invalid"
+    },
+    "validador": {
+      "caracteres": "The minimum length is 8 characters",
+      "general": "Your password must have at least one uppercase letter and one special character",
+      "repetido": "Passwords do not match"
+    }
+  },
+  "user-hub-module": {
+    "home": {
+      "bienvenida": "Welcome:",
+      "ultima-conexion": "Last connection:",
+      "menu": {
+        "inicio": "Home",
+        "perfil": "Profile",
+        "crear-juego": "Create Game",
+        "juegos-creados": "Games Created",
+        "reporte": "Reports",
+        "salir": "Log out",
+        "juegos-jugados": "Games Played"
+      }
+    },
+    "perfil": {
+      "title": "Update Personal Information",
+      "usuario-titulo": "User",
+      "nombres-titulo": "First Names",
+      "apellidos-titulo": "Last Names",
+      "correo-titulo": "Email",
+      "rol-titulo": "Role",
+      "edad-titulo": "Age",
+      "fechaN-titulo": "Date of birth",
+      "contrasena-titulo": "New Password",
+      "contrasena-hint": "If you do not wish to update the password, simply leave the field empty",
+      "contrasena-actual-titulo": "Current password",
+      "contrasena-actual-hint": "To confirm the modification of your information, please provide your current password",
+      "modal": {
+        "titulo": "Confirmation of User Information Update",
+        "subtitulo": "Are you sure you want to edit your user information?"
+      }
+    },
+    "juegos-creado": {
+      "title": "View your created games",
+      "subtitle": "In this session, you'll be able to exit the game",
+      "error": "Starting from scratch: Create your first game now",
+      "no-datos": "At the moment, there are no games created in your account. To start creating a new one, simply press the button below this message. This step will take you to the interface where you can begin the game creation process easily and quickly.",
+      "no-datos-2": "Enjoy creating your first game!",
+      "dato-juego-titulo": "Game data"
+    },
+    "juegos-jugados": {
+      "title": "View the games you have played",
+      "error": "Starting from scratch: Play for the first time",
+      "no-datos": "At the moment, there are no games played on your account. To start playing, simply press the button below this message. This step will take you to the interface where you can start the process easily and quickly.",
+      "no-datos-2": "Enjoy playing your first game!",
+      "dato-juego-titulo": "Game Data"
+    },
+    "reporte": {
+      "titulo": "Report generation"
+    },
+    "crear-juego": {
+      "titulo": "Game Creation",
+      "fecha-titulo": "Completion Date",
+      "fecha-hint": "This is the date when your game finishes. By default, it is set to 7 days.",
+      "tipo-titulo": "Game Type",
+      "tipo-hint": "This is the type of game you should choose.",
+      "modales": {
+        "titulo-ayudanos": "Help Us Improve Our Requirements Database",
+        "subtitulo-ayudanos": "Would you like your requirements to be stored in our database so that other teachers can use them in the future? Your contribution will help us create a more complete and useful library for everyone. Your collaboration is very valuable!",
+        "titulo-agradecimiento": "Thank You for Your Help",
+        "subtitulo-agradecimiento": "Your requirements have been successfully stored. Now, if you want to create more games, you will find your requirements already loaded in our database. Thank you for your collaboration, we are committed to offering you a better experience."
+      },
+      "componente-form": {
+        "cargar-req-titulo": "Load Requirements",
+        "cargar-req-subtitulo": "You can load requirements created by you or other teachers",
+        "requerimiento-titulo": "Requirement",
+        "type-requerimiento-titulo": "Type of Requirement",
+        "retroA": "Feedback",
+        "puntos": "Additional Points",
+        "modal-1": {
+          "titulo": "End Game",
+          "subtitle": "Are you sure you want to end the game? Once ended, the created game cannot be edited."
+        },
+        "modal-2": {
+          "titulo": "Missing Requirements",
+          "subtitle": "Only one type of requirement was added, and at least two different types of requirements must be saved."
+        },
+        "modal-3": {
+          "titulo": "Choose Saved Requirements",
+          "subtitle": "Only one type of requirement was added, and at least two different types of requirements must be saved."
+        },
+        "modal-4": {
+          "titulo": "Edit Your Requirement",
+          "subtitle": "Only one type of requirement was added, and at least two different types of requirements must be saved."
+        }
+      }
+    },
+    "serios-game": {
+      "titulo": "Please enter the game code",
+      "puntaje": "Score:",
+      "modales": {
+        "titulo-1": "Game Feedback",
+        "titulo-2": "End of Game!",
+        "subtitle-2": "The game has come to an end. Thank you for playing!"
+      },
+      "ambiguos": "Ambiguous",
+      "no-ambiguos": "Not Ambiguous",
+      "funcionales": "Functional",
+      "no-funcionales": "Non-Functional",
+      "req-no-funcionales": "Set of non-functional requirements",
+      "req-funcionales": "Set of functional requirements",
+      "req-funcionales-no-funcionales": "Set of requirements"
+    }
+  },
+  "404-page": {
+    "sorry": "Apologies for the inconvenience. Don't worry, we're here to help! Simply press the button below to return to the homepage and continue your journey seamlessly",
+    "page-not-found": "Oh no!<br>You've strayed from the digital path"
+  },
+  "language-component": {
+    "spanish": "Spanish",
+    "english": "English"
+  },
+  "general": {
+    "boton-continuar": "Continue",
+    "boton-regresar": "Return",
+    "boton-aceptar": "Accept",
+    "boton-cancelar": "Cancel",
+    "boton-salir": "Exit",
+    "boton-actualizar": "Update",
+    "boton-seleccionar": "Select",
+    "boton-no": "No",
+    "boton-si": "Yes",
+    "boton-buscar": "Search",
+    "boton-eliminar-req": "Delete requirement",
+    "boton-guardar-req": "Save requirement",
+    "boton-agregar-req": "Add requirement",
+    "boton-editar-req": "Requirement from scratch",
+    "boton-seleccionar-req": "Select requirement",
+    "boton-crear-juego": "Create Game",
+    "boton-jugar-juego": "Play Game",
+    "boton-cerrar-juego": "Exit game",
+    "boton-generar": "Generate",
+    "boton-finalizar-juego": "Finish game",
+    "estudiante": "Student",
+    "profesor": "Professor",
+    "opcional": "Optional",
+    "inacitvo": "Inactive",
+    "acitvo": "Active"
+  },
+  "general-msg": {
+    "error-get-user": "User not found. Please try again later",
+    "error-put-user": "The user was not successfully edited. Please try again later.",
+    "sucess-put-user": "The user was edited successfully.",
+    "error-put-user-password": "The current password provided is incorrect.",
+    "error-pasword-repetido": "The current password is the same as the new password entered, they must be different",
+    "error-crear-juego": "The game creation was not successful. Please try again later.",
+    "ok-crear-juego": "The game levels were created successfully. The game code is xxx, which will help your students find your game.",
+    "error-cerrar-juego": "The game creation was not successful. Please try again later.",
+    "ok-cerrar-juego": "The game creation was successful.",
+    "ok-guardar-juego": "Score saved successfully",
+    "error-guardar-juego": "You have already played this game before",
+    "error-guardar-juego-2": "Error saving the score. Please try again later",
+    "codigo-incorrecto": "Incorrect code",
+    "esta-incorrecto": "The game is closed",
+    "estado_jugado": "The game has already been played",
+    "usuario-ocupado": "The user is busy"
+  },
+  "general-table": {
+    "no": "No.",
+    "id_juego": "Game ID",
+    "tipo_req": "Requirement Type",
+    "tipo_req-2": "Requirement Type",
+    "fecha_creacion": "Creation Date",
+    "fecha_finalizacion": "Completion Date",
+    "retro-alimentacion": "Feedback",
+    "puntos": "Points",
+    "req": "Requirement",
+    "estado": "Status",
+    "estado-acitvo": "Active",
+    "estado-inacitvo": "Inactive",
+    "acciones": "Actions",
+    "seleccionar": "Select",
+    "req-base": "Requirement from base",
+    "error": "You must have at least 5 requirements",
+    "nombres": "Names",
+    "tiempo-inicio": "Start time",
+    "tiempo-fin": "End time",
+    "tiempo": "Time",
+    "aciertos": "Hits",
+    "errores": "Misses"
+  },
+  "general-tool": {
+    "revisar-juego": "Review Game"
+  },
+  "tipo-juego": {
+    "titulo": "Type:",
+    "juego-1": "Type 1",
+    "juego-2": "Type 2",
+    "juego-3": "Type 3",
+    "juego-1-title": "Detect ambiguous and unambiguous non-functional requirements",
+    "juego-2-title": "Detect functional and non-functional requirements",
+    "juego-3-title": "Detect ambiguous and unambiguous functional requirements",
+    "juego-1-subtitle-ambiguo": "Non-functional ambiguous",
+    "juego-1-subtitle-noAmbiguo": "Non-functional non-ambiguous",
+    "juego-2-subtitle-ambiguo": "Functional requirements",
+    "juego-2-subtitle-noAmbiguo": "Non-functional requirements",
+    "juego-3-subtitle-ambiguo": "Functional ambiguous",
+    "juego-3-subtitle-noAmbiguo": "Functional non-ambiguous"
+  },
+  "instrucciones-juegos": {
+    "titulo": "Game Instructions",
+    "tipo-1": {
+      "contenido": "In this game, your goal is to improve your ability to identify and classify ambiguous and unambiguous non-functional requirements. Here are the instructions to get started:",
+      "paso-1": "1. Main Screen: You will see three boards on the screen:",
+      "paso-1-1": "Ambiguous",
+      "paso-1-2": "Requirements",
+      "paso-1-3": "Unambiguous",
+      "paso-2": "2. Requirement Cards: On the central board called 'Requirements', different cards with descriptions of non-functional requirements will appear.",
+      "paso-3": "3. Classification: Drag and drop each requirement card onto the corresponding board:",
+      "paso-3-1": "Ambiguous: If you consider the requirement to be ambiguous.",
+      "paso-3-2": "Unambiguous: If you consider the requirement to be unambiguous.",
+      "paso-4": "4. Scoring:",
+      "paso-4-1": "If you place a card correctly, you will earn points.",
+      "paso-4-2": "If you place a card incorrectly, you will lose points, but you will have the opportunity to correct it without earning additional points.",
+      "paso-5": "5. Feedback: Each time you make a mistake, you will receive an explanation of why the card is misplaced. Use this feedback to learn and improve.",
+      "paso-6": "6. End of the Game: The game ends when you have correctly classified all the requirement cards. Try to achieve the highest possible score!",
+      "paso-7": "Good luck and have fun while improving your skills in detecting ambiguous and unambiguous non-functional requirements!"
+    },
+    "tipo-2": {
+      "contenido": "In this game, your goal is to improve your ability to identify and classify functional and non-functional requirements. Here are the instructions to get started:",
+      "paso-1": "1. Main Screen: You will see three boards on the screen:",
+      "paso-1-1": "Functional",
+      "paso-1-2": "Requirements",
+      "paso-1-3": "Non-functional",
+      "paso-2": "2. Requirement Cards: On the central board called 'Requirements', different cards with descriptions of requirements will appear.",
+      "paso-3": "3. Classification: Drag and drop each requirement card onto the corresponding board:",
+      "paso-3-1": "Functional: If you consider the requirement to be functional.",
+      "paso-3-2": "Non-functional: If you consider the requirement to be non-functional.",
+      "paso-4": "4. Scoring:",
+      "paso-4-1": "If you place a card correctly, you will earn points.",
+      "paso-4-2": "If you place a card incorrectly, you will lose points, but you will have the opportunity to correct it without earning additional points.",
+      "paso-5": "5. Feedback: Each time you make a mistake, you will receive an explanation of why the card is misplaced. Use this feedback to learn and improve.",
+      "paso-6": "6. End of the Game: The game ends when you have correctly classified all the requirement cards. Try to achieve the highest possible score!",
+      "paso-7": "Good luck and have fun while improving your skills in detecting functional and non-functional requirements!"
+    },
+    "tipo-3": {
+      "contenido": "In this game, your goal is to improve your ability to identify and classify ambiguous and unambiguous functional requirements. Here are the instructions to get started:",
+      "paso-1": "1. Main Screen: You will see three boards on the screen:",
+      "paso-1-1": "Ambiguous",
+      "paso-1-2": "Requirements",
+      "paso-1-3": "Unambiguous",
+      "paso-2": "2. Requirement Cards: On the central board called 'Requirements', different cards with descriptions of functional requirements will appear.",
+      "paso-3": "3. Classification: Drag and drop each requirement card onto the corresponding board:",
+      "paso-3-1": "Ambiguous: If you consider the requirement to be ambiguous.",
+      "paso-3-2": "Unambiguous: If you consider the requirement to be unambiguous.",
+      "paso-4": "4. Scoring:",
+      "paso-4-1": "If you place a card correctly, you will earn points.",
+      "paso-4-2": "If you place a card incorrectly, you will lose points, but you will have the opportunity to correct it without earning additional points.",
+      "paso-5": "5. Feedback: Each time you make a mistake, you will receive an explanation of why the card is misplaced. Use this feedback to learn and improve.",
+      "paso-6": "6. End of the Game: The game ends when you have correctly classified all the requirement cards. Try to achieve the highest possible score!",
+      "paso-7": "Good luck and have fun while improving your skills in detecting ambiguous and unambiguous functional requirements!"
+    }
+  }
+}

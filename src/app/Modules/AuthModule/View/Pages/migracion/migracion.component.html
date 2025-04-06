@@ -1,0 +1,28 @@
+<div class="w-full h-full grid justify-content-center border-box">
+  <div class="w-6 h-full flex align-content-center flex-wrap">
+    <div class="w-12 grid m-0 container-auth shadow-3 border-round-xl border-color p-4">
+      <div class="col-12 mb-3">
+        <p class="color-primary tex-titulo-Serius-Game text-center">{{'aut-module.migracion.title' | translate}}</p>
+      </div>
+      <div class="col-6">
+        <app-ui-kaas-input label="aut-module.migracion.nombre" hint="aut-module.migracion.nombre-hint" [(value)]="datosCliente.nombre"></app-ui-kaas-input>
+      </div>
+      <div class="col-6">
+        <app-ui-kaas-input label="aut-module.migracion.apellido" hint="aut-module.migracion.apellido-hint" [(value)]="datosCliente.apellido"></app-ui-kaas-input>
+      </div>
+      <div class="col-6 mt-2">
+        <app-radio-button label="aut-module.migracion.rol" [(value)]="datosCliente.opcionRol" [options]="opcion"></app-radio-button>
+      </div>
+      <div class="col-6 mt-2">
+        <app-datepicker label="aut-module.migracion.fecha-nacimiento" [(value)]="datosCliente.fechaNacimiento"></app-datepicker>
+      </div>
+      <div class="w-full flex justify-content-center flex-wrap mt-4">
+        <app-ui-kaas-button [label]="'general.boton-continuar' | translate" 
+                            [disabled]="datosCliente.nombre == '' || datosCliente.apellido == ''"
+                            [butonFull]="false" 
+                            buttonSize="small"
+                            (eventClick)="migrarUsuario()"></app-ui-kaas-button>
+      </div>
+    </div>
+  </div>
+</div>

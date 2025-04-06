@@ -1,0 +1,61 @@
+@import "assets/styles/main";
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+*{
+    font-family: 'Roboto', sans-serif;
+    margin: 0px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-button:not(:disabled) {
+    color: #07115f!important;
+}
+
+// .cdk-overlay-pane {width: 100%!important;}
+// .mat-menu-panel {max-width: 100%!important; min-width: 64px!important;}
+
+p{
+    margin-bottom: 0px !important;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+.custom-snackbar_exitoso {
+    .mdc-snackbar__surface {
+        background-color: rgba(240, 253, 244, 0.95)!important;
+        border: 1px solid #bbf7d0!important;
+        .mat-mdc-snack-bar-label {
+            .mdc-snackbar__label {
+                color: #16a34a!important;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.custom-snackbar_fallido {
+    .mdc-snackbar__surface {
+        background-color: rgba(254, 242, 242, 0.95)!important;
+        border: 1px solid #fecaca!important;
+        .mat-mdc-snack-bar-label {
+            .mdc-snackbar__label {
+                color: #dc2626!important;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.mdc-snackbar__surface {
+    margin-top: 60px;
+    margin-right: -5px;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    min-width: max-content!important;
+}

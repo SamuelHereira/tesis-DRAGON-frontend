@@ -1,0 +1,45 @@
+<div class="modal-overlay">
+  <ng-container *ngIf="content == ''; else mensaje">
+    <div class="modal" style="width: {{width}}">
+      <div class="header-modal w-full">
+        <div class="grid m-0 w-full">
+          <div class="col pl-0">
+            <p class="m-0 title-style">{{titulo}}</p>
+          </div>
+          <div class="w-max col-fixed pr-0 align-content-center" *ngIf="hideClose">
+            <i class="fa-solid fa-circle-xmark cursor-pointer icon-style" (click)="cerrarModal()"></i>
+          </div>
+        </div>
+      </div>
+      <div class="pt-4 pb-3 content-modal w-full">
+        <ng-content select="[app-content]"></ng-content>
+      </div>
+      <div class="footer-modal">
+        <ng-content select="[app-footer]"></ng-content>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #mensaje>
+    <div class="modal" style="width: {{width}}">
+      <div class="header-modal w-full">
+        <div class="grid m-0 w-full">
+          <div class="col pl-0">
+            <p class="m-0 title-style">{{titulo}}</p>
+          </div>
+          <div class="w-max col-fixed pr-0 align-content-center" *ngIf="hideClose">
+            <i class="fa-solid fa-circle-xmark cursor-pointer icon-style" (click)="cerrarModal()"></i>
+          </div>
+        </div>
+      </div>
+      <div class="pt-4 pb-3 content-modal w-full flex">
+        <img [width]="'60'" height="auto" [src]="(peticionError) ? 'assets/Img/Icons/iconos/icono-x.png': 'assets/Img/Icons/iconos/green-check.webp'" alt="">
+        <div class="flex align-content-center flex-wrap">
+          <p class="m-0 ml-3">{{content}}</p>
+        </div>
+      </div>
+      <div class="footer-modal">
+        <ng-content select="[app-footer-mensaje]"></ng-content>
+      </div>
+    </div>
+  </ng-template>
+</div>

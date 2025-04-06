@@ -1,0 +1,6 @@
+<button mat-button [matMenuTriggerFor]="menu">{{option_select | translate}}</button>
+<mat-menu #menu="matMenu">
+    <ng-container *ngFor="let value of options_language;">
+        <button (click)="changeLanguage(value.code)" mat-menu-item>{{value.name | translate }}</button>
+    </ng-container>
+</mat-menu>

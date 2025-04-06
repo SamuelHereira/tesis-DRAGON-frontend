@@ -1,0 +1,16 @@
+.ui-kaas-style-heading{
+    margin-bottom: 6px;
+}
+
+.ui-kaas-style-heading span{
+    color: #333;
+    font-weight: 700;
+    line-height: 1.4;
+    font-size: 1.125rem;
+}
+
+@media (max-width: 1024px) {
+    .ui-kaas-style-heading span{
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,129 @@
+:root {
+    --SG_primary-50: #e7f2ff;
+    --SG_primary-100: #d3e8ff;
+    --SG_primary-200: #b0d2ff;
+    --SG_primary-300: #81b2ff;
+    --SG_primary-400: #4f82ff;
+    --SG_primary-500: #2852ff;
+    --SG_primary-600: #041fff;
+    --SG_primary-700: #001dff;
+    --SG_primary-800: #0019e2;
+    --SG_primary-900: #0b1fa4;
+    --SG_primary: #07115f;
+    --SG_cuadro: rgba(0,0,0,.2);
+    --black: #000000;
+    --white: #ffffff;
+    --border: #ced4da
+}
+
+.border-color {
+    border: 1px solid var(--border);
+}
+
+.bg-cuadro {
+    background-color: rgba(0,0,0,.2);
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+.color-white {
+    color: var(--white);
+}
+
+.bg-black {
+    background-color: var(--black);
+}
+
+.color-black {
+    color: var(--black);
+}
+
+.bg-primary-50 {
+    background-color: var(--SG_primary-50);
+}
+
+.color-primary-50 {
+    color: var(--SG_primary-50);
+}
+
+.bg-primary-100 {
+    background-color: var(--SG_primary-100);
+}
+
+.color-primary-100 {
+    color: var(--SG_primary-100);
+}
+
+.bg-primary-200 {
+    background-color: var(--SG_primary-200);
+}
+
+.color-primary-200 {
+    color: var(--SG_primary-200);
+}
+
+.bg-primary-300 {
+    background-color: var(--SG_primary-300);
+}
+
+.color-primary-300 {
+    color: var(--SG_primary-300);
+}
+
+.bg-primary-400 {
+    background-color: var(--SG_primary-400);
+}
+
+.color-primary-400 {
+    color: var(--SG_primary-400);
+}
+
+.bg-primary-500 {
+    background-color: var(--SG_primary-500);
+}
+
+.color-primary-500 {
+    color: var(--SG_primary-500);
+}
+
+.bg-primary-600 {
+    background-color: var(--SG_primary-600);
+}
+
+.color-primary-600 {
+    color: var(--SG_primary-600);
+}
+
+.bg-primary-700 {
+    background-color: var(--SG_primary-700);
+}
+
+.color-primary-700 {
+    color: var(--SG_primary-700);
+}
+
+.bg-primary-800 {
+    background-color: var(--SG_primary-800);
+}
+
+.color-primary-800 {
+    color: var(--SG_primary-800);
+}
+
+.bg-primary-900 {
+    background-color: var(--SG_primary-900);
+}
+
+.color-primary-900 {
+    color: var(--SG_primary-900);
+}
+
+.bg-primary {
+    background-color: var(--SG_primary);
+}
+
+.color-primary {
+    color: var(--SG_primary);
+}

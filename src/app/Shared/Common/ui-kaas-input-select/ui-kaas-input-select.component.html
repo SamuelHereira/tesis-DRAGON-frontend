@@ -1,0 +1,27 @@
+<ng-container *ngIf="!readOnly; else inputNormal">
+  <app-ui-kaas-heading [label]="label" *ngIf=" label != '' "></app-ui-kaas-heading>
+  <div [class]="classIn">
+    <div id="menuElement" class="menu-select w-full" [ngClass]="{'menu-select-active': classStyleActive}" [matMenuTriggerFor]="menu" (menuOpened)="openMenu()" (menuClosed)="closeMenu()">
+      <div class="w-full flex justify-content-between flex-wrap">
+        <span class="col p-0">{{selectString | translate}}</span>
+        <div class="w-max">
+            <i class="bi" [ngClass]="{'bi-chevron-down': !classStyleActive, 'bi-chevron-up': classStyleActive}"></i>
+        </div>
+      </div>
+    </div>
+    <mat-menu #menu="matMenu" [class]="id_menu" [id]="id_menu">
+      <ng-container *ngFor="let value of options;">
+          <button (click)="onChangeTypeGame(value.code)" type="button" mat-menu-item>{{value.name | translate }}</button>
+      </ng-container>
+    </mat-menu>
+  </div>
+  <app-ui-kaas-hint [label]="hint" *ngIf=" hint != '' "></app-ui-kaas-hint>
+</ng-container>
+<ng-template #inputNormal>
+  <app-ui-kaas-input [readOnly]="true" 
+                     [label]="label" 
+                     [hint]="hint" 
+                     [(value)]="selectString"
+                     [selectType]="true"></app-ui-kaas-input>
+</ng-template>
+

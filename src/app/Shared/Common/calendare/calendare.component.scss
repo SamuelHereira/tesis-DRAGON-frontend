@@ -1,0 +1,44 @@
+.calendare-style {
+    ::ng-deep {
+        .mat-mdc-text-field-wrapper {
+            border: 1px solid var(--border)!important;
+            border-radius: 6px;
+            color: black;
+            background-color: white!important;
+        }
+        
+        .mat-mdc-form-field-subscript-wrapper {
+            display: none;
+        } 
+        .mdc-text-field--filled:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):hover .mdc-line-ripple::before {
+            border-color: transparent!important;
+        }
+
+        .mdc-line-ripple {
+            border: none!important;
+            display: none;
+        }
+
+        .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+            height: 38.19px!important;
+        }
+
+        .mdc-text-field--no-label:not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mat-mdc-form-field-infix {
+            padding-top: 8px!important;
+            padding-bottom: 8px!important;
+        }
+        .mat-mdc-form-field-icon-prefix, .mat-mdc-form-field-icon-suffix {
+            align-self: flex-start!important;
+            padding-top: 0px!important;
+            padding-bottom: 0px!important;
+        }
+        .mat-mdc-icon-button.mat-mdc-button-base{
+            height: 38.19px!important;
+            padding-top: 0px!important;
+            padding-bottom: 0px!important;
+        }
+        .mat-mdc-icon-button .mat-mdc-button-touch-target {
+            height: 38.19px!important;
+        }
+    }
+}

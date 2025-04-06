@@ -1,0 +1,61 @@
+// @import '../../../assets/styles/ui-kaas-colors.scss'; // Importa el archivo global
+
+.my-component-button {
+  // @extend .colors-global-class; // Extiende la clase definida en el archivo global
+  display: flex;
+}
+
+.ui-kaas-style-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: flex;
+  align-items:center;
+  transition: box-shadow 0.2s
+}
+
+.ui-kaas-style-button:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+.ui-kaas-style-button-text{
+  display: flex;
+  border: none;
+  background-color: transparent;
+  align-items:center;
+  cursor: pointer;
+}
+
+.ui-kaas-style-button-medium {
+  font-size: 1.5rem;
+}
+
+.ui-kaas-style-button-small {
+  font-size: 1rem;
+}
+
+.ui-kaas-style-img-icon {
+  width: 32px;
+  height: 32px;
+}
+
+
+.ui-kaas-ml-3 {
+  margin-left: 1rem;
+}
+.ui-kaas-mr-3 {
+  margin-right: 1rem;
+}
+
+.ui-kaas-ml-2 {
+  margin-left: 0.5rem;
+}
+.ui-kaas-mr-2 {
+  margin-right: 0.5rem;
+}
+
+.ui-kaas-opacity-50{
+  opacity: 0.5;
+}
+
