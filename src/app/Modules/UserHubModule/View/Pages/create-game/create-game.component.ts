@@ -323,14 +323,33 @@ export class CreateGameComponent implements OnInit {
 
         nivel.requerimientos = [...nivel.requerimientos, ...nivelesGenerados];
         this.cargandoIA = false;
+
+        this.openSnackBar(
+          this._translateService.instant(
+            'user-hub-module.crear-juego.componente-form.generar-ia-success'
+          ),
+          'custom-snackbar_exitoso'
+        );
       },
       error: (err) => {
         this.openSnackBar(
-          'Error al obtener requerimientos IA',
+          this._translateService.instant(
+            'user-hub-module.crear-juego.componente-form.generar-ia-error'
+          ),
           'custom-snackbar_fallido'
         );
         this.cargandoIA = false;
       },
     });
+  }
+
+  get labelGenerarIA(): string {
+    return this.cargandoIA
+      ? this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-button-loading'
+        )
+      : this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-button'
+        );
   }
 }

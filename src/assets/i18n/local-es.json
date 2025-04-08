@@ -1,5 +1,5 @@
 {
-  "title": "SERIOUS GAME",
+  "title": "DRAGON SERIOUS GAME",
   "aut-module": {
     "titulo": "Explora y descubre tus requerimientos no funcionales a través de una experiencia de juego única",
     "iniciar-sesion": "Iniciar sesión",
@@ -120,6 +120,10 @@
         "cargar-req-titulo": "Cargar requerimientos",
         "cargar-req-subtitulo": "Puedes cargar requerimientos creados por ti o por otros profesores",
         "generar-ia": "Generar por IA",
+        "generar-ia-button": "Generar usando Gemini",
+        "generar-ia-button-loading": "Generando...",
+        "generar-ia-error": "Error al generar los requerimientos, intenta nuevamente",
+        "generar-ia-success": "La Generación de requerimientos fue exitosa",
         "requerimiento-titulo": "Requerimiento",
         "type-requerimiento-titulo": "Tipo de requerimiento",
         "retroA": "RetroAlimentación",
