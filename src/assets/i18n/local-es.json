@@ -119,6 +119,7 @@
       "componente-form": {
         "cargar-req-titulo": "Cargar requerimientos",
         "cargar-req-subtitulo": "Puedes cargar requerimientos creados por ti o por otros profesores",
+        "generar-ia": "Generar por IA",
         "requerimiento-titulo": "Requerimiento",
         "type-requerimiento-titulo": "Tipo de requerimiento",
         "retroA": "RetroAlimentación",
