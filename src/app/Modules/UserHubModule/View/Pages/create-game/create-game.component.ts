@@ -1,4 +1,10 @@
-import { Component, DoCheck, ElementRef, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  ElementRef,
+  OnInit,
+} from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { DatosJuego, Requerimiento } from '../../Model/requerimientos.model';
 import { Router } from '@angular/router';
@@ -17,7 +23,7 @@ import {
   styleUrls: ['./create-game.component.scss'],
 })
 export class CreateGameComponent implements OnInit {
-  modoCreacion: 'manual' | 'ia' = 'manual';
+  modoCreacion: 'manual' | 'ia' | 'excel' = 'manual';
   tema: string = '';
   cargandoIA = false;
 
@@ -65,7 +71,8 @@ export class CreateGameComponent implements OnInit {
     private _profesorService: ProfesorService,
     private _snackBar: MatSnackBar,
     private _translateService: TranslateService,
-    private _geminiService: GeminiService
+    private _geminiService: GeminiService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -351,5 +358,9 @@ export class CreateGameComponent implements OnInit {
       : this._translateService.instant(
           'user-hub-module.crear-juego.componente-form.generar-ia-button'
         );
+  }
+
+  changeModoCreacion(view: 'manual' | 'ia' | 'excel') {
+    this.modoCreacion = view;
   }
 }
