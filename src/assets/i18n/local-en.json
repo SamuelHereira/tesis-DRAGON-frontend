@@ -124,6 +124,13 @@
         "generar-ia-button-loading": "Generating...",
         "generar-ia-error": "Error generating requirements, please try again",
         "generar-ia-success": "The generation of requirements was successful",
+
+        "import-excel": "Import from Excel",
+        "import-excel-button": "Import from Excel",
+        "import-excel-button-loading": "Importing...",
+        "import-excel-error": "Error importing requirements, please try again",
+        "import-excel-success": "The import of requirements was successful",
+
         "requerimiento-titulo": "Requirement",
         "type-requerimiento-titulo": "Type of Requirement",
         "retroA": "Feedback",

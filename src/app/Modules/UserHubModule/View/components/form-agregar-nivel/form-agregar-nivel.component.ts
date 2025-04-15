@@ -13,7 +13,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
+import {
+  GeminiRequest,
+  GeminiService,
+  RequerimientoIA,
+} from '../../../Service/gemini.service';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { ImportService, ResponseExcel } from '../../../Service/import.service';
+import { environment } from 'src/environments/environment';
 
+type CreationMode = 'manual' | 'load' | 'ia' | 'import-excel';
 @Component({
   selector: 'app-form-agregar-nivel',
   templateUrl: './form-agregar-nivel.component.html',
@@ -41,6 +50,7 @@ export class FormAgregarNivelComponent implements OnInit {
 
   expandible = true;
   mostrarExpandible = false;
+  modoCreacion: CreationMode = 'manual';
   requrimientoCargado = 'no';
 
   requrimientoData!: Requerimiento;
@@ -48,9 +58,20 @@ export class FormAgregarNivelComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   cdr!: ChangeDetectorRef;
 
+  // ia
+  tema: string = '';
+  cargandoIA: boolean = false;
+
+  // excel
+  excelFile: File | null = null;
+  importandoExcel: boolean = false;
+
   constructor(
     private _translateService: TranslateService,
-    cdr: ChangeDetectorRef
+    cdr: ChangeDetectorRef,
+    private _snackBar: MatSnackBar,
+    private _geminiService: GeminiService,
+    private _importService: ImportService
   ) {
     this.dataSource = new MatTableDataSource();
     this.cdr = cdr;
@@ -328,5 +349,160 @@ export class FormAgregarNivelComponent implements OnInit {
 
   cambiarText(value: string): string {
     return this._translateService.instant(value);
+  }
+
+  openSnackBar(message: string, class_customer: string) {
+    const config = new MatSnackBarConfig();
+    config.duration = 3000;
+    config.verticalPosition = 'top';
+    config.horizontalPosition = 'center';
+    config.panelClass = [class_customer];
+    this._snackBar.open(message, '', config);
+  }
+
+  changeModoCreacion(value: CreationMode) {
+    this.modoCreacion = value;
+  }
+
+  generarPorIA() {
+    if (!this.tema || !this.tipo) return;
+    this.cargandoIA = true;
+
+    let tipoJuegoNumber = 0;
+    if (this.tipo == 'tipo-juego.juego-1-title') tipoJuegoNumber = 1;
+    if (this.tipo == 'tipo-juego.juego-2-title') tipoJuegoNumber = 2;
+    if (this.tipo == 'tipo-juego.juego-3-title') tipoJuegoNumber = 3;
+
+    const data: GeminiRequest = {
+      topic: this.tema,
+      gameMode: tipoJuegoNumber,
+    };
+
+    this._geminiService.generarRequerimientosPorIA(data).subscribe({
+      next: (res: RequerimientoIA[]) => {
+        // const nivel = this.datosJuego.niveles[0];
+
+        const actualLength = this.nivel.requerimientos.length;
+
+        const nivelesGenerados = res.map((req, idx) => ({
+          id: (actualLength + idx + 1).toString(),
+          requerimiento: req.title,
+          retroalimentacion: req.feedback,
+          opcionRequerimiento: req.type_code,
+          requerimientoBase: 'No',
+          requerimientoCompleto: '',
+          requerimientoFallido: false,
+          puntosAdicionales: 100,
+        }));
+
+        this.nivel.requerimientos = [
+          ...this.nivel.requerimientos,
+          ...nivelesGenerados,
+        ];
+        this.cargandoIA = false;
+
+        this.openSnackBar(
+          this._translateService.instant(
+            'user-hub-module.crear-juego.componente-form.generar-ia-success'
+          ),
+          'custom-snackbar_exitoso'
+        );
+        this.agregarRequerimiento = false;
+      },
+      error: (err) => {
+        this.openSnackBar(
+          this._translateService.instant(
+            'user-hub-module.crear-juego.componente-form.generar-ia-error'
+          ),
+          'custom-snackbar_fallido'
+        );
+        this.cargandoIA = false;
+      },
+      complete: () => {
+        this.tema = '';
+        this.cargandoIA = false;
+      },
+    });
+  }
+
+  get labelGenerarIA(): string {
+    return this.cargandoIA
+      ? this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-button-loading'
+        )
+      : this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-button'
+        );
+  }
+
+  get labelImportarExcel(): string {
+    return this.importandoExcel
+      ? this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.import-excel-loading'
+        )
+      : this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.import-excel-button'
+        );
+  }
+
+  guardarArchivoExcel(event: any) {
+    const archivo = event.target.files[0];
+    this.excelFile = archivo ?? null;
+  }
+
+  importarExcel() {
+    if (!this.excelFile) return;
+
+    this._importService.importarDesdeExcel(this.excelFile).subscribe({
+      next: (res: ResponseExcel) => {
+        if (res.code != '200') {
+          this.openSnackBar(res.msg, 'custom-snackbar_fallido');
+          return;
+        }
+
+        const actualLength = this.nivel.requerimientos.length;
+
+        this.nivel.requerimientos = [
+          ...this.nivel.requerimientos,
+          ...res.result.map((req, idx) => ({
+            id: (actualLength + idx + 1).toString(),
+            requerimiento: req.title,
+            retroalimentacion: req.feedback,
+            opcionRequerimiento: req.type_code,
+            requerimientoBase: 'No',
+            requerimientoCompleto: '',
+            requerimientoFallido: false,
+            puntosAdicionales: 100,
+          })),
+        ];
+        this.openSnackBar(
+          'Requerimientos importados con éxito',
+          'custom-snackbar_exitoso'
+        );
+        this.agregarRequerimiento = false;
+      },
+      error: () => {
+        this.openSnackBar(
+          'Error al procesar el archivo Excel',
+          'custom-snackbar_fallido'
+        );
+      },
+      complete: () => {
+        this.importandoExcel = false;
+        this.excelFile = null;
+      },
+    });
+  }
+
+  descargarPlantilla() {
+    let tipoJuegoNumber = 0;
+    if (this.tipo == 'tipo-juego.juego-1-title') tipoJuegoNumber = 1;
+    if (this.tipo == 'tipo-juego.juego-2-title') tipoJuegoNumber = 2;
+    if (this.tipo == 'tipo-juego.juego-3-title') tipoJuegoNumber = 3;
+
+    const link = document.createElement('a');
+    link.href = `assets/plantillas/tipo${tipoJuegoNumber}_plantilla.xlsx`;
+    link.download = `plantilla_tipo${tipoJuegoNumber}.xlsx`;
+    link.click();
   }
 }

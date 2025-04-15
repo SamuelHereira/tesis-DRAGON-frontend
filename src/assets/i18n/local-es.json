@@ -124,6 +124,13 @@
         "generar-ia-button-loading": "Generando...",
         "generar-ia-error": "Error al generar los requerimientos, intenta nuevamente",
         "generar-ia-success": "La Generación de requerimientos fue exitosa",
+
+        "import-excel": "Importar desde Excel",
+        "import-excel-button": "Importar",
+        "import-excel-button-loading": "Importando...",
+        "import-excel-error": "Error al importar requerimientos, por favor intenta de nuevo",
+        "import-excel-success": "La importación de requerimientos fue exitosa",
+
         "requerimiento-titulo": "Requerimiento",
         "type-requerimiento-titulo": "Tipo de requerimiento",
         "retroA": "RetroAlimentación",

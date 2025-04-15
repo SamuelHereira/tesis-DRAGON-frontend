@@ -13,7 +13,7 @@
     <div class="col-12 my-1">
       <div class="separate-line"></div>
     </div>
-    <div class="colo-12" *ngIf="expandible">
+    <!-- <div class="colo-12" *ngIf="expandible">
       <app-radio-button
         *ngIf="agregarRequerimiento || nivel.requerimientos.length == 0"
         [label]="
@@ -30,104 +30,233 @@
         (valueChange)="onChangeRequerimientos($event)"
       >
       </app-radio-button>
+    </div> -->
+    <div
+      class="w-max flex align-items-center"
+      *ngIf="expandible && agregarRequerimiento"
+    >
+      <div class="mr-2">
+        <p>Modo de creación:</p>
+      </div>
+      <div
+        [ngClass]="{
+          'color-primary-50 bg-primary': modoCreacion === 'manual',
+          'color-white bg-primary-100 selector-togle': modoCreacion !== 'manual'
+        }"
+        class="border-box border-round-3xl border-noround-right p-2 pl-3 cursor-pointer"
+        (click)="changeModoCreacion('manual')"
+      >
+        <p class="text-subtitulos-4-size">
+          <!-- {{ "aut-module.iniciar-sesion" | translate }} -->
+          Manual
+        </p>
+      </div>
+      <div
+        [ngClass]="{
+          'color-primary-50 bg-primary': modoCreacion === 'load',
+          'color-white bg-primary-100 selector-togle': modoCreacion !== 'load'
+        }"
+        class="border-box p-2 pl-3 cursor-pointer"
+        (click)="changeModoCreacion('load')"
+      >
+        <p class="text-subtitulos-4-size">
+          <!-- {{ "aut-module.iniciar-sesion" | translate }} -->
+          Cargar de base
+        </p>
+      </div>
+      <div
+        [ngClass]="{
+          'color-primary-50 bg-primary': modoCreacion === 'ia',
+          'color-white bg-primary-100 selector-togle': modoCreacion !== 'ia'
+        }"
+        (click)="changeModoCreacion('ia')"
+        class="border-box py-2 px-3 cursor-pointer"
+      >
+        <p class="text-subtitulos-4-size">
+          <!-- {{ "aut-module.crear-cuenta" | translate }} -->
+          IA
+        </p>
+      </div>
+      <div
+        [ngClass]="{
+          'color-primary-50 bg-primary': modoCreacion === 'import-excel',
+          'color-white bg-primary-100 selector-togle':
+            modoCreacion !== 'import-excel'
+        }"
+        (click)="changeModoCreacion('import-excel')"
+        class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer"
+      >
+        <p class="text-subtitulos-4-size">
+          <!-- {{ "aut-module.crear-cuenta" | translate }} -->
+          Excel
+        </p>
+      </div>
     </div>
   </div>
   <ng-container *ngIf="expandible">
     <ng-container
       *ngIf="agregarRequerimiento || nivel.requerimientos.length == 0"
     >
-      <div class="col-12 md:col-6" *ngIf="requrimientoCargado == 'si'">
-        <app-ui-kaas-input
-          [label]="
-            'user-hub-module.crear-juego.componente-form.requerimiento-titulo'
-              | translate
-          "
-          [(value)]="requrimientoData.requerimiento"
-          icono="bi bi-search"
-          (iconClick)="abrirModalRequerimientosCargados()"
-          [readOnly]="true"
-        ></app-ui-kaas-input>
-      </div>
-      <div class="col-12 md:col-6">
-        <ng-container *ngIf="requrimientoCargado == 'si'; else templateName">
+      <ng-container
+        *ngIf="modoCreacion === 'manual' || modoCreacion === 'load'"
+      >
+        <div class="col-12 md:col-6" *ngIf="modoCreacion === 'load'">
           <app-ui-kaas-input
             [label]="
-              'user-hub-module.crear-juego.componente-form.type-requerimiento-titulo'
+              'user-hub-module.crear-juego.componente-form.requerimiento-titulo'
                 | translate
             "
-            [(value)]="reqTemp"
+            [(value)]="requrimientoData.requerimiento"
+            icono="bi bi-search"
+            (iconClick)="abrirModalRequerimientosCargados()"
             [readOnly]="true"
+          ></app-ui-kaas-input>
+        </div>
+        <div class="col-12 md:col-6">
+          <ng-container *ngIf="modoCreacion === 'load'; else templateName">
+            <app-ui-kaas-input
+              [label]="
+                'user-hub-module.crear-juego.componente-form.type-requerimiento-titulo'
+                  | translate
+              "
+              [(value)]="reqTemp"
+              [readOnly]="true"
+            >
+            </app-ui-kaas-input>
+          </ng-container>
+          <ng-template #templateName>
+            <app-ui-kaas-input-select
+              [label]="
+                'user-hub-module.crear-juego.componente-form.type-requerimiento-titulo'
+                  | translate
+              "
+              [(value)]="requrimientoData.opcionRequerimiento"
+              [options]="options_Requerimientos"
+              [readOnly]="false"
+              [id_menu]="indice + 'requerimiento_tipo'"
+            >
+            </app-ui-kaas-input-select>
+          </ng-template>
+        </div>
+        <div class="col-12 md:col-6" *ngIf="modoCreacion === 'manual'">
+          <app-ui-kaas-input
+            [label]="
+              'user-hub-module.crear-juego.componente-form.requerimiento-titulo'
+                | translate
+            "
+            [(value)]="requrimientoData.requerimiento"
+          ></app-ui-kaas-input>
+        </div>
+        <div class="col-12 md:col-6">
+          <app-ui-kaas-input
+            [readOnly]="modoCreacion == 'load'"
+            [label]="
+              'user-hub-module.crear-juego.componente-form.retroA' | translate
+            "
+            [placeholder]="'general.opcional' | translate"
+            [(value)]="requrimientoData.retroalimentacion"
+          ></app-ui-kaas-input>
+        </div>
+        <div class="col-12 md:col-6">
+          <app-ui-kaas-slider
+            [label]="
+              'user-hub-module.crear-juego.componente-form.puntos' | translate
+            "
+            [(value)]="requrimientoData.puntosAdicionales"
+          ></app-ui-kaas-slider>
+        </div>
+        <div class="col-12 flex flex-grap justify-content-end">
+          <div class="w-max flex gap-3 flex-grap">
+            <app-ui-kaas-button
+              *ngIf="nivel.requerimientos.length > 0"
+              [label]="''"
+              [butonFull]="false"
+              [icon_visible]="true"
+              [icon]="'bi bi-trash-fill'"
+              buttonSize="small"
+              [tooltip]="'general.boton-eliminar-req' | translate"
+              [background_color]="'bg-red-600'"
+              (eventClick)="cancelarRegistro()"
+            >
+            </app-ui-kaas-button>
+            <app-ui-kaas-button
+              [label]="''"
+              [butonFull]="false"
+              [icon_visible]="true"
+              [icon]="'bi bi-floppy-fill'"
+              buttonSize="small"
+              [tooltip]="'general.boton-guardar-req' | translate"
+              [disabled]="validarGuardarRequerimiento()"
+              (eventClick)="guardarRequerimiento()"
+            >
+            </app-ui-kaas-button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="modoCreacion === 'ia'">
+        <div class="col-6">
+          <app-ui-kaas-input
+            [label]="
+              'user-hub-module.crear-juego.componente-form.generar-ia'
+                | translate
+            "
+            [(value)]="tema"
+            (iconClick)="generarPorIA()"
+            [icono]="'bi bi-magic'"
+            [matTooltip]="'Generar con IA'"
           >
           </app-ui-kaas-input>
-        </ng-container>
-        <ng-template #templateName>
-          <app-ui-kaas-input-select
-            [label]="
-              'user-hub-module.crear-juego.componente-form.type-requerimiento-titulo'
-                | translate
-            "
-            [(value)]="requrimientoData.opcionRequerimiento"
-            [options]="options_Requerimientos"
-            [readOnly]="false"
-            [id_menu]="indice + 'requerimiento_tipo'"
-          >
-          </app-ui-kaas-input-select>
-        </ng-template>
-      </div>
-      <div class="col-12 md:col-6" *ngIf="requrimientoCargado == 'no'">
-        <app-ui-kaas-input
-          [label]="
-            'user-hub-module.crear-juego.componente-form.requerimiento-titulo'
-              | translate
-          "
-          [(value)]="requrimientoData.requerimiento"
-        ></app-ui-kaas-input>
-      </div>
-      <div class="col-12 md:col-6">
-        <app-ui-kaas-input
-          [readOnly]="requrimientoCargado == 'si'"
-          [label]="
-            'user-hub-module.crear-juego.componente-form.retroA' | translate
-          "
-          [placeholder]="'general.opcional' | translate"
-          [(value)]="requrimientoData.retroalimentacion"
-        ></app-ui-kaas-input>
-      </div>
-      <div class="col-12 md:col-6">
-        <app-ui-kaas-slider
-          [label]="
-            'user-hub-module.crear-juego.componente-form.puntos' | translate
-          "
-          [(value)]="requrimientoData.puntosAdicionales"
-        ></app-ui-kaas-slider>
-      </div>
-      <div class="col-12 flex flex-grap justify-content-end">
-        <div class="w-max flex gap-3 flex-grap">
+        </div>
+        <div class="col-12">
           <app-ui-kaas-button
-            *ngIf="nivel.requerimientos.length > 0"
-            [label]="''"
-            [butonFull]="false"
-            [icon_visible]="true"
-            [icon]="'bi bi-trash-fill'"
+            (click)="generarPorIA()"
+            [disabled]="cargandoIA"
+            [label]="labelGenerarIA"
             buttonSize="small"
-            [tooltip]="'general.boton-eliminar-req' | translate"
-            [background_color]="'bg-red-600'"
-            (eventClick)="cancelarRegistro()"
-          >
-          </app-ui-kaas-button>
-          <app-ui-kaas-button
-            [label]="''"
-            [butonFull]="false"
-            [icon_visible]="true"
-            [icon]="'bi bi-floppy-fill'"
-            buttonSize="small"
-            [tooltip]="'general.boton-guardar-req' | translate"
-            [disabled]="validarGuardarRequerimiento()"
-            (eventClick)="guardarRequerimiento()"
+            [loading]="cargandoIA"
           >
           </app-ui-kaas-button>
         </div>
-      </div>
+      </ng-container>
+      <ng-container *ngIf="modoCreacion === 'import-excel'">
+        <div class="col-6">
+          <app-ui-kaas-input
+            [label]="
+              'user-hub-module.crear-juego.componente-form.import-excel'
+                | translate
+            "
+            [icono]="'bi bi-magic'"
+            [matTooltip]="
+              'user-hub-module.crear-juego.componente-form.import-excel-button'
+                | translate
+            "
+            type="file"
+            [accept]="'.xlsx, .xls'"
+            (change)="guardarArchivoExcel($event)"
+          >
+          </app-ui-kaas-input>
+        </div>
+        <div class="col-6 flex align-items-end">
+          <app-ui-kaas-button
+            [label]="'Descargar Plantilla'"
+            [icon_visible]="true"
+            [icon]="'bi bi-download'"
+            buttonSize="small"
+            (eventClick)="descargarPlantilla()"
+          >
+          </app-ui-kaas-button>
+        </div>
+        <div class="col-12">
+          <app-ui-kaas-button
+            (click)="importarExcel()"
+            [disabled]="importandoExcel"
+            [label]="labelImportarExcel"
+            buttonSize="small"
+            [loading]="importandoExcel"
+          >
+          </app-ui-kaas-button>
+        </div>
+      </ng-container>
     </ng-container>
     <ng-container
       *ngIf="!agregarRequerimiento && nivel.requerimientos.length > 0"
