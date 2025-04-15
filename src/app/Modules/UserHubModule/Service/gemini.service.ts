@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 export interface GeminiRequest {
   topic: string;
   gameMode: number;
+  action: string;
 }
 
 export interface RequerimientoIA {
@@ -14,17 +15,21 @@ export interface RequerimientoIA {
   type_code: string;
 }
 
+export interface ResponseIA {
+  code: string;
+  msg: string;
+  result: RequerimientoIA[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class GeminiService {
   private urlEndPoint: string = environment.apiUrl + '/gemini';
 
   constructor(private http: HttpClient) {}
 
-  generarRequerimientosPorIA(
-    data: GeminiRequest
-  ): Observable<RequerimientoIA[]> {
+  generarRequerimientosPorIA(data: GeminiRequest): Observable<ResponseIA> {
     return new Observable((observer) => {
-      this.http.post<any>(this.urlEndPoint, data).subscribe({
+      this.http.post<ResponseIA>(this.urlEndPoint, data).subscribe({
         next: (res) => {
           try {
             observer.next(res);

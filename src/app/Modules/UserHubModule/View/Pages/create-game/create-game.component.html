@@ -25,102 +25,16 @@
           </app-ui-kaas-input-select>
         </div>
       </div>
-      <div class="w-max flex">
-        <div
-          [ngClass]="{
-            'color-primary-50 bg-primary': modoCreacion === 'manual',
-            'color-white bg-primary-100 selector-togle':
-              modoCreacion !== 'manual'
-          }"
-          class="border-box border-round-3xl border-noround-right p-2 pl-3 cursor-pointer"
-          (click)="changeModoCreacion('manual')"
-        >
-          <p class="text-subtitulos-4-size">
-            <!-- {{ "aut-module.iniciar-sesion" | translate }} -->
-            Manual
-          </p>
-        </div>
-        <div
-          [ngClass]="{
-            'color-primary-50 bg-primary': modoCreacion === 'ia',
-            'color-white bg-primary-100 selector-togle': modoCreacion !== 'ia'
-          }"
-          (click)="changeModoCreacion('ia')"
-          class="border-box py-2 px-3 cursor-pointer"
-        >
-          <p class="text-subtitulos-4-size">
-            <!-- {{ "aut-module.crear-cuenta" | translate }} -->
-            IA
-          </p>
-        </div>
-        <div
-          [ngClass]="{
-            'color-primary-50 bg-primary': modoCreacion === 'excel',
-            'color-white bg-primary-100 selector-togle':
-              modoCreacion !== 'excel'
-          }"
-          (click)="changeModoCreacion('excel')"
-          class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer"
-        >
-          <p class="text-subtitulos-4-size">
-            <!-- {{ "aut-module.crear-cuenta" | translate }} -->
-            Excel
-          </p>
-        </div>
-      </div>
-      <ng-container *ngIf="modoCreacion === 'manual'">
-        <app-form-agregar-nivel
-          [indice]="0"
-          [nivel]="datosJuego.niveles[0]"
-          [requerimientosCargados]="requerimientosCargadosTipos"
-          [tipo]="tipoJuego"
-          (_guardarRequerimiento)="guardarRequerimiento($event, 0)"
-          (_eliminarRequerimiento)="eliminarRequerimiento(0, $event)"
-          (_finalizarRequerimiento)="finalizarCreacion()"
-        ></app-form-agregar-nivel>
-      </ng-container>
-      <ng-container *ngIf="modoCreacion === 'ia'">
-        <!-- <app-form-agregar-nivel-ia
-          [indice]="0"
-          [nivel]="datosJuego.niveles[0]"
-          [requerimientosCargados]="requerimientosCargadosTipos"
-          [tipo]="tipoJuego"
-          (_guardarRequerimiento)="guardarRequerimiento($event, 0)"
-          (_eliminarRequerimiento)="eliminarRequerimiento(0, $event)"
-          (_finalizarRequerimiento)="finalizarCreacion()"
-        ></app-form-agregar-nivel-ia> -->
-      </ng-container>
-      <ng-container *ngIf="modoCreacion === 'excel'">
-        <!-- <app-form-agregar-nivel-excel
-          [indice]="0"
-          [nivel]="datosJuego.niveles[0]"
-          [requerimientosCargados]="requerimientosCargadosTipos"
-          [tipo]="tipoJuego"
-          (_guardarRequerimiento)="guardarRequerimiento($event, 0)"
-          (_eliminarRequerimiento)="eliminarRequerimiento(0, $event)"
-          (_finalizarRequerimiento)="finalizarCreacion()" 
-        ></app-form-agregar-nivel-excel> -->
-      </ng-container>
-      <!-- <ng-container *ngFor="let data of datosJuego.niveles; let indice = index">
-        <app-form-agregar-nivel
-          [indice]="indice"
-          [nivel]="data"
-          [requerimientosCargados]="requerimientosCargadosTipos"
-          [tipo]="tipoJuego"
-          (_guardarRequerimiento)="guardarRequerimiento($event, indice)"
-          (_eliminarRequerimiento)="eliminarRequerimiento(indice, $event)"
-          (_finalizarRequerimiento)="finalizarCreacion()"
-        ></app-form-agregar-nivel>
-      </ng-container> -->
-      <!-- <div class="w-full flex flex-wrap justify-content-center mt-4" *ngIf="validarCrearNivel">
-          <div class="w-max flex flex-wrap gap-3">
-            <app-ui-kaas-button [label]="'general.boton-finalizar-juego' | translate" 
-                                [butonFull]="false" 
-                                buttonSize="small"
-                                (eventClick)="finalizarCreacion()">
-            </app-ui-kaas-button>
-          </div>
-        </div> -->
+
+      <app-form-agregar-nivel
+        [indice]="0"
+        [nivel]="datosJuego.niveles[0]"
+        [requerimientosCargados]="requerimientosCargadosTipos"
+        [tipo]="tipoJuego"
+        (_guardarRequerimiento)="guardarRequerimiento($event, 0)"
+        (_eliminarRequerimiento)="eliminarRequerimiento(0, $event)"
+        (_finalizarRequerimiento)="finalizarCreacion()"
+      ></app-form-agregar-nivel>
     </form>
   </div>
 </div>

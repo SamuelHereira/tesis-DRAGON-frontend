@@ -17,6 +17,7 @@ import {
   GeminiRequest,
   GeminiService,
   RequerimientoIA,
+  ResponseIA,
 } from '../../../Service/gemini.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { ImportService, ResponseExcel } from '../../../Service/import.service';
@@ -376,15 +377,25 @@ export class FormAgregarNivelComponent implements OnInit {
     const data: GeminiRequest = {
       topic: this.tema,
       gameMode: tipoJuegoNumber,
+      action: 'generar',
     };
 
     this._geminiService.generarRequerimientosPorIA(data).subscribe({
-      next: (res: RequerimientoIA[]) => {
+      next: (res: ResponseIA) => {
         // const nivel = this.datosJuego.niveles[0];
+
+        if (res.code != '200' || res.result.length == 0) {
+          this.openSnackBar(
+            res.msg || 'Error al generar requerimientos por IA',
+            'custom-snackbar_fallido'
+          );
+          this.cargandoIA = false;
+          return;
+        }
 
         const actualLength = this.nivel.requerimientos.length;
 
-        const nivelesGenerados = res.map((req, idx) => ({
+        const nivelesGenerados = res.result.map((req, idx) => ({
           id: (actualLength + idx + 1).toString(),
           requerimiento: req.title,
           retroalimentacion: req.feedback,
@@ -455,8 +466,11 @@ export class FormAgregarNivelComponent implements OnInit {
 
     this._importService.importarDesdeExcel(this.excelFile).subscribe({
       next: (res: ResponseExcel) => {
-        if (res.code != '200') {
-          this.openSnackBar(res.msg, 'custom-snackbar_fallido');
+        if (res.code != '200' || res.result.length == 0) {
+          this.openSnackBar(
+            res.msg || 'Error al procesar el archivo Excel',
+            'custom-snackbar_fallido'
+          );
           return;
         }
 
