@@ -8,6 +8,7 @@ import { JuegosCreadosComponent } from './View/Pages/juegos-creados/juegos-cread
 import { ReportesComponent } from './View/Pages/reportes/reportes.component';
 import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugados.component';
 import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
+import { RevisorJuegosAsignadosComponent } from './View/Pages/revisor-juegos-asignados/revisor-juegos-asignados.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path: 'juegos-creados/:id/revisores',
         component: RevisoresJuegoComponent,
+      },
+      {
+        path: 'revisor',
+        component: RevisorJuegosAsignadosComponent,
       },
     ],
   },

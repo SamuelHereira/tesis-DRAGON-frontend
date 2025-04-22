@@ -8,171 +8,227 @@ import { Requerimiento } from '../../Model/requerimientos.model';
 @Component({
   selector: 'app-serios-game',
   templateUrl: './serios-game.component.html',
-  styleUrls: ['./serios-game.component.scss']
+  styleUrls: ['./serios-game.component.scss'],
 })
-export class SeriosGameComponent implements OnInit{
-
-  subs = new Subscription(); 
+export class SeriosGameComponent implements OnInit {
+  subs = new Subscription();
   puntos: number = 0;
   aciertos: number = 0;
   errores: number = 0;
   REQUERIMIENTOS_DRAGULA = 'ITEMS_JUEGO';
   // public many = ['The', 'possibilities', 'are', 'endless!'];
   // public many2 = ['Explore', 'them'];
-  pedirCodigo : boolean = true;
-  mostrarRetoAlimentacion : boolean = false;
+  pedirCodigo: boolean = true;
+  mostrarRetoAlimentacion: boolean = false;
   mostrarFinilazion: boolean = false;
   mostrarInicioModal: boolean = false;
-  retroalimentacion : string = "";
+  retroalimentacion: string = '';
   event: Event | undefined;
-  valorCodigo : string = "";
+  valorCodigo: string = '';
 
-  tipoJuego: string = "";
-  ambiguosAndFuncionales: string = "";
-  noAmbiguosAndNoFuncionales: string = "";
-  requerimientoFinal: string = "";
+  tipoJuego: string = '';
+  ambiguosAndFuncionales: string = '';
+  noAmbiguosAndNoFuncionales: string = '';
+  requerimientoFinal: string = '';
   tipoJuegoID: number = 0;
 
-  id_juegoTemp : number = 0;
+  id_juegoTemp: number = 0;
   //juegosPublicos: any[] = [];
 
-  requesitosAmbiguos : any[] = []
+  requesitosAmbiguos: any[] = [];
 
-  requesitosNoAmbiguos : any[] = []
+  requesitosNoAmbiguos: any[] = [];
 
-  requisitosNoFuncionales  : any[] = [];
+  requisitosNoFuncionales: any[] = [];
 
-  displayedColumns: string[] = ['position', 'id_juego', 'fecha_creacion', 'fecha_finalizacion', "acctions"];
+  displayedColumns: string[] = [
+    'position',
+    'id_juego',
+    'fecha_creacion',
+    'fecha_finalizacion',
+    'acctions',
+  ];
 
   horaActual: string = new Date().toTimeString().split(' ')[0];
 
-  public constructor(private dragulaService:DragulaService,private _translateService: TranslateService, private _alumnoService : AlumnoService, private _snackBar: MatSnackBar) {
-    this.subs.add(dragulaService.dropModel(this.REQUERIMIENTOS_DRAGULA)
-      .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
-        const itemId = target!.id;
-        const puntosActual = this.puntos;
-        if(itemId != 'requerimientos_no_funcionales') {
-          if(item.ambiguo){
-            if(itemId == 'requerimientos_ambiguos'){
-              item.requerimientoCompleto = 'si';
-              this.puntos = (item.requrimientoFallido) ? puntosActual : puntosActual + item.puntos;
-              if (!item.requrimientoFallido) {
-                  this.aciertos = this.aciertos +1;
+  public constructor(
+    private dragulaService: DragulaService,
+    private _translateService: TranslateService,
+    private _alumnoService: AlumnoService,
+    private _snackBar: MatSnackBar
+  ) {
+    this.subs.add(
+      dragulaService
+        .dropModel(this.REQUERIMIENTOS_DRAGULA)
+        .subscribe(({ el, target, source, sourceModel, targetModel, item }) => {
+          const itemId = target!.id;
+          const puntosActual = this.puntos;
+          if (itemId != 'requerimientos_no_funcionales') {
+            if (item.ambiguo) {
+              if (itemId == 'requerimientos_ambiguos') {
+                item.requerimientoCompleto = 'si';
+                this.puntos = item.requrimientoFallido
+                  ? puntosActual
+                  : puntosActual + item.puntos;
+                if (!item.requrimientoFallido) {
+                  this.aciertos = this.aciertos + 1;
+                }
+              } else {
+                item.requerimientoCompleto = 'error';
+                item.requrimientoFallido = true;
+                this.puntos = this.puntos - 100;
+                this.retroalimentacion = item.retroAlimentacion;
+                if (this.retroalimentacion != '')
+                  this.mostrarRetoAlimentacion = true;
+                this.errores = this.errores + 1;
+              }
+            } else {
+              if (itemId == 'requerimientos_no_ambiguos') {
+                item.requerimientoCompleto = 'si';
+                this.puntos = item.requrimientoFallido
+                  ? puntosActual
+                  : puntosActual + item.puntos;
+                if (!item.requrimientoFallido) {
+                  this.aciertos = this.aciertos + 1;
+                }
+              } else {
+                item.requerimientoCompleto = 'error';
+                item.requrimientoFallido = true;
+                this.puntos = this.puntos - 100;
+                this.retroalimentacion = item.retroAlimentacion;
+                if (this.retroalimentacion != '')
+                  this.mostrarRetoAlimentacion = true;
+                this.errores = this.errores + 1;
               }
             }
-            else {
-              item.requerimientoCompleto = 'error';
-              item.requrimientoFallido = true;
-              this.puntos = this.puntos - 100;
-              this.retroalimentacion = item.retroAlimentacion;
-              if (this.retroalimentacion != "")
-                this.mostrarRetoAlimentacion = true;
-              this.errores = this.errores +1;
-            }
           }
-          else {
-            if(itemId == 'requerimientos_no_ambiguos'){
-              item.requerimientoCompleto = 'si';
-              this.puntos = (item.requrimientoFallido) ? puntosActual : puntosActual + item.puntos;
-               if (!item.requrimientoFallido) {
-                  this.aciertos = this.aciertos +1;
-              }
-            }
-            else {
-              item.requerimientoCompleto = 'error';
-              item.requrimientoFallido = true;
-              this.puntos = this.puntos - 100;
-              this.retroalimentacion = item.retroAlimentacion;
-              if (this.retroalimentacion != "")
-                this.mostrarRetoAlimentacion = true;
-              this.errores = this.errores +1;
-            }
-          }
-        }
-      })
+        })
     );
-  
-    this.dragulaService.drop(this.REQUERIMIENTOS_DRAGULA)
-    .subscribe(({ name, el, target, source, sibling }) => {
-      if(this.requisitosNoFuncionales.length == 0 && !this.requesitosAmbiguos.some(requisito => requisito.requerimientoCompleto != 'si') && !this.requesitosNoAmbiguos.some(requisito => requisito.requerimientoCompleto != 'si'))
-        this.mostrarFinilazion = true;
-    });
+
+    this.dragulaService
+      .drop(this.REQUERIMIENTOS_DRAGULA)
+      .subscribe(({ name, el, target, source, sibling }) => {
+        if (
+          this.requisitosNoFuncionales.length == 0 &&
+          !this.requesitosAmbiguos.some(
+            (requisito) => requisito.requerimientoCompleto != 'si'
+          ) &&
+          !this.requesitosNoAmbiguos.some(
+            (requisito) => requisito.requerimientoCompleto != 'si'
+          )
+        )
+          this.mostrarFinilazion = true;
+      });
 
     dragulaService.createGroup(this.REQUERIMIENTOS_DRAGULA, {
       moves: (el, container, handle) => {
-        return handle!.className.includes('handle bi bi-arrows-move cursor-move');
+        return handle!.className.includes(
+          'handle bi bi-arrows-move cursor-move'
+        );
       },
     });
-    
   }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   buscarJuego() {
-    const dataLocal = JSON.parse(localStorage.getItem('persona')!)
+    const dataLocal = JSON.parse(localStorage.getItem('persona')!);
     const criteria = {
       id: this.valorCodigo,
-      idusuario: dataLocal.id
-    }
+      idusuario: dataLocal.id,
+    };
     this._alumnoService.recuperarJuego(criteria).subscribe((dataResponse) => {
-      if(dataResponse.msg == 'OK') {
-        if(dataResponse.result.estado == 1) {
-          let tipoJuegoInicial = "";
+      if (dataResponse.msg == 'OK') {
+        if (dataResponse.result.estado == 1) {
+          let tipoJuegoInicial = '';
           this.tipoJuegoID = dataResponse.result.id_tipo_juego;
-          switch(dataResponse.result.id_tipo_juego) {
+          switch (dataResponse.result.id_tipo_juego) {
             case '1':
-                this.tipoJuego = 'tipo-juego.juego-1-title';
-                this.ambiguosAndFuncionales = 'user-hub-module.serios-game.ambiguos';
-                this.noAmbiguosAndNoFuncionales = 'user-hub-module.serios-game.no-ambiguos';
-                this.requerimientoFinal = 'user-hub-module.serios-game.req-no-funcionales';
-                tipoJuegoInicial = "NFA"
-                break;
+              this.tipoJuego = 'tipo-juego.juego-1-title';
+              this.ambiguosAndFuncionales =
+                'user-hub-module.serios-game.ambiguos';
+              this.noAmbiguosAndNoFuncionales =
+                'user-hub-module.serios-game.no-ambiguos';
+              this.requerimientoFinal =
+                'user-hub-module.serios-game.req-no-funcionales';
+              tipoJuegoInicial = 'NFA';
+              break;
             case '2':
-              this.ambiguosAndFuncionales = 'user-hub-module.serios-game.funcionales';
-              this.noAmbiguosAndNoFuncionales = 'user-hub-module.serios-game.no-funcionales';
-              this.requerimientoFinal = 'user-hub-module.serios-game.req-funcionales-no-funcionales';
+              this.ambiguosAndFuncionales =
+                'user-hub-module.serios-game.funcionales';
+              this.noAmbiguosAndNoFuncionales =
+                'user-hub-module.serios-game.no-funcionales';
+              this.requerimientoFinal =
+                'user-hub-module.serios-game.req-funcionales-no-funcionales';
               this.tipoJuego = 'tipo-juego.juego-2-title';
-              tipoJuegoInicial = "RF"
+              tipoJuegoInicial = 'RF';
               break;
             case '3':
-              this.ambiguosAndFuncionales = 'user-hub-module.serios-game.ambiguos';
-              this.noAmbiguosAndNoFuncionales = 'user-hub-module.serios-game.no-ambiguos';
-              this.requerimientoFinal = 'user-hub-module.serios-game.req-funcionales';
-              tipoJuegoInicial = "FA"
+              this.ambiguosAndFuncionales =
+                'user-hub-module.serios-game.ambiguos';
+              this.noAmbiguosAndNoFuncionales =
+                'user-hub-module.serios-game.no-ambiguos';
+              this.requerimientoFinal =
+                'user-hub-module.serios-game.req-funcionales';
+              tipoJuegoInicial = 'FA';
               this.tipoJuego = 'tipo-juego.juego-3-title';
               break;
-          };
+          }
           const jsonTemp = JSON.parse(dataResponse.result.json);
-          this.requisitosNoFuncionales = jsonTemp[0].requerimientos.map((data: any) => {
-            return {
-              texto: data.requerimiento,
-              retroAlimentacion: data.retroalimentacion,
-              ambiguo: (data.opcionRequerimiento == tipoJuegoInicial) ? true : false,
-              requrimientoFallido: data.requerimientoFallido,
-              requerimientoCompleto: "no",
-              id: data.id,
-              puntos: data.puntosAdicionales
 
+          const numRequerimientosAleatorios =
+            dataResponse.result.num_requerimientos_aleatorios;
+
+          this.requisitosNoFuncionales = jsonTemp[0].requerimientos.map(
+            (data: any) => {
+              return {
+                texto: data.requerimiento,
+                retroAlimentacion: data.retroalimentacion,
+                ambiguo:
+                  data.opcionRequerimiento == tipoJuegoInicial ? true : false,
+                requrimientoFallido: data.requerimientoFallido,
+                requerimientoCompleto: 'no',
+                id: data.id,
+                puntos: data.puntosAdicionales,
+              };
             }
-          });
-          this.requisitosNoFuncionales = this.algoritmoShuffleArray(this.requisitosNoFuncionales);
+          );
+          this.requisitosNoFuncionales = this.algoritmoShuffleArray(
+            this.requisitosNoFuncionales
+          );
+
+          if (
+            numRequerimientosAleatorios &&
+            !isNaN(numRequerimientosAleatorios)
+          ) {
+            this.requisitosNoFuncionales = this.requisitosNoFuncionales.slice(
+              0,
+              Number(numRequerimientosAleatorios)
+            );
+          }
+
           this.pedirCodigo = false;
           this.id_juegoTemp = Number(this.valorCodigo);
           this.mostrarInicioModal = true;
+        } else {
+          this.openSnackBar(
+            this._translateService.instant('general-msg.esta-incorrecto'),
+            'custom-snackbar_fallido'
+          );
         }
-        else {
-          this.openSnackBar(this._translateService.instant('general-msg.esta-incorrecto'),'custom-snackbar_fallido');
-        }
-      }
-      else {
-        if(dataResponse.msg == 'not_game')
-          this.openSnackBar(this._translateService.instant('general-msg.codigo-incorrecto'), 'custom-snackbar_fallido');
+      } else {
+        if (dataResponse.msg == 'not_game')
+          this.openSnackBar(
+            this._translateService.instant('general-msg.codigo-incorrecto'),
+            'custom-snackbar_fallido'
+          );
         else
-          this.openSnackBar(this._translateService.instant('general-msg.estado_jugado'), 'custom-snackbar_fallido');
+          this.openSnackBar(
+            this._translateService.instant('general-msg.estado_jugado'),
+            'custom-snackbar_fallido'
+          );
       }
-      this.valorCodigo = "";
-    })
-    
+      this.valorCodigo = '';
+    });
   }
 
   algoritmoShuffleArray(array: any[]): any[] {
@@ -196,9 +252,9 @@ export class SeriosGameComponent implements OnInit{
     config.duration = 3000;
     config.verticalPosition = 'top';
     config.horizontalPosition = 'center';
-    config.panelClass = "ml-8"
+    config.panelClass = 'ml-8';
     config.panelClass = [class_customer];
-    this._snackBar.open(message,'',config);
+    this._snackBar.open(message, '', config);
   }
 
   enviarPuntajeJuego() {
@@ -210,35 +266,43 @@ export class SeriosGameComponent implements OnInit{
       hora_inicio: this.horaActual,
       aciertos: this.aciertos,
       errores: this.errores,
-      hora_fin: new Date().toTimeString().split(' ')[0]
-    }
-    this._alumnoService.guardarPuntaje(criteria).subscribe(dataResponse=>{
-      if(dataResponse.msg == 'OK') {
-        if(dataResponse.result == "usuario_jugado") {
-          this.openSnackBar(this._translateService.instant('general-msg.error-guardar-juego'),'custom-snackbar_fallido');
+      hora_fin: new Date().toTimeString().split(' ')[0],
+    };
+    this._alumnoService.guardarPuntaje(criteria).subscribe((dataResponse) => {
+      if (dataResponse.msg == 'OK') {
+        if (dataResponse.result == 'usuario_jugado') {
+          this.openSnackBar(
+            this._translateService.instant('general-msg.error-guardar-juego'),
+            'custom-snackbar_fallido'
+          );
         }
-        if(dataResponse.result == "error_insert"){
-          this.openSnackBar(this._translateService.instant('general-msg.error-guardar-juego-2'),'custom-snackbar_fallido');
+        if (dataResponse.result == 'error_insert') {
+          this.openSnackBar(
+            this._translateService.instant('general-msg.error-guardar-juego-2'),
+            'custom-snackbar_fallido'
+          );
         }
-        if(dataResponse.result == "exito_insert") {
-          this.openSnackBar(this._translateService.instant('general-msg.ok-guardar-juego'),'custom-snackbar_exitoso');
+        if (dataResponse.result == 'exito_insert') {
+          this.openSnackBar(
+            this._translateService.instant('general-msg.ok-guardar-juego'),
+            'custom-snackbar_exitoso'
+          );
         }
         this.reiciarComponente();
         this.mostrarFinilazion = false;
       }
-    })
+    });
   }
 
   reiciarComponente() {
-    this.requesitosAmbiguos = []
-    this.requesitosNoAmbiguos = []
-    this.requisitosNoFuncionales  = [];
-    this.valorCodigo = "";
+    this.requesitosAmbiguos = [];
+    this.requesitosNoAmbiguos = [];
+    this.requisitosNoFuncionales = [];
+    this.valorCodigo = '';
     this.pedirCodigo = true;
     this.puntos = 0;
     this.id_juegoTemp = 0;
     this.aciertos = 0;
     this.errores = 0;
   }
-
 }

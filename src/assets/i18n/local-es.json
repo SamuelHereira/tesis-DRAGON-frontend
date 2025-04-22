@@ -65,7 +65,8 @@
         "juegos-creados": "Juegos creados",
         "reporte": "Reportes",
         "salir": "Cerrar sesión",
-        "juegos-jugados": "Juegos jugados"
+        "juegos-jugados": "Juegos jugados",
+        "revisor": "Revisor"
       }
     },
     "perfil": {
@@ -171,6 +172,14 @@
       "req-no-funcionales": "Conjunto de requitos no funcionales",
       "req-funcionales": "Conjunto de requitos funcionales",
       "req-funcionales-no-funcionales": "Conjunto de requitos"
+    },
+    "revisores": {
+      "title": "Revisores del juego",
+      "asignar-nuevo": "Asignar nuevo revisor",
+      "asignar-vacio-title": "No hay revisores asignados",
+      "asignar-vacio-subtitle": "Los revisores asignados se encargarán de revisar los requerimientos y proporcionar retroalimentación.",
+      "asignar-vacio-subtitle-2": "Puedes asignar revisores a tu juego para que te ayuden a mejorarlo.",
+      "asignar-vacio-btn": "Asignar revisor"
     }
   },
   "404-page": {
@@ -206,7 +215,8 @@
     "profesor": "Profesor",
     "opcional": "Opcional",
     "inacitvo": "Inactivo",
-    "acitvo": "Activo"
+    "acitvo": "Activo",
+    "no-data": "No hay datos para mostrar"
   },
   "general-msg": {
     "error-get-user": "El usuario no fue encontrado. Intentolo más tarde",

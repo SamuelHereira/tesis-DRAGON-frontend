@@ -14,6 +14,7 @@ import { ReportesComponent } from './View/Pages/reportes/reportes.component';
 import { JuegosVaciosComponent } from './View/components/juegos-vacios/juegos-vacios.component';
 import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugados.component';
 import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
+import { RevisorJuegosAsignadosComponent } from './View/Pages/revisor-juegos-asignados/revisor-juegos-asignados.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-
     ReportesComponent,
     JuegosVaciosComponent,
     JuegosJugadosComponent,
-    RevisoresJuegoComponent
-  ]
+    RevisoresJuegoComponent,
+    RevisorJuegosAsignadosComponent,
+  ],
 })
-export class UserHubModule { }
+export class UserHubModule {}

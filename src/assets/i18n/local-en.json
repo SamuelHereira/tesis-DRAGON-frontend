@@ -65,7 +65,8 @@
         "juegos-creados": "Games Created",
         "reporte": "Reports",
         "salir": "Log out",
-        "juegos-jugados": "Games Played"
+        "juegos-jugados": "Games Played",
+        "revisor": "Reviewer"
       }
     },
     "perfil": {
@@ -206,7 +207,8 @@
     "profesor": "Professor",
     "opcional": "Optional",
     "inacitvo": "Inactive",
-    "acitvo": "Active"
+    "acitvo": "Active",
+    "no-data": "There are no records to display"
   },
   "general-msg": {
     "error-get-user": "User not found. Please try again later",
