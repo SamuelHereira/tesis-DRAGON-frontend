@@ -13,6 +13,7 @@ import { JuegosCreadosComponent } from './View/Pages/juegos-creados/juegos-cread
 import { ReportesComponent } from './View/Pages/reportes/reportes.component';
 import { JuegosVaciosComponent } from './View/components/juegos-vacios/juegos-vacios.component';
 import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugados.component';
+import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugad
     JuegosCreadosComponent,
     ReportesComponent,
     JuegosVaciosComponent,
-    JuegosJugadosComponent
+    JuegosJugadosComponent,
+    RevisoresJuegoComponent
   ]
 })
 export class UserHubModule { }

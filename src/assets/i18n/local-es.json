@@ -110,6 +110,8 @@
       "fecha-hint": "Es la fecha en la que tu juego se completa. Por defecto, es de 7 días",
       "tipo-titulo": "Tipo de juego",
       "tipo-hint": "Este es el tipo de juego que debes elegir",
+      "numero-requerimientos-aleatorios": "Número de requerimientos aleatorios",
+      "numero-requerimientos-aleatorios-hint": "Este es el número de requerimientos aleatorios que se mostrarán en el juego",
       "modales": {
         "titulo-ayudanos": "Ayúdanos a mejorar nuestra base de datos de requerimientos",
         "subtitulo-ayudanos": "¿Te gustaría que tus requerimientos se guarden en nuestra base de datos para que otros docentes puedan utilizarlos en el futuro? Tu contribución nos ayudará a crear una biblioteca más completa y útil para todos. ¡Tu colaboración es muy valiosa!",
@@ -120,6 +122,7 @@
         "cargar-req-titulo": "Cargar requerimientos",
         "cargar-req-subtitulo": "Puedes cargar requerimientos creados por ti o por otros profesores",
         "generar-ia": "Generar por IA",
+        "generar-ia-cantidad": "Cantidad de requerimientos a generar",
         "generar-ia-button": "Generar usando Gemini",
         "generar-ia-button-loading": "Generando...",
         "generar-ia-error": "Error al generar los requerimientos, intenta nuevamente",
@@ -212,6 +215,8 @@
     "error-put-user-password": "La contraseña actual proporcionada es incorrecta.",
     "error-pasword-repetido": "La contraseña actual es igual a la contraseña nueva ingresada, deben ser diferentes",
     "error-crear-juego": "La creación del juego no fue exitosa. Por favor, inténtelo nuevamente más tarde.",
+    "error-numero-requerimientos-min": "El número de requerimientos aleatorios no puede ser menor a 5",
+    "error-numero-requerimientos-max": "El número de requerimientos aleatorios no puede ser mayor al número de requerimientos disponibles",
     "ok-crear-juego": "Los niveles del juego se creación de forma exitosa. El código del juego es xxx te servira para que tus alumnos encuentre tu juego.",
     "error-cerrar-juego": "La creación del juego no fue exitosa. Por favor, inténtelo nuevamente más tarde.",
     "ok-cerrar-juego": "La creación del juego fue exitosa.",
@@ -248,7 +253,8 @@
     "errores": "Desaciertos"
   },
   "general-tool": {
-    "revisar-juego": "Revisar juego"
+    "revisar-juego": "Revisar juego",
+    "asignar-revisores": "Asignar revisores"
   },
   "tipo-juego": {
     "titulo": "Tipo:",

@@ -7,22 +7,29 @@ import { CreateGameComponent } from './View/Pages/create-game/create-game.compon
 import { JuegosCreadosComponent } from './View/Pages/juegos-creados/juegos-creados.component';
 import { ReportesComponent } from './View/Pages/reportes/reportes.component';
 import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugados.component';
+import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, 
-    children:[
-      {path: 'serious-game', component: SeriosGameComponent},
-      {path: 'perfil', component: PerfilComponent},
-      {path: 'crear-juego', component: CreateGameComponent},
-      {path: 'juegos-creados', component: JuegosCreadosComponent},
-      {path: 'reportes', component: ReportesComponent},
-      {path: 'juegos-jugados', component: JuegosJugadosComponent},
-    ] 
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      { path: 'serious-game', component: SeriosGameComponent },
+      { path: 'perfil', component: PerfilComponent },
+      { path: 'crear-juego', component: CreateGameComponent },
+      { path: 'juegos-creados', component: JuegosCreadosComponent },
+      { path: 'reportes', component: ReportesComponent },
+      { path: 'juegos-jugados', component: JuegosJugadosComponent },
+      {
+        path: 'juegos-creados/:id/revisores',
+        component: RevisoresJuegoComponent,
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingUserHubModule {}

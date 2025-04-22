@@ -29,15 +29,21 @@ export class UiKaasInputComponent implements OnInit {
   }
 
   blockEvent(event: KeyboardEvent) {
-    if (this.characterFilter != 'all') {
-      const patternMap: Record<typeof this.characterFilter, string> = {
-        num: '/[0-9]/',
-        letra: 'AAAAA',
-        all: '*****',
+    if (this.characterFilter !== 'all') {
+      const patternMap: Record<string, RegExp> = {
+        // Solo números (0–9)
+        num: /^[0-9]$/,
+        // Solo letras (mayúsculas y minúsculas)
+        letra: /^[a-zA-Z]$/,
+        // Todos los caracteres
+        all: /.*/, // no se usa en este bloque, pero lo dejamos para consistencia
       };
 
-      const pattern = patternMap[this.characterFilter] || this.characterFilter;
       const inputChar = String.fromCharCode(event.charCode);
+
+      const pattern =
+        patternMap[this.characterFilter] || new RegExp(this.characterFilter);
+
       if (!pattern.test(inputChar)) {
         event.preventDefault();
       }

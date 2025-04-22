@@ -24,6 +24,16 @@
           >
           </app-ui-kaas-input-select>
         </div>
+        <div class="w-12 md:w-max col-fixed">
+          <app-ui-kaas-input
+            [label]="
+              'user-hub-module.crear-juego.numero-requerimientos-aleatorios'
+            "
+            [(value)]="numeroPreguntasAleatorias"
+            characterFilter="num"
+          >
+          </app-ui-kaas-input>
+        </div>
       </div>
 
       <app-form-agregar-nivel
@@ -31,6 +41,7 @@
         [nivel]="datosJuego.niveles[0]"
         [requerimientosCargados]="requerimientosCargadosTipos"
         [tipo]="tipoJuego"
+        [numeroPreguntasAleatorias]="numeroPreguntasAleatorias"
         (_guardarRequerimiento)="guardarRequerimiento($event, 0)"
         (_eliminarRequerimiento)="eliminarRequerimiento(0, $event)"
         (_finalizarRequerimiento)="finalizarCreacion()"

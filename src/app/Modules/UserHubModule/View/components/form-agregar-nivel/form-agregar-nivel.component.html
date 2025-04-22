@@ -196,6 +196,7 @@
       <ng-container *ngIf="modoCreacion === 'ia'">
         <div class="col-6">
           <app-ui-kaas-input
+            onlyNumbers
             [label]="
               'user-hub-module.crear-juego.componente-form.generar-ia'
                 | translate
@@ -204,6 +205,18 @@
             (iconClick)="generarPorIA()"
             [icono]="'bi bi-magic'"
             [matTooltip]="'Generar con IA'"
+          >
+          </app-ui-kaas-input>
+        </div>
+        <div class="col-6">
+          <app-ui-kaas-input
+            [label]="
+              'user-hub-module.crear-juego.componente-form.generar-ia-cantidad'
+                | translate
+            "
+            [(value)]="cantidadIA"
+            characterFilter="num"
+            hint="Cantidad de requerimientos a generar (en caso de ser impar se generará uno más)"
           >
           </app-ui-kaas-input>
         </div>

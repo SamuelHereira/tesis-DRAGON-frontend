@@ -109,6 +109,8 @@
       "fecha-titulo": "Completion Date",
       "fecha-hint": "This is the date when your game finishes. By default, it is set to 7 days.",
       "tipo-titulo": "Game Type",
+      "numero-preguntas-aleatorias": "Number of random questions",
+      "numero-preguntas-aleatorias-hint": "This is the number of random questions that will be generated in the game.",
       "tipo-hint": "This is the type of game you should choose.",
       "modales": {
         "titulo-ayudanos": "Help Us Improve Our Requirements Database",
@@ -120,6 +122,7 @@
         "cargar-req-titulo": "Load Requirements",
         "cargar-req-subtitulo": "You can load requirements created by you or other teachers",
         "generar-ia": "Generate by AI",
+        "generar-ia-cantidad": "Number of requirements to generate",
         "generar-ia-button": "Generate using Gemini",
         "generar-ia-button-loading": "Generating...",
         "generar-ia-error": "Error generating requirements, please try again",
@@ -248,7 +251,8 @@
     "errores": "Misses"
   },
   "general-tool": {
-    "revisar-juego": "Review Game"
+    "revisar-juego": "Review Game",
+    "asignar-revisores": "Assign reviewers"
   },
   "tipo-juego": {
     "titulo": "Type:",

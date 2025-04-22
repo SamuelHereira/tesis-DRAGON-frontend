@@ -32,6 +32,7 @@ type CreationMode = 'manual' | 'load' | 'ia' | 'import-excel';
 export class FormAgregarNivelComponent implements OnInit {
   @Input() indice!: number;
   @Input() nivel!: Nivel;
+  @Input() numeroPreguntasAleatorias!: string;
   @Input() requerimientosCargados: any[] = [];
   @Input() tipo: string = 'tipo-juego.juego-1-title';
 
@@ -61,6 +62,7 @@ export class FormAgregarNivelComponent implements OnInit {
 
   // ia
   tema: string = '';
+  cantidadIA: string = '10';
   cargandoIA: boolean = false;
 
   // excel
@@ -250,6 +252,33 @@ export class FormAgregarNivelComponent implements OnInit {
   }
 
   finalizarNivel() {
+    if (
+      this.numeroPreguntasAleatorias == '' ||
+      Number(this.numeroPreguntasAleatorias) < 5
+    ) {
+      this.openSnackBar(
+        this._translateService.instant(
+          'general-msg.error-numero-requerimientos-min'
+        ),
+        'custom-snackbar_fallido'
+      );
+      return;
+    }
+
+    if (
+      Number(this.numeroPreguntasAleatorias) > this.nivel.requerimientos.length
+    ) {
+      this.openSnackBar(
+        this._translateService.instant(
+          'general-msg.error-numero-requerimientos-max'
+        ),
+        'custom-snackbar_fallido'
+      );
+
+      return;
+    }
+
+    this.verificarRequerimientos = false;
     this.verificarFinalizar = false;
     this.expandible = false;
     this.mostrarExpandible = true;
@@ -377,6 +406,7 @@ export class FormAgregarNivelComponent implements OnInit {
     const data: GeminiRequest = {
       topic: this.tema,
       gameMode: tipoJuegoNumber,
+      numRequirements: Number(this.cantidadIA),
       action: 'generar',
     };
 

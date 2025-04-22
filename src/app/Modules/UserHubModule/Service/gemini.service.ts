@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 export interface GeminiRequest {
   topic: string;
   gameMode: number;
+  numRequirements: number;
   action: string;
 }
 

@@ -51,6 +51,7 @@ export class CreateGameComponent implements OnInit {
   };
 
   tipoJuego: string = 'tipo-juego.juego-1-title';
+  numeroPreguntasAleatorias: string = '10';
 
   options_Visibilidad: any[] = [
     { name: 'tipo-juego.juego-1', code: 'tipo-juego.juego-1-title' },
@@ -121,6 +122,7 @@ export class CreateGameComponent implements OnInit {
     const criteria = {
       id_profesor: dataLocal.id,
       id_tipo_juego: tipoJuegoNumber,
+      num_requerimientos_aleatorios: this.numeroPreguntasAleatorias,
       fechaCreacion: new Date(),
       fechaFinilizacion: this.datosJuego.fechaFinalizacion,
       json: JSON.stringify(this.datosJuego.niveles),
