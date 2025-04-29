@@ -9,6 +9,7 @@ import { ReportesComponent } from './View/Pages/reportes/reportes.component';
 import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugados.component';
 import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
 import { RevisorJuegosAsignadosComponent } from './View/Pages/revisor-juegos-asignados/revisor-juegos-asignados.component';
+import { RevisarJuegoComponent } from './View/Pages/revisar-juego/revisar-juego.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'revisor',
         component: RevisorJuegosAsignadosComponent,
+      },
+      {
+        path: 'revisor/:id/revisar-juego',
+        component: RevisarJuegoComponent,
       },
     ],
   },

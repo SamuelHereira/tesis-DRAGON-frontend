@@ -13,11 +13,11 @@ import {
 } from '../../Model/requerimientos.model';
 
 @Component({
-  selector: 'app-revisor-juegos-asignados',
-  templateUrl: './revisor-juegos-asignados.component.html',
-  styleUrls: ['./revisor-juegos-asignados.component.scss'],
+  selector: 'app-revisar-juego',
+  templateUrl: './revisar-juego.component.html',
+  styleUrls: ['./revisar-juego.component.scss'],
 })
-export class RevisorJuegosAsignadosComponent implements OnInit {
+export class RevisarJuegoComponent implements OnInit {
   constructor(
     private _router: Router,
     private _translateService: TranslateService,
@@ -43,18 +43,9 @@ export class RevisorJuegosAsignadosComponent implements OnInit {
   buscarJuegos() {
     const dataLocal = JSON.parse(localStorage.getItem('persona')!);
     this._reviewerService
-      .obetenrJuegosRevisor(dataLocal.id)
+      .obtenerJuegoRevisor(dataLocal.id)
       .subscribe((Response) => {
         if (Response.msg == 'OK') {
-          this.juegos = Response.result.map((data: JuegoRevisor) => {
-            const nivel = JSON.parse(data.json) as Nivel[];
-            const totalRequerimientos = nivel?.[0]?.requerimientos?.length || 0;
-
-            return {
-              ...data,
-              total_requerimientos: totalRequerimientos,
-            };
-          });
         }
       });
   }
@@ -70,7 +61,7 @@ export class RevisorJuegosAsignadosComponent implements OnInit {
 
   revisarJuego(juego: JuegoRevisor) {
     this._router.navigate([
-      '/home/revisor/' + juego.id_revisor_juego + '/revisar-juego',
+      '/home/revisor/' + juego.id_revisor_juego + '/revisar',
     ]);
   }
 }
