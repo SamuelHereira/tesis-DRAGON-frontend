@@ -67,7 +67,7 @@ export class HomeComponent implements OnInit {
           ultimoRegistro: dataResponse.result.registro,
           rol: dataResponse.result.rol,
         };
-        const isRevisor = Boolean(dataResponse.result.isRevisor);
+        const isRevisor = Boolean(Number(dataResponse.result.isRevisor));
         this.llenarOpcionesMenu(dataResponse.result.rol, isRevisor);
         if (dataResponse.result.rol == 'p') {
           this._router.navigateByUrl('/home/juegos-creados');
@@ -109,6 +109,17 @@ export class HomeComponent implements OnInit {
           activo: false,
           id: 3,
         },
+        ...(isRevisor
+          ? [
+              {
+                titulo: 'user-hub-module.home.menu.revisor',
+                icono: 'bi bi-clipboard-check-fill',
+                ruta: '/home/profesor-revisor',
+                activo: false,
+                id: 5,
+              },
+            ]
+          : []),
         {
           titulo: 'user-hub-module.home.menu.reporte',
           icono: 'bi bi-file-earmark-pdf-fill',

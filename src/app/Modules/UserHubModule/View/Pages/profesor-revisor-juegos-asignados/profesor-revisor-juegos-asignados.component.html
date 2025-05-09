@@ -30,10 +30,16 @@
             </th>
             <td mat-cell *matCellDef="let element">{{ element.id_juego }}</td>
           </ng-container>
+          <ng-container matColumnDef="nombre_profesor">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "Profesor" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.profesor }}</td>
+          </ng-container>
 
           <ng-container matColumnDef="fecha_creacion">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "general-table.tiempo-inicio" | translate }}
+              {{ "Fecha inicio" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.fecha_creacion | translate }}
@@ -42,20 +48,10 @@
 
           <ng-container matColumnDef="fecha_finalizacion">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "general-table.tiempo-fin" | translate }}
+              {{ "Fecha fin" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.fecha_finalizacion }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="revisiones">
-            <th mat-header-cell *matHeaderCellDef>
-              {{ "general-table.revisiones" | translate }}
-            </th>
-            <td mat-cell *matCellDef="let element">
-              {{ element.total_revision }} /
-              {{ element.total_requerimientos }}
             </td>
           </ng-container>
 

@@ -180,6 +180,19 @@
       "asignar-vacio-subtitle": "Los revisores asignados se encargarán de revisar los requerimientos y proporcionar retroalimentación.",
       "asignar-vacio-subtitle-2": "Puedes asignar revisores a tu juego para que te ayuden a mejorarlo.",
       "asignar-vacio-btn": "Asignar revisor"
+    },
+    "revisar-juego": {
+      "titulo": "Revisar requerimientos",
+      "modal-revisar": {
+        "titulo": "Revisar requerimiento",
+        "review": "Revisión",
+        "input-label": "Revisión",
+        "input-placeholder": "Escribe tu revisión aquí",
+        "btn-no-cambios": "No sugerir cambios",
+        "btn-cambios": "Sugerir cambios",
+        "success": "Revisión guardada con éxito",
+        "error": "Error al guardar la revisión. Inténtalo más tarde"
+      }
     }
   },
   "404-page": {
@@ -260,11 +273,21 @@
     "tiempo-fin": "Hora fin",
     "tiempo": "Tiempo",
     "aciertos": "Aciertos",
-    "errores": "Desaciertos"
+    "errores": "Desaciertos",
+    "revisiones": "Revisiones"
   },
   "general-tool": {
     "revisar-juego": "Revisar juego",
-    "asignar-revisores": "Asignar revisores"
+    "asignar-revisores": "Asignar revisores",
+    "revisar-requerimiento": "Review requirement"
+  },
+
+  "revisar-juego-table": {
+    "no": "No.",
+    "titulo": "Requerimiento",
+    "tipo": "Tipo",
+    "feedback": "Retroalimentación",
+    "revisado": "Revisado"
   },
   "tipo-juego": {
     "titulo": "Tipo:",

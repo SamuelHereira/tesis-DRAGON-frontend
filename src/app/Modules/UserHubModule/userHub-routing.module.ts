@@ -10,6 +10,8 @@ import { JuegosJugadosComponent } from './View/Pages/juegos-jugados/juegos-jugad
 import { RevisoresJuegoComponent } from './View/Pages/revisores-juego/revisores-juego.component';
 import { RevisorJuegosAsignadosComponent } from './View/Pages/revisor-juegos-asignados/revisor-juegos-asignados.component';
 import { RevisarJuegoComponent } from './View/Pages/revisar-juego/revisar-juego.component';
+import { ProfesorRevisorJuegosAsignadosComponent } from './View/Pages/profesor-revisor-juegos-asignados/profesor-revisor-juegos-asignados.component';
+import { ProfesorRevisarJuegoComponent } from './View/Pages/profesor-revisar-juego/profesor-revisar-juego.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,18 @@ const routes: Routes = [
       {
         path: 'revisor/:id/revisar-juego',
         component: RevisarJuegoComponent,
+      },
+      {
+        path: 'profesor-revisor',
+        component: ProfesorRevisorJuegosAsignadosComponent,
+      },
+      {
+        path: 'profesor-revisor/:id/revisiones',
+        component: ProfesorRevisarJuegoComponent,
+      },
+      {
+        path: 'profesor-revisor/:id/revisiones/:id',
+        component: ProfesorRevisorJuegosAsignadosComponent,
       },
     ],
   },

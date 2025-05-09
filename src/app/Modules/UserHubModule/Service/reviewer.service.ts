@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { forkJoin, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { JuegoRevisor } from '../interfaces/reviewer.interface';
+import {
+  JuegoRevisor,
+  JuegoRevisorDecoded,
+} from '../interfaces/reviewer.interface';
 import { IResponse } from '../interfaces/response.interface';
 
 @Injectable({
@@ -12,10 +15,11 @@ export class ReviewerService {
   constructor(private http: HttpClient) {}
   private urlEndPoint: string = environment.apiUrl + '/home';
 
-  obtenerRevisoresValidos(idJuego: number): Observable<any> {
+  obtenerRevisoresValidos(idJuego: number, rol: string): Observable<any> {
     const criteria = {
       action: 'obtenerRevisoresValidos',
       id_juego: idJuego,
+      rol,
     };
     return this.http.post<any>(this.urlEndPoint, criteria);
   }
@@ -58,11 +62,38 @@ export class ReviewerService {
 
   obtenerJuegoRevisor(
     idRevisorJuego: string
-  ): Observable<IResponse<JuegoRevisor>> {
+  ): Observable<IResponse<JuegoRevisorDecoded>> {
     const criteria = {
       action: 'obtenerJuegoRevisor',
       id_revisor_juego: idRevisorJuego,
     };
     return this.http.post<any>(this.urlEndPoint, criteria);
+  }
+
+  enviarFeedbackRequerimiento(criteria: {
+    action?: string;
+    id_revisor_juego: string;
+    id_requerimiento: number;
+    titulo: string;
+    retroalimentacion: string;
+    tipo: string;
+    no_revision?: number;
+    id_revision?: number;
+  }): Observable<IResponse<any>> {
+    criteria.action = 'postRevisarRequerimientoJuego';
+    return this.http.post<IResponse<any>>(this.urlEndPoint, criteria);
+  }
+
+  obtenerJuegoProfesorRevisor(
+    id_revisor_juego: string
+  ): Observable<IResponse<JuegoRevisorDecoded>> {
+    const criteria = {
+      action: 'obtenerJuegoProfesorRevisor',
+      id_revisor_juego: id_revisor_juego,
+    };
+    return this.http.post<IResponse<JuegoRevisorDecoded>>(
+      this.urlEndPoint,
+      criteria
+    );
   }
 }

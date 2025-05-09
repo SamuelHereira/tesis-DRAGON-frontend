@@ -172,6 +172,27 @@
       "req-no-funcionales": "Set of non-functional requirements",
       "req-funcionales": "Set of functional requirements",
       "req-funcionales-no-funcionales": "Set of requirements"
+    },
+    "revisores": {
+      "title": "Game Reviewers",
+      "asignar-nuevo": "Assign a new reviewer",
+      "asignar-nuevo-title": "Assign a new reviewer",
+      "asignar-nuevo-subtitle": "You can assign a new reviewer to your game.",
+      "asignar-nuevo-subtitle-2": "The assigned reviewers will be responsible for reviewing the requirements and providing feedback.",
+      "asignar-nuevo-btn": "Assign reviewer"
+    },
+    "revisar-juego": {
+      "titulo": "Review requirements",
+      "modal-revisar": {
+        "titulo": "Review requirement",
+        "review": "Review",
+        "input-label": "Review",
+        "input-placeholder": "Enter your review",
+        "btn-no-cambios": "No suggest changes",
+        "btn-cambios": "Suggest changes",
+        "success": "Review saved successfully",
+        "error": "Error saving the review. Please try again later"
+      }
     }
   },
   "404-page": {
@@ -250,11 +271,21 @@
     "tiempo-fin": "End time",
     "tiempo": "Time",
     "aciertos": "Hits",
-    "errores": "Misses"
+    "errores": "Misses",
+    "revisiones": "Reviews"
   },
   "general-tool": {
     "revisar-juego": "Review Game",
-    "asignar-revisores": "Assign reviewers"
+    "asignar-revisores": "Assign reviewers",
+    "revisar-requerimiento": "Review requirement"
+  },
+
+  "revisar-juego-table": {
+    "no": "No.",
+    "titulo": "Requerimiento",
+    "tipo": "Tipo",
+    "feedback": "Retroalimentación",
+    "revisado": "Revisado"
   },
   "tipo-juego": {
     "titulo": "Type:",

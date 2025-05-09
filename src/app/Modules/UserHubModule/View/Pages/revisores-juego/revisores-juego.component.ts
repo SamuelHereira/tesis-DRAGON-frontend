@@ -12,8 +12,9 @@ import { TranslateService } from '@ngx-translate/core';
 export class RevisoresJuegoComponent implements OnInit {
   idJuego!: number;
   revisores: any[] = [];
-  displayedColumns: string[] = ['id', 'nombre', 'actions'];
+  displayedColumns: string[] = ['id', 'nombre', 'rol', 'actions'];
 
+  tipoRevisor: string = 'e';
   revisorSeleccionado: string = '';
 
   revisoresValidos: any[] = [];
@@ -21,6 +22,17 @@ export class RevisoresJuegoComponent implements OnInit {
   btnDisabled: boolean = true;
 
   eliminarRevisor: boolean = false;
+
+  tiposRevisores = [
+    {
+      code: 'e',
+      name: this._translateService.instant('Estudiante'),
+    },
+    {
+      code: 'p',
+      name: this._translateService.instant('Profesor'),
+    },
+  ];
 
   constructor(
     private route: ActivatedRoute,
@@ -48,16 +60,16 @@ export class RevisoresJuegoComponent implements OnInit {
           return {
             id: revisor.idUsuario,
             nombre: `${revisor.nombres} ${revisor.apellidos}`,
+            rol: revisor.rol === 'e' ? 'Estudiante' : 'Profesor',
           };
         });
         this.cdr.detectChanges();
       });
   }
 
-  openModalAsignar() {
-    this.asignarRevisor = true;
+  obtenerRevisoresValidos() {
     this.reviewerService
-      .obtenerRevisoresValidos(this.idJuego)
+      .obtenerRevisoresValidos(this.idJuego, this.tipoRevisor)
       .subscribe((res) => {
         this.revisoresValidos = res.result.map((revisor: any) => {
           return {
@@ -67,6 +79,10 @@ export class RevisoresJuegoComponent implements OnInit {
         });
         this.cdr.detectChanges();
       });
+  }
+
+  openModalAsignar() {
+    this.asignarRevisor = true;
   }
 
   closeModalAsignar() {

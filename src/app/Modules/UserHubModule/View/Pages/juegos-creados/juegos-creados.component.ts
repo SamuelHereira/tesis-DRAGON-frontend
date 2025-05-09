@@ -36,6 +36,7 @@ export class JuegosCreadosComponent implements OnInit {
     'typeReq',
     'ReqPlus',
     'pts',
+    'actions',
   ];
   view_req: boolean = false;
 

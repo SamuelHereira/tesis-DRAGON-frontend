@@ -16,11 +16,11 @@ import {
 } from '../../Model/requerimientos.model';
 
 @Component({
-  selector: 'app-revisar-juego',
-  templateUrl: './revisar-juego.component.html',
-  styleUrls: ['./revisar-juego.component.scss'],
+  selector: 'app-profesor-revisar-juego',
+  templateUrl: './profesor-revisar-juego.component.html',
+  styleUrls: ['./profesor-revisar-juego.component.scss'],
 })
-export class RevisarJuegoComponent implements OnInit {
+export class ProfesorRevisarJuegoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
 
@@ -42,7 +42,6 @@ export class RevisarJuegoComponent implements OnInit {
     'titulo',
     'tipo',
     'feedback',
-    'revisado',
     'options',
   ];
 
@@ -85,7 +84,7 @@ export class RevisarJuegoComponent implements OnInit {
 
   buscarJuegos() {
     this._reviewerService
-      .obtenerJuegoRevisor(this.idRevisorJuego)
+      .obtenerJuegoProfesorRevisor(this.idRevisorJuego)
       .subscribe((response) => {
         if (response.msg == 'OK') {
           this.juego = response.result;
@@ -130,80 +129,13 @@ export class RevisarJuegoComponent implements OnInit {
   }
 
   revisar(requerimientoId: number) {
-    this.requerimientoIdSeleccionado = requerimientoId;
-    this.requerimientoSeleccionado = this.requerimientos.find(
-      (requerimiento) => requerimiento.id == requerimientoId.toString()
-    )!;
-
-    this.reviewRequerimiento = {
-      id: this.requerimientoSeleccionado.id,
-      titulo: this.requerimientoSeleccionado.requerimiento,
-      retroalimentacion: this.requerimientoSeleccionado.retroalimentacion,
-      tipo: this.requerimientoSeleccionado.opcionRequerimiento,
-      id_revision: this.requerimientoSeleccionado.id_revision,
-    };
-
-    console.log(this.requerimientoSeleccionado);
-    console.log('reviewRequerimiento', this.reviewRequerimiento);
-
-    if (this.requerimientoSeleccionado.id_revision) {
-      const revision = this.juego.revisiones.find(
-        (revision) =>
-          Number(revision.id_requerimiento) ===
-          Number(this.requerimientoSeleccionado.id)
-      );
-
-      if (revision) {
-        this.reviewRequerimiento.retroalimentacion = revision.retroalimentacion;
-        this.reviewRequerimiento.titulo = revision.titulo;
-        this.reviewRequerimiento.tipo = revision.tipo;
-      }
-    }
-
-    this._cdr.detectChanges();
-    this.revisarModal = true;
-  }
-
-  finalizarRevision() {
-    const noFeedback =
-      this.reviewRequerimiento.titulo ===
-        this.requerimientoSeleccionado.requerimiento &&
-      this.reviewRequerimiento.retroalimentacion ===
-        this.requerimientoSeleccionado.retroalimentacion &&
-      this.reviewRequerimiento.tipo ===
-        this.requerimientoSeleccionado.opcionRequerimiento
-        ? 1
-        : 0;
-
-    this._reviewerService
-      .enviarFeedbackRequerimiento({
-        id_revisor_juego: this.idRevisorJuego,
-        id_requerimiento: this.requerimientoIdSeleccionado,
-        titulo: this.reviewRequerimiento.titulo,
-        retroalimentacion: this.reviewRequerimiento.retroalimentacion,
-        tipo: this.reviewRequerimiento.tipo,
-        no_revision: noFeedback,
-        id_revision: this.reviewRequerimiento.id_revision,
-      })
-      .subscribe((response) => {
-        if (response.msg == 'OK') {
-          this.openSnackBar(
-            this._translateService.instant(
-              'user-hub-module.revisar-juego.modal-revisar.success'
-            ),
-            'custom-snackbar_exitoso'
-          );
-          this.buscarJuegos();
-          this.cancelarRevision();
-        } else {
-          this.openSnackBar(
-            this._translateService.instant(
-              'user-hub-module.revisar-juego.modal-revisar.error'
-            ),
-            'custom-snackbar_fallido'
-          );
-        }
-      });
+    this._router.navigate([
+      '/home/profesor-revisor/' +
+        this.juego.id_revisor_juego +
+        '/revisiones' +
+        '/' +
+        requerimientoId,
+    ]);
   }
 
   getTipoRequerimientoText(tipo: string) {
