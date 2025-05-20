@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import {
   JuegoRevisor,
   JuegoRevisorDecoded,
+  RevisionRevisorResponse,
 } from '../interfaces/reviewer.interface';
 import { IResponse } from '../interfaces/response.interface';
 
@@ -95,5 +96,28 @@ export class ReviewerService {
       this.urlEndPoint,
       criteria
     );
+  }
+
+  obtenerProfesorRevisionesRequerimiento(
+    id_revisor_juego: string,
+    id_requerimiento: string
+  ): Observable<IResponse<RevisionRevisorResponse[]>> {
+    const criteria = {
+      action: 'obtenerProfesorRevisionesRequerimiento',
+      id_revisor_juego: id_revisor_juego,
+      id_requerimiento: id_requerimiento,
+    };
+    return this.http.post<IResponse<RevisionRevisorResponse[]>>(
+      this.urlEndPoint,
+      criteria
+    );
+  }
+
+  revisarPorProfesorRevisor(criteria: {
+    id_revision_revisor_juego: string;
+    id_revisor_juego: string;
+    feedback: string;
+  }): Observable<IResponse<any>> {
+    return this.http.post<IResponse<any>>(this.urlEndPoint, criteria);
   }
 }

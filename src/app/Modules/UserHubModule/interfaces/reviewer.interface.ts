@@ -36,3 +36,15 @@ export interface Revision {
   id_revisor_juego: number;
   id_revision_revisor_juego: number;
 }
+
+export interface RevisionRevisorResponse {
+  id_revision_revisor_juego: string;
+  id_revisor_juego: string;
+  id_requerimiento: string;
+  titulo: string;
+  retroalimentacion: string;
+  tipo: string;
+  fecha_revision: Date;
+  no_feedback: string;
+  estudiante: string;
+}

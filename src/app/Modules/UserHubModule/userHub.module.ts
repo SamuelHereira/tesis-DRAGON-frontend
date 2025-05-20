@@ -18,6 +18,7 @@ import { RevisorJuegosAsignadosComponent } from './View/Pages/revisor-juegos-asi
 import { RevisarJuegoComponent } from './View/Pages/revisar-juego/revisar-juego.component';
 import { ProfesorRevisorJuegosAsignadosComponent } from './View/Pages/profesor-revisor-juegos-asignados/profesor-revisor-juegos-asignados.component';
 import { ProfesorRevisarJuegoComponent } from './View/Pages/profesor-revisar-juego/profesor-revisar-juego.component';
+import { ProfesorRevisarRevisionComponent } from './View/Pages/profesor-revisar-revision/profesor-revisar-revision.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { ProfesorRevisarJuegoComponent } from './View/Pages/profesor-revisar-jue
     RevisarJuegoComponent,
     ProfesorRevisorJuegosAsignadosComponent,
     ProfesorRevisarJuegoComponent,
+    ProfesorRevisarRevisionComponent,
   ],
 })
 export class UserHubModule {}
