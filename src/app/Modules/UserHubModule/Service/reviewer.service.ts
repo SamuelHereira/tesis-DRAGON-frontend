@@ -114,10 +114,13 @@ export class ReviewerService {
   }
 
   revisarPorProfesorRevisor(criteria: {
+    action?: string;
     id_revision_revisor_juego: string;
     id_revisor_juego: string;
     feedback: string;
+    aprobado: number;
   }): Observable<IResponse<any>> {
+    criteria.action = 'postRevisarPorProfesor';
     return this.http.post<IResponse<any>>(this.urlEndPoint, criteria);
   }
 }

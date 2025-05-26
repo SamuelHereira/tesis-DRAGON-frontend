@@ -42,7 +42,8 @@ export class RevisarJuegoComponent implements OnInit {
     'titulo',
     'tipo',
     'feedback',
-    'revisado',
+    'estado',
+    'revisiones_profesores',
     'options',
   ];
 
@@ -52,6 +53,7 @@ export class RevisarJuegoComponent implements OnInit {
   requerimientoSeleccionado: Requerimiento & {
     revisado: boolean;
     id_revision?: number;
+    revisiones_profesores?: any[];
   } = null!;
   reviewRequerimiento: {
     id: string;
@@ -90,20 +92,29 @@ export class RevisarJuegoComponent implements OnInit {
         if (response.msg == 'OK') {
           this.juego = response.result;
           this.requerimientos = response.result.json.requerimientos.map(
-            (requerimiento) => ({
-              ...requerimiento,
-              revisado: Boolean(
-                response.result.revisiones.find(
-                  (revision) =>
-                    Number(revision.id_requerimiento) ===
-                    Number(requerimiento.id)
-                )
-              ),
-              id_revision: response.result.revisiones.find(
+            (requerimiento) => {
+              const id_revision = response.result.revisiones.find(
                 (revision) =>
                   Number(revision.id_requerimiento) === Number(requerimiento.id)
-              )?.id_revision_revisor_juego,
-            })
+              )?.id_revision_revisor_juego;
+
+              return {
+                ...requerimiento,
+                revisado: Boolean(
+                  response.result.revisiones.find(
+                    (revision) =>
+                      Number(revision.id_requerimiento) ===
+                      Number(requerimiento.id)
+                  )
+                ),
+                id_revision: id_revision,
+                revisiones_profesores:
+                  response.result.revisiones_profesor.filter(
+                    (revision) =>
+                      revision.id_revision_revisor_juego === id_revision
+                  ),
+              };
+            }
           );
         }
       });

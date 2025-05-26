@@ -55,32 +55,10 @@ export class ProfesorRevisarRevisionComponent implements OnInit {
   revisarModal: boolean = false;
   requerimientoIdSeleccionado: number = 0;
   requerimientoSeleccionado: RevisionRevisorResponse & {
-    revisado: boolean;
+    revisado?: boolean;
     id_revision?: number;
   } = null!;
-  reviewRequerimiento: {
-    id: string;
-    titulo: string;
-    retroalimentacion: string;
-    tipo: string;
-    id_revision?: number;
-  } = {
-    id: '',
-    titulo: '',
-    retroalimentacion: '',
-    tipo: '',
-  };
-
-  options_Requerimientos = [
-    { name: 'tipo-juego.juego-1-subtitle-ambiguo', code: 'NFA' },
-    { name: 'tipo-juego.juego-1-subtitle-noAmbiguo', code: 'NFN' },
-
-    { name: 'tipo-juego.juego-2-subtitle-ambiguo', code: 'RF' },
-    { name: 'tipo-juego.juego-2-subtitle-noAmbiguo', code: 'RNF' },
-
-    { name: 'tipo-juego.juego-3-subtitle-ambiguo', code: 'FA' },
-    { name: 'tipo-juego.juego-3-subtitle-noAmbiguo', code: 'FN' },
-  ];
+  comentario: string = '';
 
   ngOnInit() {
     this.idRevisorJuego = this.route.snapshot.paramMap.get('id')!;
@@ -99,22 +77,6 @@ export class ProfesorRevisarRevisionComponent implements OnInit {
       .subscribe((response) => {
         if (response.msg == 'OK') {
           this.revisiones = response.result;
-          // this.requerimientos = response.result.json.requerimientos.map(
-          //   (requerimiento) => ({
-          //     ...requerimiento,
-          //     revisado: Boolean(
-          //       response.result.revisiones.find(
-          //         (revision) =>
-          //           Number(revision.id_requerimiento) ===
-          //           Number(requerimiento.id)
-          //       )
-          //     ),
-          //     id_revision: response.result.revisiones.find(
-          //       (revision) =>
-          //         Number(revision.id_requerimiento) === Number(requerimiento.id)
-          //     )?.id_revision_revisor_juego,
-          //   })
-          // );
         }
       });
   }
@@ -131,12 +93,6 @@ export class ProfesorRevisarRevisionComponent implements OnInit {
   cancelarRevision() {
     this.revisarModal = false;
     this.requerimientoIdSeleccionado = 0;
-    this.reviewRequerimiento = {
-      id: '',
-      titulo: '',
-      retroalimentacion: '',
-      tipo: '',
-    };
   }
 
   getTipoRequerimientoText(tipo: string) {
@@ -180,19 +136,52 @@ export class ProfesorRevisarRevisionComponent implements OnInit {
     this._cdr.detectChanges();
   }
 
-  revisar(id: string) {
+  revisar(id_revision_revisor_juego: string) {
     this.revisarModal = true;
-    this.requerimientoIdSeleccionado = Number(id);
+    this.requerimientoIdSeleccionado = Number(id_revision_revisor_juego);
+    this.requerimientoSeleccionado = this.revisiones.find(
+      (revisar) =>
+        revisar.id_revision_revisor_juego == id_revision_revisor_juego
+    )!;
+    console.log('revisar', this.requerimientoSeleccionado);
   }
 
-  finalizarRevision() {
-    this.revisarModal = false;
-    this.requerimientoIdSeleccionado = 0;
-    this.reviewRequerimiento = {
-      id: '',
-      titulo: '',
-      retroalimentacion: '',
-      tipo: '',
-    };
+  finalizarRevision(aprobado: number) {
+    this._reviewerService
+      .revisarPorProfesorRevisor({
+        id_revisor_juego: this.idRevisorJuego,
+        id_revision_revisor_juego:
+          this.requerimientoSeleccionado.id_revision_revisor_juego,
+        aprobado: aprobado,
+        feedback: this.comentario,
+      })
+      .subscribe({
+        next: (response) => {
+          if (response.code == '200') {
+            this.openSnackBar(
+              'Revisión finalizada con éxito',
+              'custom-snackbar_exitoso'
+            );
+            this.revisarModal = false;
+            this.requerimientoIdSeleccionado = 0;
+
+            this.comentario = '';
+
+            this.buscarRevisiones();
+            this._cdr.detectChanges();
+          } else {
+            this.openSnackBar(
+              'Error al finalizar la revisión',
+              'custom-snackbar_fallido'
+            );
+          }
+        },
+        error: (error) => {
+          this.openSnackBar(
+            'Error al finalizar la revisión',
+            'custom-snackbar_fallido'
+          );
+        },
+      });
   }
 }

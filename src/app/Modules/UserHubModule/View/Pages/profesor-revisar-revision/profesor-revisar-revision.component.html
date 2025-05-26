@@ -96,26 +96,20 @@
 
           <ng-container matColumnDef="revisados">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "revisar-juego-table.revisados" | translate }}
+              {{ "Estado" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-              <i
-                [ngClass]="
-                  element.revisado == true
-                    ? 'bi bi-check-circle'
-                    : 'bi bi-x-circle'
-                "
-                [ngStyle]="
-                  element.no_feedback === '0'
-                    ? { color: '#4CAF50' }
-                    : { color: '#F44336' }
-                "
-                [matTooltip]="
-                  element.revisado == true
-                    ? 'general-tool.revisado'
-                    : ('general-tool.no-revisado' | translate)
-                "
-              ></i>
+              <div *ngIf="!element.revisiones.length">Pendiente</div>
+              <div
+                *ngIf="element.revisiones.length && element.revisiones?.[0]?.aprobado == 1"
+              >
+                Aprobado
+              </div>
+              <div
+                *ngIf="element.revisiones.length && element.revisiones?.[0]?.aprobado == 0"
+              >
+                Rechazado
+              </div>
             </td>
           </ng-container>
 
@@ -125,9 +119,10 @@
             </th>
             <td mat-cell *matCellDef="let element">
               <i
+                *ngIf="!element.revisiones.length"
                 [matTooltip]="'general-tool.revisar-requerimiento' | translate"
                 class="bi bi-chat-square-text cursor-pointer text-2xl"
-                (click)="revisar(element.id)"
+                (click)="revisar(element.id_revision_revisor_juego)"
               ></i>
             </td>
           </ng-container>
@@ -153,7 +148,7 @@
         'user-hub-module.revisar-juego.modal-revisar.input-placeholder'
           | translate
       "
-      [(value)]="reviewRequerimiento.retroalimentacion"
+      [(value)]="comentario"
     />
   </div>
   <div app-footer>
@@ -171,13 +166,20 @@
 
         <app-ui-kaas-button
           class="w-full"
-          [label]="
-            'user-hub-module.revisar-juego.modal-revisar.review' | translate
-          "
+          [label]="'Aprobar' | translate"
           [butonFull]="true"
           buttonSize="small"
           [background_color]="'bg-green-600'"
-          (eventClick)="finalizarRevision()"
+          (eventClick)="finalizarRevision(1)"
+        >
+        </app-ui-kaas-button>
+        <app-ui-kaas-button
+          class="w-full"
+          [label]="'Rechazar' | translate"
+          [butonFull]="true"
+          buttonSize="small"
+          [background_color]="'bg-red-600'"
+          (eventClick)="finalizarRevision(0)"
         >
         </app-ui-kaas-button>
       </div>

@@ -25,6 +25,7 @@ export interface JuegoRevisorDecoded {
   json: Nivel;
   total_requerimientos: number;
   revisiones: Revision[];
+  revisiones_profesor: RevisionProfesor[];
 }
 
 export interface Revision {
@@ -47,4 +48,14 @@ export interface RevisionRevisorResponse {
   fecha_revision: Date;
   no_feedback: string;
   estudiante: string;
+  revisiones: RevisionProfesor[];
+}
+
+export interface RevisionProfesor {
+  aprobado: boolean;
+  fecha_revision: string;
+  id_revision_profesor: number;
+  id_revision_revisor_juego: number;
+  id_revisor_juego: number;
+  retroalimentacion: string;
 }
