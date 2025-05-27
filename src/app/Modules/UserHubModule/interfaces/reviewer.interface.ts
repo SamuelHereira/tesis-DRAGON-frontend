@@ -48,6 +48,7 @@ export interface RevisionRevisorResponse {
   fecha_revision: Date;
   no_feedback: string;
   estudiante: string;
+  pregunta_info: PreguntaInfo;
   revisiones: RevisionProfesor[];
 }
 
@@ -58,4 +59,15 @@ export interface RevisionProfesor {
   id_revision_revisor_juego: number;
   id_revisor_juego: number;
   retroalimentacion: string;
+}
+
+export interface PreguntaInfo {
+  id: string;
+  requerimiento: string;
+  puntosAdicionales: number;
+  requerimientoBase: string;
+  retroalimentacion: string;
+  opcionRequerimiento: string;
+  requerimientoFallido: boolean;
+  requerimientoCompleto: string;
 }
