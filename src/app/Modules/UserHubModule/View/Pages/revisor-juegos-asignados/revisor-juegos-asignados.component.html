@@ -5,8 +5,7 @@
 >
   <ng-container>
     <p class="mt-4 text-center color-primary tex-titulo-Serius-Game">
-      <!-- {{ "user-hub-module.juegos-jugados.title" | translate }} -->
-      Juegos en los que eres revisor
+      {{ "user-hub-module.juegos-revisor.titulo" | translate }}
     </p>
     <div class="w-full grid m-0 mt-4 mat-elevation-z4 border-round-xl p-4">
       <section
@@ -69,6 +68,11 @@
                 (click)="revisarJuego(element)"
                 class="bi bi-card-checklist cursor-pointer text-2xl"
               ></i>
+              <i
+                [matTooltip]="'general-tool.ver-reporte' | translate"
+                (click)="obtenerRevisionesEstudiantes(element.id_juego)"
+                class="bi bi-clipboard-data cursor-pointer text-2xl ml-2"
+              ></i>
             </td>
           </ng-container>
 
@@ -81,4 +85,141 @@
       </section>
     </div>
   </ng-container>
+  <div
+    class="w-max mt-8"
+    id="htmlDataRevisionesEstudiantes"
+    *ngIf="revisionesEstudiantesStatus.viewPdf"
+  >
+    <div class="mt-4">
+      <ng-container
+        *ngFor="
+          let data of revisionesEstudiantesStatus.juegosSeleccionados;
+          let indice = index
+        "
+      >
+        <p class="text-primary text-xl mb-4 mt-4">
+          {{ "general-table.id_juego" | translate }}: {{ data.id_juego }}
+        </p>
+        <div *ngFor="let req of data.requerimientos" class="mb-4">
+          <p>
+            {{ "reporte-revision-table.no" | translate }}
+            : {{ req.id_requerimiento }}
+          </p>
+          <p>
+            {{ "reporte-revision-table.tipo" | translate }}
+            : {{ req.tipo_requerimiento }}
+          </p>
+          <p>
+            {{ "reporte-revision-table.titulo" | translate }}
+            : {{ req.titulo }}
+          </p>
+          <p>
+            {{ "reporte-revision-table.retroalimentacion" | translate }}:
+            {{ req.retroalimentacion }}
+          </p>
+
+          <div class="border-1 border-solid border-300 border-round-lg mt-4">
+            <table mat-table [dataSource]="req.revisiones">
+              <ng-container matColumnDef="revisor">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.revisor" | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.revisor }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="tipo">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.tipo" | translate }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  [ngClass]="{
+                    'text-red-500': element.tipo !== req.tipo_requerimiento,
+                    'text-green-500': element.tipo === req.tipo_requerimiento
+                  }"
+                >
+                  {{ element.tipo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="titulo">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.titulo" | translate }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  [ngClass]="{
+                    'text-red-500': element.titulo !== req.titulo,
+                    'text-green-500': element.titulo === req.titulo
+                  }"
+                >
+                  {{ element.titulo }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="retroalimentacion">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.retroalimentacion" | translate }}
+                </th>
+                <td
+                  mat-cell
+                  *matCellDef="let element"
+                  [ngClass]="{
+                    'text-red-500':
+                      element.retroalimentacion !== req.retroalimentacion,
+                    'text-green-500':
+                      element.retroalimentacion === req.retroalimentacion
+                  }"
+                >
+                  {{ element.retroalimentacion }}
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="fechaRevision">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.fecha-revision" | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.fecha_revision }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="noFeedback">
+                <th mat-header-cell *matHeaderCellDef>
+                  {{ "reporte-revision-table.no-feedback" | translate }}
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.no_feedback == 0 ? "No" : "Sí" }}
+                </td>
+              </ng-container>
+
+              <tr
+                mat-header-row
+                *matHeaderRowDef="
+                  revisionesEstudiantesStatus.displayedColumns2;
+                  sticky: true
+                "
+              ></tr>
+              <tr
+                mat-row
+                *matRowDef="
+                  let row;
+                  columns: revisionesEstudiantesStatus.displayedColumns2
+                "
+              ></tr>
+            </table>
+            <div
+              *ngIf="req.revisiones.length === 0"
+              class="mat-elevation-z1 p-4 text-center"
+            >
+              {{ "reporte-revision-table.no-data" | translate }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
 </div>

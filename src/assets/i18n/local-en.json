@@ -110,8 +110,14 @@
       "fecha-titulo": "Completion Date",
       "fecha-hint": "This is the date when your game finishes. By default, it is set to 7 days.",
       "tipo-titulo": "Game Type",
-      "numero-preguntas-aleatorias": "Number of random questions",
-      "numero-preguntas-aleatorias-hint": "This is the number of random questions that will be generated in the game.",
+      "creation-mode": "Creation Mode",
+      "creation-mode-manual": "Manual",
+      "creation-mode-base": "Load from Data Base",
+      "creation-mode-ia": "IA",
+      "creation-mode-excel": "Excel",
+      "download-template": "Download Template",
+      "numero-requerimientos-aleatorios": "Number of random requirements",
+      "numero-requerimientos-aleatorios-hint": "This is the number of random requirements that will be generated in the game.",
       "tipo-hint": "This is the type of game you should choose.",
       "modales": {
         "titulo-ayudanos": "Help Us Improve Our Requirements Database",
@@ -179,7 +185,12 @@
       "asignar-nuevo-title": "Assign a new reviewer",
       "asignar-nuevo-subtitle": "You can assign a new reviewer to your game.",
       "asignar-nuevo-subtitle-2": "The assigned reviewers will be responsible for reviewing the requirements and providing feedback.",
-      "asignar-nuevo-btn": "Assign reviewer"
+      "asignar-nuevo-btn": "Assign reviewer",
+      "asignar-modal": {
+        "titulo": "Assign Reviewer",
+        "type": "Select reviewer type",
+        "reviewer": "Select reviewer"
+      }
     },
     "revisar-juego": {
       "titulo": "Review requirements",
@@ -193,6 +204,9 @@
         "success": "Review saved successfully",
         "error": "Error saving the review. Please try again later"
       }
+    },
+    "juegos-revisor": {
+      "titulo": "Games to Review"
     }
   },
   "404-page": {
@@ -273,10 +287,13 @@
     "tiempo": "Time",
     "aciertos": "Hits",
     "errores": "Misses",
-    "revisiones": "Reviews"
+    "revisiones": "Reviews",
+    "usuario": "User",
+    "rol": "Role"
   },
   "general-tool": {
     "revisar-juego": "Review Game",
+    "ver-reporte": "View Report",
     "asignar-revisores": "Assign reviewers",
     "revisar-requerimiento": "Review requirement"
   },
@@ -356,5 +373,19 @@
       "paso-6": "6. End of the Game: The game ends when you have correctly classified all the requirement cards. Try to achieve the highest possible score!",
       "paso-7": "Good luck and have fun while improving your skills in detecting ambiguous and unambiguous functional requirements!"
     }
+  },
+  "reporte-revision-table": {
+    "revisiones_profesores": "Teacher Reviews",
+    "no": "No.",
+    "tipo": "Type",
+    "titulo": "Title",
+    "retroalimentacion": "Feedback",
+    "fecha-revision": "Review Date",
+    "no-feedback": "No Feedback",
+    "revisor": "Reviewer",
+    "no-data": "No data to display",
+    "aprobado": "Approved",
+    "generar-reporte-estudiantes": "Generate Students Reviews Report",
+    "generar-reporte-profesores": "Generate Teachers Reviews Report"
   }
 }

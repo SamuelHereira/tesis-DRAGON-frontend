@@ -51,4 +51,28 @@ export class ProfesorService {
     );
     return forkJoin(observables).toPromise();
   }
+
+  obtenerReporteRevisionEstudiante(criteria: any): Observable<any> {
+    criteria.action = 'reporteRevisionesPorRequerimiento';
+    return this.http.post<any>(this.urlEndPoint, criteria);
+  }
+
+  getReporteRevisionEstudiante(criterios: any[]): Promise<any> {
+    const observables = criterios.map((criterion) =>
+      this.obtenerReporteRevisionEstudiante(criterion)
+    );
+    return forkJoin(observables).toPromise();
+  }
+
+  obtenerReporteRevisionProfesores(criteria: any): Observable<any> {
+    criteria.action = 'reporteRevisionesProfesoresPorRevision';
+    return this.http.post<any>(this.urlEndPoint, criteria);
+  }
+
+  getReporteRevisionProfesores(criterios: any[]): Promise<any> {
+    const observables = criterios.map((criterion) =>
+      this.obtenerReporteRevisionProfesores(criterion)
+    );
+    return forkJoin(observables).toPromise();
+  }
 }

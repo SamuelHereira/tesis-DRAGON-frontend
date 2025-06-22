@@ -111,6 +111,12 @@
       "fecha-hint": "Es la fecha en la que tu juego se completa. Por defecto, es de 7 días",
       "tipo-titulo": "Tipo de juego",
       "tipo-hint": "Este es el tipo de juego que debes elegir",
+      "creation-mode": "Modo de creación",
+      "creation-mode-manual": "Manual",
+      "creation-mode-base": "Cargar de base",
+      "creation-mode-ia": "IA",
+      "creation-mode-excel": "Excel",
+      "download-template": "Descargar plantilla",
       "numero-requerimientos-aleatorios": "Número de requerimientos aleatorios",
       "numero-requerimientos-aleatorios-hint": "Este es el número de requerimientos aleatorios que se mostrarán en el juego",
       "modales": {
@@ -179,7 +185,12 @@
       "asignar-vacio-title": "No hay revisores asignados",
       "asignar-vacio-subtitle": "Los revisores asignados se encargarán de revisar los requerimientos y proporcionar retroalimentación.",
       "asignar-vacio-subtitle-2": "Puedes asignar revisores a tu juego para que te ayuden a mejorarlo.",
-      "asignar-vacio-btn": "Asignar revisor"
+      "asignar-vacio-btn": "Asignar revisor",
+      "asignar-modal": {
+        "titulo": "Asignar revisor",
+        "type": "Seleccionar tipo de revisor",
+        "reviewer": "Seleccionar revisor"
+      }
     },
     "revisar-juego": {
       "titulo": "Revisar requerimientos",
@@ -193,6 +204,9 @@
         "success": "Revisión guardada con éxito",
         "error": "Error al guardar la revisión. Inténtalo más tarde"
       }
+    },
+    "juegos-revisor": {
+      "titulo": "Juegos en los que eres revisor"
     }
   },
   "404-page": {
@@ -274,12 +288,15 @@
     "tiempo": "Tiempo",
     "aciertos": "Aciertos",
     "errores": "Desaciertos",
-    "revisiones": "Revisiones"
+    "revisiones": "Revisiones",
+    "usuario": "Usuario",
+    "rol": "Rol"
   },
   "general-tool": {
     "revisar-juego": "Revisar juego",
     "asignar-revisores": "Asignar revisores",
-    "revisar-requerimiento": "Review requirement"
+    "revisar-requerimiento": "Review requirement",
+    "ver-reporte": "Ver reporte"
   },
 
   "revisar-juego-table": {
@@ -357,5 +374,19 @@
       "paso-6": "6. Final del Juego: El juego termina cuando hayas clasificado correctamente todas las cartas de requisitos. ¡Intenta obtener la mejor puntuación posible!",
       "paso-7": "¡Buena suerte y diviértete mientras mejoras tus habilidades en la detección de requisitos funcionales y no funcionales!"
     }
+  },
+  "reporte-revision-table": {
+    "revisiones_profesores": "Revisiones de Profesores",
+    "no": "No.",
+    "tipo": "Tipo",
+    "titulo": "Título",
+    "retroalimentacion": "Retroalimentación",
+    "fecha-revision": "Fecha de Revisión",
+    "no-feedback": "Sin Retroalimentación",
+    "revisor": "Revisor",
+    "no-data": "No hay datos para mostrar",
+    "aprobado": "Aprobado",
+    "generar-reporte-estudiantes": "Generar Reporte Revisiones Estudiantes",
+    "generar-reporte-profesores": "Generar Reporte Revisiones Profesores"
   }
 }

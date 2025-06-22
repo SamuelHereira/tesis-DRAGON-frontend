@@ -4,6 +4,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {
+  ReporteRevisionEstudiante,
+  ReporteStatus,
+} from '../../../interfaces/reports.interface';
 
 @Component({
   selector: 'app-reportes',
@@ -51,6 +55,64 @@ export class ReportesComponent implements OnInit {
   selection = new SelectionModel<any>(true, []);
 
   datosJuegosSeleccionados: any[] = [];
+  datosJuegosSeleccionadosRevisionesEstudiantes: any[] = [];
+
+  revisionesEstudiantesStatus: ReporteStatus<ReporteRevisionEstudiante> = {
+    viewPdf: false,
+    juegosSeleccionados: [],
+    displayedColumns: ['id', 'tipo', 'titulo', 'retroalimentacion'],
+    displayedColumns2: [
+      'revisor',
+      'tipo',
+      'titulo',
+      'retroalimentacion',
+      'fechaRevision',
+      'noFeedback',
+    ],
+
+    chartsData: [
+      {
+        labels: ['Red', 'Blue', 'Yellow'],
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+        ],
+      },
+    ],
+  };
+
+  revisionesProfesoresStatus: ReporteStatus<ReporteRevisionEstudiante> = {
+    viewPdf: false,
+    juegosSeleccionados: [],
+    displayedColumns: [
+      'revisor',
+      'tipo',
+      'titulo',
+      'retroalimentacion',
+      'fechaRevision',
+      'noFeedback',
+    ],
+    displayedColumns2: [
+      'revisor',
+      'retroalimentacion',
+      'fechaRevision',
+      'aprobado',
+    ],
+
+    chartsData: [
+      {
+        labels: ['Red', 'Blue', 'Yellow'],
+        data: [300, 50, 100],
+        backgroundColor: [
+          'rgb(255, 99, 132)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 205, 86)',
+        ],
+      },
+    ],
+  };
 
   ngOnInit() {
     this.buscarJuegos();
@@ -264,5 +326,195 @@ export class ReportesComponent implements OnInit {
     const differenceInMilliseconds = end.getTime() - start.getTime();
     const differenceInSeconds = differenceInMilliseconds / 1000;
     return differenceInSeconds;
+  }
+
+  obtenerRevisionesEstudiantes() {
+    const criteria = this.selection.selected.map((data) => {
+      return {
+        id_usuario: data.id_profesor,
+        id_juego: data.id_juego,
+      };
+    });
+    this._profesprService
+      .getReporteRevisionEstudiante(criteria)
+      .then((data) => {
+        let juegosTemp = [...data];
+        console.log('juegosTemp', juegosTemp);
+        juegosTemp = juegosTemp
+          .filter((data) => data.code == '200' && data.msg == 'OK')
+          .map((res) => res.result);
+
+        console.log('juegosTemp', juegosTemp);
+
+        this.revisionesEstudiantesStatus.juegosSeleccionados = juegosTemp;
+        this.revisionesEstudiantesStatus.viewPdf = true;
+        setTimeout(() => {
+          this.openPDFRevisionesEstudiantes();
+        }, 0);
+      });
+  }
+
+  openPDFRevisionesEstudiantes(): void {
+    console.log('openPDFRevisionesEstudiantes');
+    try {
+      let DATA: any = document.getElementById('htmlDataRevisionesEstudiantes');
+
+      const marginLeft = 15;
+      const marginTop = 10;
+      const marginRight = 15;
+      const marginBottom = 10;
+
+      console.log('DATA', DATA);
+
+      html2canvas(DATA, { scale: 2, useCORS: true }).then((canvas) => {
+        const imgWidth = 210 - marginLeft - marginRight; // A4 - márgenes
+        const pageHeight = 297 - marginTop - marginBottom; // A4 - márgenes
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        const totalPDFPages = Math.ceil(imgHeight / pageHeight);
+        const PDF = new jsPDF('p', 'mm', 'a4');
+
+        for (let i = 0; i < totalPDFPages; i++) {
+          if (i > 0) PDF.addPage();
+
+          const pageCanvas = document.createElement('canvas');
+          pageCanvas.width = canvas.width;
+          pageCanvas.height = (pageHeight * canvas.width) / imgWidth;
+
+          const pageContext = pageCanvas.getContext('2d');
+          if (pageContext) {
+            pageContext.drawImage(
+              canvas,
+              0,
+              i * pageCanvas.height, // origen Y en el canvas original
+              canvas.width,
+              pageCanvas.height,
+              0,
+              0,
+              canvas.width,
+              pageCanvas.height
+            );
+
+            const pageData = pageCanvas.toDataURL('image/png');
+
+            PDF.addImage(
+              pageData,
+              'PNG',
+              marginLeft,
+              marginTop,
+              imgWidth,
+              pageHeight
+            );
+          }
+        }
+
+        PDF.save(
+          'Reportes Revisiones Estudiantes ' +
+            this.formatDate(new Date()) +
+            '.pdf'
+        );
+      });
+    } catch (error) {
+      console.error(
+        'Error al generar el PDF de revisiones de estudiantes:',
+        error
+      );
+      this.revisionesEstudiantesStatus.viewPdf = false;
+    }
+  }
+
+  obtenerRevisionesProfesores() {
+    console.log('obtenerRevisionesProfesores');
+    const criteria = this.selection.selected.map((data) => {
+      return {
+        id_usuario: data.id_profesor,
+        id_juego: data.id_juego,
+      };
+    });
+    this._profesprService
+      .getReporteRevisionProfesores(criteria)
+      .then((data) => {
+        let juegosTemp = [...data];
+        console.log('juegosTemp', juegosTemp);
+        juegosTemp = juegosTemp
+          .filter((data) => data.code == '200' && data.msg == 'OK')
+          .map((res) => res.result);
+
+        console.log('juegosTemp', juegosTemp);
+
+        this.revisionesProfesoresStatus.juegosSeleccionados = juegosTemp;
+        this.revisionesProfesoresStatus.viewPdf = true;
+        setTimeout(() => {
+          this.openPDFRevisionesProfesores();
+        }, 0);
+      });
+  }
+
+  openPDFRevisionesProfesores(): void {
+    try {
+      let DATA: any = document.getElementById('htmlDataRevisionesProfesores');
+
+      console.log('DATA', DATA);
+
+      const marginLeft = 15;
+      const marginTop = 10;
+      const marginRight = 15;
+      const marginBottom = 10;
+
+      html2canvas(DATA, { scale: 2, useCORS: true }).then((canvas) => {
+        const imgWidth = 210 - marginLeft - marginRight; // A4 - márgenes
+        const pageHeight = 297 - marginTop - marginBottom; // A4 - márgenes
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        const totalPDFPages = Math.ceil(imgHeight / pageHeight);
+        const PDF = new jsPDF('p', 'mm', 'a4');
+
+        for (let i = 0; i < totalPDFPages; i++) {
+          if (i > 0) PDF.addPage();
+
+          const pageCanvas = document.createElement('canvas');
+          pageCanvas.width = canvas.width;
+          pageCanvas.height = (pageHeight * canvas.width) / imgWidth;
+
+          const pageContext = pageCanvas.getContext('2d');
+          if (pageContext) {
+            pageContext.drawImage(
+              canvas,
+              0,
+              i * pageCanvas.height, // origen Y en el canvas original
+              canvas.width,
+              pageCanvas.height,
+              0,
+              0,
+              canvas.width,
+              pageCanvas.height
+            );
+
+            const pageData = pageCanvas.toDataURL('image/png');
+
+            PDF.addImage(
+              pageData,
+              'PNG',
+              marginLeft,
+              marginTop,
+              imgWidth,
+              pageHeight
+            );
+          }
+        }
+
+        PDF.save(
+          'Reportes Revisiones Profesores ' +
+            this.formatDate(new Date()) +
+            '.pdf'
+        );
+      });
+    } catch (error) {
+      console.error(
+        'Error al generar el PDF de revisiones de profesores:',
+        error
+      );
+      this.revisionesProfesoresStatus.viewPdf = false;
+    }
   }
 }

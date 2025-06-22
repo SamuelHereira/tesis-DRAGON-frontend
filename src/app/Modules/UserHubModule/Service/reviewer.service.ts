@@ -123,4 +123,13 @@ export class ReviewerService {
     criteria.action = 'postRevisarPorProfesor';
     return this.http.post<IResponse<any>>(this.urlEndPoint, criteria);
   }
+
+  obtenerReporteRevisionesPorEstudianteJuego(criteria: {
+    action?: string;
+    id_juego: number;
+    id_estudiante: number;
+  }): Observable<IResponse<any[]>> {
+    criteria.action = 'reporteRevisionesPorRequerimientoYEstudiante';
+    return this.http.post<IResponse<any[]>>(this.urlEndPoint, criteria);
+  }
 }

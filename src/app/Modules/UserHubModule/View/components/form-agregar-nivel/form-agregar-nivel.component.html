@@ -36,7 +36,9 @@
       *ngIf="expandible && agregarRequerimiento"
     >
       <div class="mr-2">
-        <p>Modo de creación:</p>
+        <p>
+          {{ "user-hub-module.crear-juego.creation-mode" | translate }}
+        </p>
       </div>
       <div
         [ngClass]="{
@@ -47,8 +49,7 @@
         (click)="changeModoCreacion('manual')"
       >
         <p class="text-subtitulos-4-size">
-          <!-- {{ "aut-module.iniciar-sesion" | translate }} -->
-          Manual
+          {{ "user-hub-module.crear-juego.creation-mode-manual" | translate }}
         </p>
       </div>
       <div
@@ -60,8 +61,7 @@
         (click)="changeModoCreacion('load')"
       >
         <p class="text-subtitulos-4-size">
-          <!-- {{ "aut-module.iniciar-sesion" | translate }} -->
-          Cargar de base
+          {{ "user-hub-module.crear-juego.creation-mode-base" | translate }}
         </p>
       </div>
       <div
@@ -73,8 +73,7 @@
         class="border-box py-2 px-3 cursor-pointer"
       >
         <p class="text-subtitulos-4-size">
-          <!-- {{ "aut-module.crear-cuenta" | translate }} -->
-          IA
+          {{ "user-hub-module.crear-juego.creation-mode-ia" | translate }}
         </p>
       </div>
       <div
@@ -87,8 +86,7 @@
         class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer"
       >
         <p class="text-subtitulos-4-size">
-          <!-- {{ "aut-module.crear-cuenta" | translate }} -->
-          Excel
+          {{ "user-hub-module.crear-juego.creation-mode-excel" | translate }}
         </p>
       </div>
     </div>
@@ -251,7 +249,9 @@
         </div>
         <div class="col-6 flex align-items-end">
           <app-ui-kaas-button
-            [label]="'Descargar Plantilla'"
+            [label]="
+              'user-hub-module.crear-juego.download-template' | translate
+            "
             [icon_visible]="true"
             [icon]="'bi bi-download'"
             buttonSize="small"
