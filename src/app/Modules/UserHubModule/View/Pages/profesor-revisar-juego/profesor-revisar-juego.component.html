@@ -52,6 +52,16 @@
             </td>
           </ng-container>
 
+          <ng-container matColumnDef="revisiones">
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              {{ "revisar-juego-table.revisiones" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              {{ element.revisiones_estudiantes }} /
+              {{ element.revisiones_profesor }}
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="options">
             <th mat-header-cell *matHeaderCellDef>
               {{ "general-table.acciones" | translate }}

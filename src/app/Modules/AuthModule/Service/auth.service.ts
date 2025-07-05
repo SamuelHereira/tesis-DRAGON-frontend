@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   constructor(private http: HttpClient) {}
   private urlEndPoint: string = environment.apiUrl + '/auth';
-  //private urlEndPoint: string = 'https://seriusgameug.com/back_end/auth';
 
   login(criteria: any): Observable<any> {
     criteria.action = 'login';

@@ -78,7 +78,7 @@ export class ReviewerService {
     titulo: string;
     retroalimentacion: string;
     tipo: string;
-    no_revision?: number;
+    no_feedback?: number;
     id_revision?: number;
   }): Observable<IResponse<any>> {
     criteria.action = 'postRevisarRequerimientoJuego';

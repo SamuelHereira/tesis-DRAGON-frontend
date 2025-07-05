@@ -98,8 +98,9 @@
             <th mat-header-cell *matHeaderCellDef>
               {{ "revisar-juego-table.cambios" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
+                class="text-2xl"
                 [ngClass]="
                   element.no_feedback === '0'
                     ? 'bi bi-check-circle'
@@ -120,18 +121,25 @@
           </ng-container>
 
           <ng-container matColumnDef="revisados">
-            <th mat-header-cell *matHeaderCellDef>
-              {{ "Estado" | translate }}
+            <th mat-header-cell *matHeaderCellDef class="text-center">
+              {{ "revisar-juego-table.estado" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">
-              <div *ngIf="!element.revisiones.length">Pendiente</div>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <div
+                *ngIf="!element.revisiones.length"
+                class="chip bg-orange-500 text-white px-2 py-1 rounded"
+              >
+                Pendiente
+              </div>
               <div
                 *ngIf="element.revisiones.length && element.revisiones?.[0]?.aprobado == 1"
+                class="chip bg-green-500 text-white px-2 py-1 rounded"
               >
                 Aprobado
               </div>
               <div
                 *ngIf="element.revisiones.length && element.revisiones?.[0]?.aprobado == 0"
+                class="chip bg-red-500 text-white px-2 py-1 rounded"
               >
                 Rechazado
               </div>
@@ -142,7 +150,7 @@
             <th mat-header-cell *matHeaderCellDef>
               {{ "general-table.acciones" | translate }}
             </th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let element" class="text-center">
               <i
                 *ngIf="!element.revisiones.length"
                 [matTooltip]="'general-tool.revisar-requerimiento' | translate"
@@ -191,19 +199,21 @@
 
         <app-ui-kaas-button
           class="w-full"
-          [label]="'Aprobar' | translate"
+          [label]="'general.boton-aprobar' | translate"
           [butonFull]="true"
           buttonSize="small"
           [background_color]="'bg-green-600'"
+          [disabled]="!comentario"
           (eventClick)="finalizarRevision(1)"
         >
         </app-ui-kaas-button>
         <app-ui-kaas-button
           class="w-full"
-          [label]="'Rechazar' | translate"
+          [label]="'general.boton-rechazar' | translate"
           [butonFull]="true"
           buttonSize="small"
           [background_color]="'bg-red-600'"
+          [disabled]="!comentario"
           (eventClick)="finalizarRevision(0)"
         >
         </app-ui-kaas-button>

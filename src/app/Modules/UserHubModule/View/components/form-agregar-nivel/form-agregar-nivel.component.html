@@ -199,6 +199,10 @@
               'user-hub-module.crear-juego.componente-form.generar-ia'
                 | translate
             "
+            [placeholder]="
+              'user-hub-module.crear-juego.componente-form.generar-ia-placeholder'
+                | translate
+            "
             [(value)]="tema"
             (iconClick)="generarPorIA()"
             [icono]="'bi bi-magic'"
@@ -214,17 +218,34 @@
             "
             [(value)]="cantidadIA"
             characterFilter="num"
-            hint="Cantidad de requerimientos a generar (en caso de ser impar se generará uno más)"
+            [hint]="
+              'user-hub-module.crear-juego.componente-form.generar-ia-cantidad-hint'
+                | translate
+            "
           >
           </app-ui-kaas-input>
         </div>
-        <div class="col-12">
+        <div class="col-3">
           <app-ui-kaas-button
-            (click)="generarPorIA()"
-            [disabled]="cargandoIA"
-            [label]="labelGenerarIA"
+            (click)="generarPorIA('gemini')"
+            [disabled]="
+              cargandoIAGemini || cargandoIAOpenAI || !tema || !cantidadIA
+            "
+            [label]="labelGenerarIAGemini"
             buttonSize="small"
-            [loading]="cargandoIA"
+            [loading]="cargandoIAGemini || cargandoIAOpenAI"
+          >
+          </app-ui-kaas-button>
+        </div>
+        <div class="col-3">
+          <app-ui-kaas-button
+            (click)="generarPorIA('openai')"
+            [disabled]="
+              cargandoIAOpenAI || cargandoIAGemini || !tema || !cantidadIA
+            "
+            [label]="labelGenerarIAOpenAI"
+            buttonSize="small"
+            [loading]="cargandoIAGemini || cargandoIAOpenAI"
           >
           </app-ui-kaas-button>
         </div>

@@ -193,7 +193,7 @@ export class RevisarJuegoComponent implements OnInit {
         titulo: this.reviewRequerimiento.titulo,
         retroalimentacion: this.reviewRequerimiento.retroalimentacion,
         tipo: this.reviewRequerimiento.tipo,
-        no_revision: noFeedback,
+        no_feedback: noFeedback,
         id_revision: this.reviewRequerimiento.id_revision,
       })
       .subscribe((response) => {

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-export interface GeminiRequest {
+export interface IAApiRequest {
   topic: string;
   gameMode: number;
+  ia: 'gemini' | 'openai';
   numRequirements: number;
   action: string;
 }
@@ -28,7 +29,7 @@ export class GeminiService {
 
   constructor(private http: HttpClient) {}
 
-  generarRequerimientosPorIA(data: GeminiRequest): Observable<ResponseIA> {
+  generarRequerimientosPorIA(data: IAApiRequest): Observable<ResponseIA> {
     return new Observable((observer) => {
       this.http.post<ResponseIA>(this.urlEndPoint, data).subscribe({
         next: (res) => {

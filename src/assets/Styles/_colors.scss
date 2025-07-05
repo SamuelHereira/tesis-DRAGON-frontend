@@ -1,129 +1,130 @@
 :root {
-    --SG_primary-50: #e7f2ff;
-    --SG_primary-100: #d3e8ff;
-    --SG_primary-200: #b0d2ff;
-    --SG_primary-300: #81b2ff;
-    --SG_primary-400: #4f82ff;
-    --SG_primary-500: #2852ff;
-    --SG_primary-600: #041fff;
-    --SG_primary-700: #001dff;
-    --SG_primary-800: #0019e2;
-    --SG_primary-900: #0b1fa4;
-    --SG_primary: #07115f;
-    --SG_cuadro: rgba(0,0,0,.2);
-    --black: #000000;
-    --white: #ffffff;
-    --border: #ced4da
+  --SG_primary-50: #f4f3f9;
+  --SG_primary-100: #e1ddee;
+  --SG_primary-200: #c4bbdf;
+  --SG_primary-300: #a397cf;
+  --SG_primary-400: #867fb0;
+  --SG_primary-500: #6e689a;
+  --SG_primary-600: #594d85; /* color ideal intermedio */
+  --SG_primary-700: #4a3f70;
+  --SG_primary-800: #3e3560;
+  --SG_primary-900: #2e2749;
+  --SG_primary: #594d85;
+
+  --SG_cuadro: rgba(89, 77, 133, 0.2);
+  --black: #000;
+  --white: #fff;
+  --border: #d8d4ec;
 }
 
 .border-color {
-    border: 1px solid var(--border);
+  border: 1px solid var(--border);
 }
 
 .bg-cuadro {
-    background-color: rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .bg-white {
-    background-color: var(--white);
+  background-color: var(--white);
 }
 
 .color-white {
-    color: var(--white);
+  color: var(--white);
 }
 
 .bg-black {
-    background-color: var(--black);
+  background-color: var(--black);
 }
 
 .color-black {
-    color: var(--black);
+  color: var(--black);
 }
 
 .bg-primary-50 {
-    background-color: var(--SG_primary-50);
+  background-color: var(--SG_primary-50) !important;
 }
 
 .color-primary-50 {
-    color: var(--SG_primary-50);
+  color: var(--SG_primary-50) !important;
 }
 
 .bg-primary-100 {
-    background-color: var(--SG_primary-100);
+  background-color: var(--SG_primary-100) !important;
 }
 
 .color-primary-100 {
-    color: var(--SG_primary-100);
+  color: var(--SG_primary-100) !important;
 }
 
 .bg-primary-200 {
-    background-color: var(--SG_primary-200);
+  background-color: var(--SG_primary-200) !important;
 }
 
 .color-primary-200 {
-    color: var(--SG_primary-200);
+  color: var(--SG_primary-200) !important;
 }
 
 .bg-primary-300 {
-    background-color: var(--SG_primary-300);
+  background-color: var(--SG_primary-300) !important;
 }
 
 .color-primary-300 {
-    color: var(--SG_primary-300);
+  color: var(--SG_primary-300) !important;
 }
 
 .bg-primary-400 {
-    background-color: var(--SG_primary-400);
+  background-color: var(--SG_primary-400) !important;
 }
 
 .color-primary-400 {
-    color: var(--SG_primary-400);
+  color: var(--SG_primary-400) !important;
 }
 
 .bg-primary-500 {
-    background-color: var(--SG_primary-500);
+  background-color: var(--SG_primary-500) !important;
 }
 
 .color-primary-500 {
-    color: var(--SG_primary-500);
+  color: var(--SG_primary-500) !important;
 }
 
 .bg-primary-600 {
-    background-color: var(--SG_primary-600);
+  background-color: var(--SG_primary-600) !important;
 }
 
 .color-primary-600 {
-    color: var(--SG_primary-600);
+  color: var(--SG_primary-600) !important;
 }
 
 .bg-primary-700 {
-    background-color: var(--SG_primary-700);
+  background-color: var(--SG_primary-700) !important;
 }
 
 .color-primary-700 {
-    color: var(--SG_primary-700);
+  color: var(--SG_primary-700) !important;
 }
 
 .bg-primary-800 {
-    background-color: var(--SG_primary-800);
+  background-color: var(--SG_primary-800) !important;
 }
 
 .color-primary-800 {
-    color: var(--SG_primary-800);
+  color: var(--SG_primary-800) !important;
 }
 
 .bg-primary-900 {
-    background-color: var(--SG_primary-900);
+  background-color: var(--SG_primary-900) !important;
 }
 
 .color-primary-900 {
-    color: var(--SG_primary-900);
+  color: var(--SG_primary-900) !important;
 }
 
 .bg-primary {
-    background-color: var(--SG_primary);
+  background-color: var(--SG_primary) !important;
 }
 
 .color-primary {
-    color: var(--SG_primary);
+  color: var(--SG_primary) !important;
 }

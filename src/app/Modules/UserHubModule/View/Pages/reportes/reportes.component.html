@@ -86,34 +86,51 @@
       <div class="w-full flex flex-wrap justify-content-center mt-4">
         <div class="w-max flex gap-3">
           <app-ui-kaas-button
-            [label]="'general.boton-generar' | translate"
+            [label]="labelGenerarReporte"
             (eventClick)="obtenerDatosReportes()"
             [icon_visible]="true"
             [icon]="'bi bi-filetype-pdf'"
             [iconPosition]="'right'"
             buttonSize="small"
+            [disabled]="
+              !selection.hasValue() ||
+              juegos.length <= 0 ||
+              loading ||
+              revisionesEstudiantesStatus.loading ||
+              revisionesProfesoresStatus.loading
+            "
           >
           </app-ui-kaas-button>
           <app-ui-kaas-button
-            [label]="
-              'reporte-revision-table.generar-reporte-estudiantes' | translate
-            "
+            [label]="labelGenerarReporteEstudiantes"
             (eventClick)="obtenerRevisionesEstudiantes()"
             [icon_visible]="true"
             [icon]="'bi bi-filetype-pdf'"
             [iconPosition]="'right'"
             buttonSize="small"
+            [disabled]="
+              !selection.hasValue() ||
+              juegos.length <= 0 ||
+              loading ||
+              revisionesProfesoresStatus.loading ||
+              revisionesEstudiantesStatus.loading
+            "
           >
           </app-ui-kaas-button>
           <app-ui-kaas-button
-            [label]="
-              'reporte-revision-table.generar-reporte-profesores' | translate
-            "
+            [label]="labelGenerarReporteProfesores"
             (eventClick)="obtenerRevisionesProfesores()"
             [icon_visible]="true"
             [icon]="'bi bi-filetype-pdf'"
             [iconPosition]="'right'"
             buttonSize="small"
+            [disabled]="
+              !selection.hasValue() ||
+              juegos.length <= 0 ||
+              loading ||
+              revisionesEstudiantesStatus.loading ||
+              revisionesProfesoresStatus.loading
+            "
           >
           </app-ui-kaas-button>
         </div>
@@ -219,7 +236,11 @@
   </ng-container>
 
   <!-- <ng-container *ngIf="revisionesEstudiantesStatus.viewPdf"> -->
-  <div class="w-max mt-8" id="htmlDataRevisionesEstudiantes">
+  <div
+    class="w-max mt-8"
+    id="htmlDataRevisionesEstudiantes"
+    *ngIf="revisionesEstudiantesStatus.viewPdf"
+  >
     <div class="mt-4">
       <ng-container
         *ngFor="
@@ -353,7 +374,11 @@
     </div>
   </div>
 
-  <div class="w-max mt-8" id="htmlDataRevisionesProfesores">
+  <div
+    class="w-max mt-8"
+    id="htmlDataRevisionesProfesores"
+    *ngIf="revisionesProfesoresStatus.viewPdf"
+  >
     <div class="mt-4">
       <ng-container
         *ngFor="let data of revisionesProfesoresStatus.juegosSeleccionados"

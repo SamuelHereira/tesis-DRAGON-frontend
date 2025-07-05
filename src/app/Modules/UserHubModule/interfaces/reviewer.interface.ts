@@ -59,6 +59,7 @@ export interface RevisionProfesor {
   id_revision_revisor_juego: number;
   id_revisor_juego: number;
   retroalimentacion: string;
+  id_requerimiento: number;
 }
 
 export interface PreguntaInfo {

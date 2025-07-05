@@ -14,7 +14,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  GeminiRequest,
+  IAApiRequest,
   GeminiService,
   RequerimientoIA,
   ResponseIA,
@@ -63,7 +63,8 @@ export class FormAgregarNivelComponent implements OnInit {
   // ia
   tema: string = '';
   cantidadIA: string = '10';
-  cargandoIA: boolean = false;
+  cargandoIAGemini: boolean = false;
+  cargandoIAOpenAI: boolean = false;
 
   // excel
   excelFile: File | null = null;
@@ -394,17 +395,21 @@ export class FormAgregarNivelComponent implements OnInit {
     this.modoCreacion = value;
   }
 
-  generarPorIA() {
+  generarPorIA(ia: 'gemini' | 'openai' = 'gemini') {
     if (!this.tema || !this.tipo) return;
-    this.cargandoIA = true;
+    if (this.cargandoIAGemini || this.cargandoIAOpenAI) return;
+
+    this.cargandoIAGemini = ia === 'gemini';
+    this.cargandoIAOpenAI = ia === 'openai';
 
     let tipoJuegoNumber = 0;
     if (this.tipo == 'tipo-juego.juego-1-title') tipoJuegoNumber = 1;
     if (this.tipo == 'tipo-juego.juego-2-title') tipoJuegoNumber = 2;
     if (this.tipo == 'tipo-juego.juego-3-title') tipoJuegoNumber = 3;
 
-    const data: GeminiRequest = {
+    const data: IAApiRequest = {
       topic: this.tema,
+      ia: ia,
       gameMode: tipoJuegoNumber,
       numRequirements: Number(this.cantidadIA),
       action: 'generar',
@@ -419,7 +424,8 @@ export class FormAgregarNivelComponent implements OnInit {
             res.msg || 'Error al generar requerimientos por IA',
             'custom-snackbar_fallido'
           );
-          this.cargandoIA = false;
+          this.cargandoIAGemini = false;
+          this.cargandoIAOpenAI = false;
           return;
         }
 
@@ -440,7 +446,8 @@ export class FormAgregarNivelComponent implements OnInit {
           ...this.nivel.requerimientos,
           ...nivelesGenerados,
         ];
-        this.cargandoIA = false;
+        this.cargandoIAGemini = false;
+        this.cargandoIAOpenAI = false;
 
         this.openSnackBar(
           this._translateService.instant(
@@ -457,22 +464,34 @@ export class FormAgregarNivelComponent implements OnInit {
           ),
           'custom-snackbar_fallido'
         );
-        this.cargandoIA = false;
+        this.cargandoIAGemini = false;
+        this.cargandoIAOpenAI = false;
       },
       complete: () => {
         this.tema = '';
-        this.cargandoIA = false;
+        this.cargandoIAGemini = false;
+        this.cargandoIAOpenAI = false;
       },
     });
   }
 
-  get labelGenerarIA(): string {
-    return this.cargandoIA
+  get labelGenerarIAGemini(): string {
+    return this.cargandoIAGemini
       ? this._translateService.instant(
           'user-hub-module.crear-juego.componente-form.generar-ia-button-loading'
         )
       : this._translateService.instant(
-          'user-hub-module.crear-juego.componente-form.generar-ia-button'
+          'user-hub-module.crear-juego.componente-form.generar-ia-gemini-button'
+        );
+  }
+
+  get labelGenerarIAOpenAI(): string {
+    return this.cargandoIAOpenAI
+      ? this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-button-loading'
+        )
+      : this._translateService.instant(
+          'user-hub-module.crear-juego.componente-form.generar-ia-openai-button'
         );
   }
 

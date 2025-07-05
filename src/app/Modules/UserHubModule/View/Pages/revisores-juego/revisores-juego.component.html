@@ -86,12 +86,14 @@
       [(value)]="tipoRevisor"
       (onChange)="obtenerRevisoresValidos()"
     ></app-ui-kaas-input-select>
-    <app-ui-kaas-input-select
-      [label]="'user-hub-module.revisores.asignar-modal.reviewer' | translate"
-      [options]="revisoresValidos"
-      [(value)]="revisorSeleccionado"
-    >
-    </app-ui-kaas-input-select>
+    <div class="mt-4">
+      <app-ui-kaas-input-select
+        [label]="'user-hub-module.revisores.asignar-modal.reviewer' | translate"
+        [options]="revisoresValidos"
+        [(value)]="revisorSeleccionado"
+      >
+      </app-ui-kaas-input-select>
+    </div>
   </div>
   <div app-footer>
     <div class="w-full flex flex-wrap justify-content-center gap-3">

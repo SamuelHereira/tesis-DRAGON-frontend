@@ -54,7 +54,7 @@
 
           <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Estado" | translate }}
+              {{ "revisar-juego-table.estado" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
               <div *ngIf="!element.revisado" class="text-orange-500">
@@ -76,24 +76,26 @@
 
           <ng-container matColumnDef="revisiones_profesores">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Revisiones de profesores" | translate }}
+              {{ "revisar-juego-table.revisiones" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
-              <i
-                *ngFor="let revision of element.revisiones_profesores"
-                [ngClass]="
-                  revision.aprobado == 1
-                    ? 'bi bi-check-circle'
-                    : 'bi bi-x-circle'
-                "
-                class="ml-2"
-                [ngStyle]="
-                  revision.aprobado == 1
-                    ? { color: '#4CAF50' }
-                    : { color: '#F44336' }
-                "
-                [matTooltip]="revision.retroalimentacion"
-              ></i>
+              <div class="flex justify-content-center">
+                <i
+                  *ngFor="let revision of element.revisiones_profesores"
+                  class="text-xl ml-2"
+                  [ngClass]="
+                    revision.aprobado == 1
+                      ? 'bi bi-check-circle'
+                      : 'bi bi-x-circle'
+                  "
+                  [ngStyle]="
+                    revision.aprobado == 1
+                      ? { color: '#4CAF50' }
+                      : { color: '#F44336' }
+                  "
+                  [matTooltip]="revision.retroalimentacion"
+                ></i>
+              </div>
             </td>
           </ng-container>
 

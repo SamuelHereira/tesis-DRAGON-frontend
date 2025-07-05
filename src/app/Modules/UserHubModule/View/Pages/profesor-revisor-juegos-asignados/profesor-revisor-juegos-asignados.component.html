@@ -31,14 +31,14 @@
           </ng-container>
           <ng-container matColumnDef="nombre_profesor">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Profesor" | translate }}
+              {{ "general-table.profesor" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">{{ element.profesor }}</td>
           </ng-container>
 
           <ng-container matColumnDef="fecha_creacion">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Fecha inicio" | translate }}
+              {{ "general-table.fecha_inicio" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.fecha_creacion | translate }}
@@ -47,7 +47,7 @@
 
           <ng-container matColumnDef="fecha_finalizacion">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Fecha fin" | translate }}
+              {{ "general-table.fecha_fin" | translate }}
             </th>
             <td mat-cell *matCellDef="let element">
               {{ element.fecha_finalizacion }}
@@ -191,13 +191,24 @@
               </ng-container>
 
               <ng-container matColumnDef="noFeedback">
-                <th mat-header-cell *matHeaderCellDef>
+                <th mat-header-cell *matHeaderCellDef class="text-center">
                   {{ "reporte-revision-table.no-feedback" | translate }}
                 </th>
-                <td mat-cell *matCellDef="let revision">
-                  {{ revision.no_feedback == 0 ? "No" : "Sí" }}
-                </td>
-              </ng-container>
+                <td mat-cell *matCellDef="let revision" class="text-center">
+                  <i
+                    class="text-2xl"
+                    [ngClass]="
+                      revision.no_feedback === '0'
+                        ? 'bi bi-check-circle'
+                        : 'bi bi-x-circle'
+                    "
+                    [ngStyle]="
+                      revision.no_feedback === '0'
+                        ? { color: '#4CAF50' }
+                        : { color: '#F44336' }
+                    "
+                  ></i></td
+              ></ng-container>
 
               <tr
                 mat-header-row
@@ -264,11 +275,27 @@
                       </ng-container>
 
                       <ng-container matColumnDef="aprobado">
-                        <th mat-header-cell *matHeaderCellDef>
+                        <th
+                          mat-header-cell
+                          *matHeaderCellDef
+                          class="text-center"
+                        >
                           {{ "reporte-revision-table.aprobado" | translate }}
                         </th>
-                        <td mat-cell *matCellDef="let prof">
-                          {{ prof.aprobado == 0 ? "No" : "Sí" }}
+                        <td mat-cell *matCellDef="let prof" class="text-center">
+                          <i
+                            class="text-2xl"
+                            [ngClass]="
+                              prof.abrobado == 1
+                                ? 'bi bi-check-circle'
+                                : 'bi bi-x-circle'
+                            "
+                            [ngStyle]="
+                              prof.abrobado == 1
+                                ? { color: '#4CAF50' }
+                                : { color: '#F44336' }
+                            "
+                          ></i>
                         </td>
                       </ng-container>
 

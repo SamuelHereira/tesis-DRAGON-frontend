@@ -8,6 +8,7 @@ import {
   ReporteRevisionEstudiante,
   ReporteStatus,
 } from '../../../interfaces/reports.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reportes',
@@ -15,7 +16,10 @@ import {
   styleUrls: ['./reportes.component.scss'],
 })
 export class ReportesComponent implements OnInit {
-  constructor(private _profesprService: ProfesorService) {}
+  constructor(
+    private _profesprService: ProfesorService,
+    private _translateService: TranslateService
+  ) {}
 
   juegos: any[] = [];
   displayedColumns: string[] = [
@@ -50,6 +54,7 @@ export class ReportesComponent implements OnInit {
   ];
 
   viewPdf: boolean = false;
+  loading: boolean = false;
 
   dataSource = new MatTableDataSource<any>(this.juegos);
   selection = new SelectionModel<any>(true, []);
@@ -58,6 +63,7 @@ export class ReportesComponent implements OnInit {
   datosJuegosSeleccionadosRevisionesEstudiantes: any[] = [];
 
   revisionesEstudiantesStatus: ReporteStatus<ReporteRevisionEstudiante> = {
+    loading: false,
     viewPdf: false,
     juegosSeleccionados: [],
     displayedColumns: ['id', 'tipo', 'titulo', 'retroalimentacion'],
@@ -84,6 +90,7 @@ export class ReportesComponent implements OnInit {
   };
 
   revisionesProfesoresStatus: ReporteStatus<ReporteRevisionEstudiante> = {
+    loading: false,
     viewPdf: false,
     juegosSeleccionados: [],
     displayedColumns: [
@@ -176,78 +183,51 @@ export class ReportesComponent implements OnInit {
   }
 
   obtenerDatosReportes() {
+    this.loading = true;
     const criteria = this.selection.selected.map((data) => {
       return {
         id_usuario: data.id_profesor,
         id_juego: data.id_juego,
       };
     });
-    this._profesprService.getTodosReportes(criteria).then((data) => {
-      let juegosTemp = [...data];
-      juegosTemp = juegosTemp.filter(
-        (data) => data.code == '200' && data.result.mensaje == 'OK'
-      );
-      this.datosJuegosSeleccionados = juegosTemp.map((data) => {
-        const jsonTemp = JSON.parse(data.result.data);
-        return {
-          id_juego: jsonTemp[0].id_juego,
-          puntajes: jsonTemp.map((dataJson: any) => {
-            return {
-              nombres: dataJson.nombres,
-              apellidos: dataJson.apellidos,
-              puntaje: dataJson.puntaje,
-              hora_inicio: dataJson.hora_inicio,
-              hora_fin: dataJson.hora_fin,
-              aciertos: dataJson.aciertos,
-              errores: dataJson.errores,
-              tiempo: this.calculateTimeDifference(
-                dataJson.hora_inicio,
-                dataJson.hora_fin
-              ),
-            };
-          }),
-        };
+    this._profesprService
+      .getTodosReportes(criteria)
+      .then((data) => {
+        let juegosTemp = [...data];
+        juegosTemp = juegosTemp.filter(
+          (data) => data.code == '200' && data.result.mensaje == 'OK'
+        );
+        this.datosJuegosSeleccionados = juegosTemp.map((data) => {
+          const jsonTemp = JSON.parse(data.result.data);
+          return {
+            id_juego: jsonTemp[0].id_juego,
+            puntajes: jsonTemp.map((dataJson: any) => {
+              return {
+                nombres: dataJson.nombres,
+                apellidos: dataJson.apellidos,
+                puntaje: dataJson.puntaje,
+                hora_inicio: dataJson.hora_inicio,
+                hora_fin: dataJson.hora_fin,
+                aciertos: dataJson.aciertos,
+                errores: dataJson.errores,
+                tiempo: this.calculateTimeDifference(
+                  dataJson.hora_inicio,
+                  dataJson.hora_fin
+                ),
+              };
+            }),
+          };
+        });
+        if (this.duu === 0) {
+          this.viewPdf = true;
+          setTimeout(() => {
+            this.openPDF();
+          }, 0);
+        }
+      })
+      .catch((error) => {
+        this.loading = false;
       });
-      if (this.duu === 0) {
-        //     chartsData: any[] = [
-        // {
-        //   labels: ['Red', 'Blue', 'Yellow'],
-        //   data: [300, 50, 100],
-        //   backgroundColor: [
-        //     'rgb(255, 99, 132)',
-        //     'rgb(54, 162, 235)',
-        //     'rgb(255, 205, 86)'
-        //   ]
-        //  },
-        //     ];
-        // this.chartsData = juegosTemp.map(data => {
-        //     return {
-        //       labels: ['Red', 'Blue', 'Yellow'],
-        //       data: [300, 50, 100],
-        //       backgroundColor: [
-        //         'rgb(255, 99, 132)',
-        //         'rgb(54, 162, 235)',
-        //         'rgb(255, 205, 86)'
-        //       ]
-        //     }
-        // });
-        // this.chartsData.push(
-        //   {
-        //     labels: ['Red', 'Blue', 'Yellow'],
-        //     data: [300, 50, 100],
-        //     backgroundColor: [
-        //       'rgb(255, 99, 132)',
-        //       'rgb(54, 162, 235)',
-        //       'rgb(255, 205, 86)'
-        //     ]
-        //   }
-        // );
-        this.viewPdf = true;
-        setTimeout(() => {
-          this.openPDF();
-        }, 0);
-      }
-    });
   }
 
   duu = 0;
@@ -306,6 +286,11 @@ export class ReportesComponent implements OnInit {
       })
       .then(() => {
         this.viewPdf = false;
+        this.loading = false;
+      })
+      .catch((error) => {
+        this.viewPdf = false;
+        this.loading = false;
       });
   }
 
@@ -329,6 +314,7 @@ export class ReportesComponent implements OnInit {
   }
 
   obtenerRevisionesEstudiantes() {
+    this.revisionesEstudiantesStatus.loading = true;
     const criteria = this.selection.selected.map((data) => {
       return {
         id_usuario: data.id_profesor,
@@ -351,11 +337,14 @@ export class ReportesComponent implements OnInit {
         setTimeout(() => {
           this.openPDFRevisionesEstudiantes();
         }, 0);
+      })
+      .catch((error) => {
+        this.revisionesEstudiantesStatus.viewPdf = false;
+        this.revisionesEstudiantesStatus.loading = false;
       });
   }
 
   openPDFRevisionesEstudiantes(): void {
-    console.log('openPDFRevisionesEstudiantes');
     try {
       let DATA: any = document.getElementById('htmlDataRevisionesEstudiantes');
 
@@ -363,8 +352,6 @@ export class ReportesComponent implements OnInit {
       const marginTop = 10;
       const marginRight = 15;
       const marginBottom = 10;
-
-      console.log('DATA', DATA);
 
       html2canvas(DATA, { scale: 2, useCORS: true }).then((canvas) => {
         const imgWidth = 210 - marginLeft - marginRight; // A4 - márgenes
@@ -413,18 +400,20 @@ export class ReportesComponent implements OnInit {
             this.formatDate(new Date()) +
             '.pdf'
         );
+
+        this.revisionesEstudiantesStatus.viewPdf = false;
+        this.revisionesEstudiantesStatus.juegosSeleccionados = [];
+        this.revisionesEstudiantesStatus.loading = false;
       });
     } catch (error) {
-      console.error(
-        'Error al generar el PDF de revisiones de estudiantes:',
-        error
-      );
+      this.revisionesEstudiantesStatus.loading = false;
       this.revisionesEstudiantesStatus.viewPdf = false;
+      this.revisionesEstudiantesStatus.juegosSeleccionados = [];
     }
   }
 
   obtenerRevisionesProfesores() {
-    console.log('obtenerRevisionesProfesores');
+    this.revisionesProfesoresStatus.loading = true;
     const criteria = this.selection.selected.map((data) => {
       return {
         id_usuario: data.id_profesor,
@@ -440,21 +429,21 @@ export class ReportesComponent implements OnInit {
           .filter((data) => data.code == '200' && data.msg == 'OK')
           .map((res) => res.result);
 
-        console.log('juegosTemp', juegosTemp);
-
         this.revisionesProfesoresStatus.juegosSeleccionados = juegosTemp;
         this.revisionesProfesoresStatus.viewPdf = true;
         setTimeout(() => {
           this.openPDFRevisionesProfesores();
         }, 0);
+      })
+      .catch((error) => {
+        this.revisionesProfesoresStatus.viewPdf = false;
+        this.revisionesProfesoresStatus.loading = false;
       });
   }
 
   openPDFRevisionesProfesores(): void {
     try {
       let DATA: any = document.getElementById('htmlDataRevisionesProfesores');
-
-      console.log('DATA', DATA);
 
       const marginLeft = 15;
       const marginTop = 10;
@@ -508,13 +497,40 @@ export class ReportesComponent implements OnInit {
             this.formatDate(new Date()) +
             '.pdf'
         );
+        this.revisionesProfesoresStatus.viewPdf = false;
+        this.revisionesProfesoresStatus.juegosSeleccionados = [];
+        this.revisionesProfesoresStatus.loading = false;
       });
     } catch (error) {
-      console.error(
+      console.log(
         'Error al generar el PDF de revisiones de profesores:',
         error
       );
       this.revisionesProfesoresStatus.viewPdf = false;
+      this.revisionesProfesoresStatus.juegosSeleccionados = [];
+      this.revisionesProfesoresStatus.loading = false;
     }
+  }
+
+  get labelGenerarReporte(): string {
+    return !this.loading
+      ? this._translateService.instant('general.boton-generar')
+      : this._translateService.instant('reporte-revision-table.generando');
+  }
+
+  get labelGenerarReporteEstudiantes(): string {
+    return !this.revisionesEstudiantesStatus.loading
+      ? this._translateService.instant(
+          'reporte-revision-table.generar-reporte-estudiantes'
+        )
+      : this._translateService.instant('reporte-revision-table.generando');
+  }
+
+  get labelGenerarReporteProfesores(): string {
+    return !this.revisionesProfesoresStatus.loading
+      ? this._translateService.instant(
+          'reporte-revision-table.generar-reporte-profesores'
+        )
+      : this._translateService.instant('reporte-revision-table.generando');
   }
 }

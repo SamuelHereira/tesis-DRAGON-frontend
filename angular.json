@@ -26,10 +26,10 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
               "node_modules/primeflex/primeflex.css",
               "node_modules/primeflex/themes/primeone-light.css",
-              "node_modules/dragula/dist/dragula.css"
+              "node_modules/dragula/dist/dragula.css",
+              "src/styles.scss"
             ],
             "scripts": ["node_modules/dragula/dist/dragula.min.js"]
           },

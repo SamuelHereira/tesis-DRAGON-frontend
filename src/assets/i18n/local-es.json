@@ -129,8 +129,12 @@
         "cargar-req-titulo": "Cargar requerimientos",
         "cargar-req-subtitulo": "Puedes cargar requerimientos creados por ti o por otros profesores",
         "generar-ia": "Generar por IA",
+        "generar-ia-placeholder": "Ingresa el tema de los requerimientos que deseas generar",
+        "generar-ia-hint": "Esta opción te permite generar requerimientos automáticamente utilizando IA.",
         "generar-ia-cantidad": "Cantidad de requerimientos a generar",
-        "generar-ia-button": "Generar usando Gemini",
+        "generar-ia-cantidad-hint": "Cantidad de requerimientos a generar (en caso de ser impar se generará uno más)",
+        "generar-ia-gemini-button": "Generar usando Gemini",
+        "generar-ia-openai-button": "Generar usando OpenAI",
         "generar-ia-button-loading": "Generando...",
         "generar-ia-error": "Error al generar los requerimientos, intenta nuevamente",
         "generar-ia-success": "La Generación de requerimientos fue exitosa",
@@ -221,6 +225,8 @@
     "boton-continuar": "Continuar",
     "boton-regresar": "Regresar",
     "boton-aceptar": "Aceptar",
+    "boton-aprobar": "Aprobar",
+    "boton-rechazar": "Rechazar",
     "boton-cancelar": "Cancelar",
     "boton-salir": "Salir",
     "boton-actualizar": "Actualizar",
@@ -259,11 +265,12 @@
     "ok-cerrar-juego": "La creación del juego fue exitosa.",
     "ok-guardar-juego": "Puntuación guardada con éxito",
     "error-guardar-juego": "Ya has jugado este juego anteriormente",
-    "error-guardar-juego-2": "Error al guardar la puntuación. Inténtelo más tarde",
+    "error-guardar-juego-2": "Error al guardar la puntuación. Inténtelo más tarde.",
     "codigo-incorrecto": "Código incorrecto",
-    "esta-incorrecto": "El juego esta cerrado",
+    "esta-incorrecto": "El juego está cerrado",
     "estado_jugado": "El juego ya fue jugado",
-    "usuario-ocupado": "El usuario esta ocupado"
+    "usuario-ocupado": "El usuario ya está en uso",
+    "correo-ocupado": "El correo ya está en uso"
   },
   "general-table": {
     "no": "No.",
@@ -290,7 +297,10 @@
     "errores": "Desaciertos",
     "revisiones": "Revisiones",
     "usuario": "Usuario",
-    "rol": "Rol"
+    "rol": "Rol",
+    "profesor": "Profesor",
+    "fecha_inicio": "Fecha Inicio",
+    "fecha_fin": "Fecha Fin"
   },
   "general-tool": {
     "revisar-juego": "Revisar juego",
@@ -304,7 +314,12 @@
     "titulo": "Requerimiento",
     "tipo": "Tipo",
     "feedback": "Retroalimentación",
-    "revisado": "Revisado"
+    "revisado": "Revisado",
+    "student": "Estudiante",
+    "fecha": "Fecha",
+    "cambios": "Sugiere cambios",
+    "estado": "Estado",
+    "revisiones": "Revisiones"
   },
   "tipo-juego": {
     "titulo": "Tipo:",
@@ -382,11 +397,12 @@
     "titulo": "Título",
     "retroalimentacion": "Retroalimentación",
     "fecha-revision": "Fecha de Revisión",
-    "no-feedback": "Sin Retroalimentación",
+    "no-feedback": "Sugiere cambios",
     "revisor": "Revisor",
     "no-data": "No hay datos para mostrar",
     "aprobado": "Aprobado",
     "generar-reporte-estudiantes": "Generar Reporte Revisiones Estudiantes",
-    "generar-reporte-profesores": "Generar Reporte Revisiones Profesores"
+    "generar-reporte-profesores": "Generar Reporte Revisiones Profesores",
+    "generando": "Generando reporte..."
   }
 }

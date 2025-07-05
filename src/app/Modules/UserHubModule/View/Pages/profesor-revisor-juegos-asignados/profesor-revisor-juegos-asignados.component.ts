@@ -45,6 +45,7 @@ export class ProfesorRevisorJuegosAsignadosComponent implements OnInit {
   view_req: boolean = false;
 
   revisionesProfesoresStatus: ReporteStatus<ReporteRevisionEstudiante> = {
+    loading: false,
     viewPdf: false,
     juegosSeleccionados: [],
     displayedColumns: [

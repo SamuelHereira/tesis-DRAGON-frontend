@@ -38,4 +38,5 @@ export interface ReporteStatus<T> {
   displayedColumns: string[];
   displayedColumns2?: string[];
   chartsData: any[];
+  loading: boolean;
 }

@@ -34,24 +34,21 @@ export class ProfesorRevisarJuegoComponent implements OnInit {
   juego: JuegoRevisorDecoded = null!;
 
   requerimientos: (Requerimiento & {
-    revisado: boolean;
-    id_revision?: number;
+    revisiones_estudiantes: number;
+    revisiones_profesor: number;
   })[] = [];
   displayedColumns: string[] = [
     'position',
     'titulo',
     'tipo',
     'feedback',
+    'revisiones',
     'options',
   ];
 
   // revisar
   revisarModal: boolean = false;
-  requerimientoIdSeleccionado: number = 0;
-  requerimientoSeleccionado: Requerimiento & {
-    revisado: boolean;
-    id_revision?: number;
-  } = null!;
+
   reviewRequerimiento: {
     id: string;
     titulo: string;
@@ -91,17 +88,12 @@ export class ProfesorRevisarJuegoComponent implements OnInit {
           this.requerimientos = response.result.json.requerimientos.map(
             (requerimiento) => ({
               ...requerimiento,
-              revisado: Boolean(
-                response.result.revisiones.find(
-                  (revision) =>
-                    Number(revision.id_requerimiento) ===
-                    Number(requerimiento.id)
-                )
-              ),
-              id_revision: response.result.revisiones.find(
-                (revision) =>
-                  Number(revision.id_requerimiento) === Number(requerimiento.id)
-              )?.id_revision_revisor_juego,
+              revisiones_estudiantes: response.result.revisiones.filter(
+                (rev) => rev.id_requerimiento.toString() === requerimiento.id
+              ).length,
+              revisiones_profesor: response.result.revisiones_profesor.filter(
+                (rev) => rev.id_requerimiento.toString() === requerimiento.id
+              ).length,
             })
           );
         }
@@ -115,17 +107,6 @@ export class ProfesorRevisarJuegoComponent implements OnInit {
     config.horizontalPosition = 'center';
     config.panelClass = [class_customer];
     this._snackBar.open(message, '', config);
-  }
-
-  cancelarRevision() {
-    this.revisarModal = false;
-    this.requerimientoIdSeleccionado = 0;
-    this.reviewRequerimiento = {
-      id: '',
-      titulo: '',
-      retroalimentacion: '',
-      tipo: '',
-    };
   }
 
   revisar(requerimientoId: number) {

@@ -13,7 +13,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import {
   GeminiService,
-  GeminiRequest,
+  IAApiRequest,
   RequerimientoIA,
 } from '../../../Service/gemini.service';
 

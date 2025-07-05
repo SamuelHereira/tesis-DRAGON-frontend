@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 export class ProfesorService {
   constructor(private http: HttpClient) {}
   private urlEndPoint: string = environment.apiUrl + '/home';
-  //private urlEndPoint: string = 'http://franklinparrales.es/Grupo3_Backend/home';
 
   crearJuego(criteria: any): Observable<any> {
     criteria.action = 'crearJuego';
