@@ -32,62 +32,65 @@
       </app-radio-button>
     </div> -->
     <div
-      class="w-max flex align-items-center"
       *ngIf="expandible && agregarRequerimiento"
+      class="w-full grid align-items-center"
     >
-      <div class="mr-2">
+      <div class="md:col-6 lg:col-4">
         <p>
           {{ "user-hub-module.crear-juego.creation-mode" | translate }}
         </p>
       </div>
-      <div
-        [ngClass]="{
-          'color-primary-50 bg-primary': modoCreacion === 'manual',
-          'color-white bg-primary-100 selector-togle': modoCreacion !== 'manual'
-        }"
-        class="border-box border-round-3xl border-noround-right p-2 pl-3 cursor-pointer"
-        (click)="changeModoCreacion('manual')"
-      >
-        <p class="text-subtitulos-4-size">
-          {{ "user-hub-module.crear-juego.creation-mode-manual" | translate }}
-        </p>
-      </div>
-      <div
-        [ngClass]="{
-          'color-primary-50 bg-primary': modoCreacion === 'load',
-          'color-white bg-primary-100 selector-togle': modoCreacion !== 'load'
-        }"
-        class="border-box p-2 pl-3 cursor-pointer"
-        (click)="changeModoCreacion('load')"
-      >
-        <p class="text-subtitulos-4-size">
-          {{ "user-hub-module.crear-juego.creation-mode-base" | translate }}
-        </p>
-      </div>
-      <div
-        [ngClass]="{
-          'color-primary-50 bg-primary': modoCreacion === 'ia',
-          'color-white bg-primary-100 selector-togle': modoCreacion !== 'ia'
-        }"
-        (click)="changeModoCreacion('ia')"
-        class="border-box py-2 px-3 cursor-pointer"
-      >
-        <p class="text-subtitulos-4-size">
-          {{ "user-hub-module.crear-juego.creation-mode-ia" | translate }}
-        </p>
-      </div>
-      <div
-        [ngClass]="{
-          'color-primary-50 bg-primary': modoCreacion === 'import-excel',
-          'color-white bg-primary-100 selector-togle':
-            modoCreacion !== 'import-excel'
-        }"
-        (click)="changeModoCreacion('import-excel')"
-        class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer"
-      >
-        <p class="text-subtitulos-4-size">
-          {{ "user-hub-module.crear-juego.creation-mode-excel" | translate }}
-        </p>
+      <div class="flex align-items-center md:col-6 lg:col-8">
+        <div
+          [ngClass]="{
+            'color-primary-50 bg-primary': modoCreacion === 'manual',
+            'color-white bg-primary-100 selector-togle':
+              modoCreacion !== 'manual'
+          }"
+          class="border-box border-round-3xl border-noround-right p-2 pl-3 cursor-pointer"
+          (click)="changeModoCreacion('manual')"
+        >
+          <p class="text-subtitulos-4-size">
+            {{ "user-hub-module.crear-juego.creation-mode-manual" | translate }}
+          </p>
+        </div>
+        <div
+          [ngClass]="{
+            'color-primary-50 bg-primary': modoCreacion === 'load',
+            'color-white bg-primary-100 selector-togle': modoCreacion !== 'load'
+          }"
+          class="border-box p-2 pl-3 cursor-pointer"
+          (click)="changeModoCreacion('load')"
+        >
+          <p class="text-subtitulos-4-size">
+            {{ "user-hub-module.crear-juego.creation-mode-base" | translate }}
+          </p>
+        </div>
+        <div
+          [ngClass]="{
+            'color-primary-50 bg-primary': modoCreacion === 'ia',
+            'color-white bg-primary-100 selector-togle': modoCreacion !== 'ia'
+          }"
+          (click)="changeModoCreacion('ia')"
+          class="border-box py-2 px-3 cursor-pointer"
+        >
+          <p class="text-subtitulos-4-size">
+            {{ "user-hub-module.crear-juego.creation-mode-ia" | translate }}
+          </p>
+        </div>
+        <div
+          [ngClass]="{
+            'color-primary-50 bg-primary': modoCreacion === 'import-excel',
+            'color-white bg-primary-100 selector-togle':
+              modoCreacion !== 'import-excel'
+          }"
+          (click)="changeModoCreacion('import-excel')"
+          class="border-box border-round-3xl border-noround-left py-2 px-3 cursor-pointer"
+        >
+          <p class="text-subtitulos-4-size">
+            {{ "user-hub-module.crear-juego.creation-mode-excel" | translate }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -192,66 +195,68 @@
         </div>
       </ng-container>
       <ng-container *ngIf="modoCreacion === 'ia'">
-        <div class="col-6">
-          <app-ui-kaas-input
-            onlyNumbers
-            [label]="
-              'user-hub-module.crear-juego.componente-form.generar-ia'
-                | translate
-            "
-            [placeholder]="
-              'user-hub-module.crear-juego.componente-form.generar-ia-placeholder'
-                | translate
-            "
-            [(value)]="tema"
-            (iconClick)="generarPorIA()"
-            [icono]="'bi bi-magic'"
-            [matTooltip]="'Generar con IA'"
-          >
-          </app-ui-kaas-input>
-        </div>
-        <div class="col-6">
-          <app-ui-kaas-input
-            [label]="
-              'user-hub-module.crear-juego.componente-form.generar-ia-cantidad'
-                | translate
-            "
-            [(value)]="cantidadIA"
-            characterFilter="num"
-            [hint]="
-              'user-hub-module.crear-juego.componente-form.generar-ia-cantidad-hint'
-                | translate
-            "
-          >
-          </app-ui-kaas-input>
-        </div>
-        <div class="col-3">
-          <app-ui-kaas-button
-            (click)="generarPorIA('gemini')"
-            [disabled]="
-              cargandoIAGemini || cargandoIAOpenAI || !tema || !cantidadIA
-            "
-            [label]="labelGenerarIAGemini"
-            buttonSize="small"
-            [loading]="cargandoIAGemini || cargandoIAOpenAI"
-          >
-          </app-ui-kaas-button>
-        </div>
-        <div class="col-3">
-          <app-ui-kaas-button
-            (click)="generarPorIA('openai')"
-            [disabled]="
-              cargandoIAOpenAI || cargandoIAGemini || !tema || !cantidadIA
-            "
-            [label]="labelGenerarIAOpenAI"
-            buttonSize="small"
-            [loading]="cargandoIAGemini || cargandoIAOpenAI"
-          >
-          </app-ui-kaas-button>
+        <div class="w-full grid mt-2">
+          <div class="md:col-6 col-12">
+            <app-ui-kaas-input
+              onlyNumbers
+              [label]="
+                'user-hub-module.crear-juego.componente-form.generar-ia'
+                  | translate
+              "
+              [placeholder]="
+                'user-hub-module.crear-juego.componente-form.generar-ia-placeholder'
+                  | translate
+              "
+              [(value)]="tema"
+              (iconClick)="generarPorIA()"
+              [icono]="'bi bi-magic'"
+              [matTooltip]="'Generar con IA'"
+            >
+            </app-ui-kaas-input>
+          </div>
+          <div class="md:col-6 col-12">
+            <app-ui-kaas-input
+              [label]="
+                'user-hub-module.crear-juego.componente-form.generar-ia-cantidad'
+                  | translate
+              "
+              [(value)]="cantidadIA"
+              characterFilter="num"
+              [hint]="
+                'user-hub-module.crear-juego.componente-form.generar-ia-cantidad-hint'
+                  | translate
+              "
+            >
+            </app-ui-kaas-input>
+          </div>
+          <div class="md:col-4 col-12">
+            <app-ui-kaas-button
+              (click)="generarPorIA('gemini')"
+              [disabled]="
+                cargandoIAGemini || cargandoIAOpenAI || !tema || !cantidadIA
+              "
+              [label]="labelGenerarIAGemini"
+              buttonSize="small"
+              [loading]="cargandoIAGemini || cargandoIAOpenAI"
+            >
+            </app-ui-kaas-button>
+          </div>
+          <div class="md:col-4 col-12">
+            <app-ui-kaas-button
+              (click)="generarPorIA('openai')"
+              [disabled]="
+                cargandoIAOpenAI || cargandoIAGemini || !tema || !cantidadIA
+              "
+              [label]="labelGenerarIAOpenAI"
+              buttonSize="small"
+              [loading]="cargandoIAGemini || cargandoIAOpenAI"
+            >
+            </app-ui-kaas-button>
+          </div>
         </div>
       </ng-container>
       <ng-container *ngIf="modoCreacion === 'import-excel'">
-        <div class="col-6">
+        <div class="col-12 md:col-6">
           <app-ui-kaas-input
             [label]="
               'user-hub-module.crear-juego.componente-form.import-excel'
@@ -268,7 +273,7 @@
           >
           </app-ui-kaas-input>
         </div>
-        <div class="col-6 flex align-items-end">
+        <div class="col-12 md-col-6 flex align-items-end">
           <app-ui-kaas-button
             [label]="
               'user-hub-module.crear-juego.download-template' | translate

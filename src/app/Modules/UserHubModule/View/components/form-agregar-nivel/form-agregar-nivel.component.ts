@@ -240,6 +240,9 @@ export class FormAgregarNivelComponent implements OnInit {
 
   eliminarRequerimiento(indice: number) {
     this._eliminarRequerimiento.emit(indice);
+    if (this.nivel.requerimientos.length == 0) {
+      this.agregarRequerimiento = true;
+    }
   }
 
   editarRequerimiento(indice: number) {}
