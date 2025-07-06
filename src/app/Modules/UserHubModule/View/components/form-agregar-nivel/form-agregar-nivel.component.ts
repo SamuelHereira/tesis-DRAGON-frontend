@@ -209,7 +209,7 @@ export class FormAgregarNivelComponent implements OnInit {
   }
 
   llenarDatoRequerimiento(): Requerimiento {
-    const id_req = this.indice + 'req' + (this.nivel.requerimientos.length + 1);
+    const id_req = `${this.nivel.requerimientos.length + 1}`;
     const data: Requerimiento = {
       requerimiento: '',
       retroalimentacion: '',

@@ -119,6 +119,15 @@ export class CreateGameComponent implements OnInit {
     if (this.tipoJuego == 'tipo-juego.juego-1-title') tipoJuegoNumber = 1;
     if (this.tipoJuego == 'tipo-juego.juego-2-title') tipoJuegoNumber = 2;
     if (this.tipoJuego == 'tipo-juego.juego-3-title') tipoJuegoNumber = 3;
+
+    this.datosJuego.niveles.map((nivel) => {
+      nivel.requerimientos = nivel.requerimientos.map((req, idx) => {
+        return {
+          ...req,
+          id: `${idx + 1}`,
+        };
+      });
+    });
     const criteria = {
       id_profesor: dataLocal.id,
       id_tipo_juego: tipoJuegoNumber,

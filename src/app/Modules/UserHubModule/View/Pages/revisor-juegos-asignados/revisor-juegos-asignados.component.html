@@ -192,7 +192,19 @@
                   {{ "reporte-revision-table.no-feedback" | translate }}
                 </th>
                 <td mat-cell *matCellDef="let element">
-                  {{ element.no_feedback == 0 ? "No" : "Sí" }}
+                  <i
+                    class="text-2xl"
+                    [ngClass]="
+                      element.no_feedback === '0'
+                        ? 'bi bi-check-circle'
+                        : 'bi bi-x-circle'
+                    "
+                    [ngStyle]="
+                      element.no_feedback === '0'
+                        ? { color: '#4CAF50' }
+                        : { color: '#F44336' }
+                    "
+                  ></i>
                 </td>
               </ng-container>
 
