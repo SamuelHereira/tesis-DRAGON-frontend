@@ -43,20 +43,26 @@ export class RevisorJuegosAsignadosComponent implements OnInit {
     'revisiones',
     'options',
   ];
+
   view_req: boolean = false;
 
   revisionesEstudiantesStatus: ReporteStatus<ReporteRevisionEstudiante> = {
     loading: false,
     viewPdf: false,
     juegosSeleccionados: [],
-    displayedColumns: ['id', 'tipo', 'titulo', 'retroalimentacion'],
-    displayedColumns2: [
+    displayedColumns: [
       'revisor',
       'tipo',
       'titulo',
       'retroalimentacion',
       'fechaRevision',
       'noFeedback',
+    ],
+    displayedColumns2: [
+      'revisor',
+      'retroalimentacion',
+      'fechaRevision',
+      'aprobado',
     ],
 
     chartsData: [
@@ -138,6 +144,8 @@ export class RevisorJuegosAsignadosComponent implements OnInit {
               juegosSeleccionados: [response.result as any],
               viewPdf: true,
             };
+
+            console.log('Revisiones Estudiantes', response.result);
 
             this.openPDFRevisionesEstudiantes();
           } else {
